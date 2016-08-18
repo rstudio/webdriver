@@ -12,6 +12,10 @@ LazyData: true
 URL: https://github.com/gaborcsardi/webdriver
 BugReports: https://github.com/gaborcsardi/webdriver/issues
 RoxygenNote: 5.0.1
+Imports:
+    httr,
+    jsonlite,
+    R6
 Suggests: 
     testthat
 Encoding: UTF-8
