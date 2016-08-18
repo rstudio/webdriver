@@ -1,5 +1,5 @@
 
-headers <- c(
+default_headers <- c(
   "Accept"       = "application/json",
   "Content-Type" = "application/json",
   "User-Agent"   = "R webdriver"
@@ -8,7 +8,10 @@ headers <- c(
 #' @importFrom jsonlite toJSON
 #' @importFrom httr GET POST DELETE add_headers stop_for_status
 
-session_make_request <- function(self, private, endpoint, data, params) {
+session_make_request <- function(self, private, endpoint, data, params,
+                                 headers = NULL) {
+
+  headers <- update(default_headers, as.character(headers))
 
   ep <- parse_endpoint(endpoint, private, params)
 
