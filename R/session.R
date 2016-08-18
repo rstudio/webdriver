@@ -33,6 +33,9 @@ session <- R6Class(
     get_source = function()
       session_get_source(self, private),
 
+    take_screenshot = function(file = NULL)
+      session_take_screenshot(self, private, file = file),
+
     ## Elements ------------------------------------------------
 
     find_element = function(css = NULL, link_text = NULL,
@@ -47,6 +50,7 @@ session <- R6Class(
 
     get_active_element = function()
       session_get_active_element(self, private)
+
   ),
 
   private = list(
@@ -235,4 +239,37 @@ session_get_source <- function(self, private) {
   )
 
   response$value
+}
+
+#' @importFrom jsonlite base64_dec
+#' @importFrom showimage show_image
+
+session_take_screenshot <- function(self, private, file) {
+
+  if (!is.null(file)) assert_filename(file)
+
+  response <- private$make_request(
+    "TAKE SCREENSHOT"
+  )
+
+  handle_screenshot(response, file)
+
+  invisible(self)
+}
+
+
+handle_screenshot <- function(response, file) {
+
+  if (is.null(output <- file)) {
+    output <- tempfile(fileext = ".png")
+    on.exit(unlink(output))
+  }
+
+  writeBin(
+    base64_dec(response$value),
+    output
+  )
+
+  ## if 'file' was NULL, then show it on the graphics device
+  if (is.null(file)) show_image(output)
 }

@@ -49,7 +49,10 @@ element <- R6Class(
       element_clear(self, private),
 
     send_keys = function(keys)
-      element_send_keys(self, private)
+      element_send_keys(self, private),
+
+    take_screenshot = function(file = NULL)
+      element_take_screenshot(self, private, file)
   ),
 
   private = list(
@@ -224,6 +227,23 @@ element_send_keys <- function(self, private, keys) {
     "ELEMENT SEND KEYS",
     params = list(element_id = private$id)
   )
+
+  invisible(self)
+}
+
+
+## TODO: seems to return full screenshot?
+
+element_take_screenshot <- function(self, private, file) {
+
+  if (!is.null(file)) assert_filename(file)
+
+  response <- private$session_private$make_request(
+    "TAKE ELEMENT SCREENSHOT",
+    params = list(element_id = private$id)
+  )
+
+  handle_screenshot(response, file)
 
   invisible(self)
 }

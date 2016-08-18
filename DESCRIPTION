@@ -15,7 +15,10 @@ RoxygenNote: 5.0.1
 Imports:
     httr,
     jsonlite,
-    R6
+    R6,
+    showimage
+Remotes:
+    MangoTheCat/showimage
 Suggests: 
     testthat
 Encoding: UTF-8
