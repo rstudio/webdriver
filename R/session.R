@@ -28,7 +28,10 @@ session <- R6Class(
       session_refresh(self, private),
 
     get_title = function()
-      session_get_title(self, private)
+      session_get_title(self, private),
+
+    get_source = function()
+      session_get_source(self, private),
 
     ## Elements ------------------------------------------------
 
@@ -223,4 +226,13 @@ session_get_active_element <- function(self, private) {
     session = self,
     session_private = private
   )
+}
+
+
+session_get_source <- function(self, private) {
+  response <- private$make_request(
+    "GET PAGE SOURCE"
+  )
+
+  response$value
 }
