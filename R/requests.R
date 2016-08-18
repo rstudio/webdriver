@@ -8,9 +8,9 @@ headers <- c(
 #' @importFrom jsonlite toJSON
 #' @importFrom httr GET POST DELETE add_headers stop_for_status
 
-session_make_request <- function(self, private, endpoint, data) {
+session_make_request <- function(self, private, endpoint, data, params) {
 
-  ep <- parse_endpoint(endpoint, private)
+  ep <- parse_endpoint(endpoint, private, params)
 
   url <- paste0(
     "http://",
@@ -40,7 +40,7 @@ session_make_request <- function(self, private, endpoint, data) {
   parse_response(response)
 }
 
-parse_endpoint <- function(endpoint, params) {
+parse_endpoint <- function(endpoint, params, xparams) {
 
   if (! endpoint %in% names(endpoints)) {
     stop("Unknown webdriver API endpoint, internal error")
@@ -52,8 +52,9 @@ parse_endpoint <- function(endpoint, params) {
 
   for (col in colons) {
     col1 <- substring(col, 2)
-    if (! col1 %in% names(params)) stop("Unknown API parameter: ", col)
-    template <- gsub(col, params[[col1]], template, fixed = TRUE)
+    value <- xparams[[col1]] %||% params[[col1]] %||%
+      stop("Unknown API parameter: ", col)
+    template <- gsub(col, value, template, fixed = TRUE)
   }
 
   if (substring(template, 1, 1) != "/") {

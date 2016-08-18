@@ -3,6 +3,7 @@
 #' @export
 
 session <- R6Class(
+  "session",
   public = list(
 
     initialize = function(host = "localhost", port = 8910)
@@ -28,6 +29,21 @@ session <- R6Class(
 
     get_title = function()
       session_get_title(self, private)
+
+    ## Elements ------------------------------------------------
+
+    find_element = function(css = NULL, link_text = NULL,
+      partial_link_text = NULL, xpath = NULL)
+      session_find_element(self, private, css, link_text,
+                           partial_link_text, xpath),
+
+    find_elements = function(css = NULL, link_text = NULL,
+      partial_link_text = NULL, xpath = NULL)
+      session_find_elements(self, private, css, link_text,
+                            partial_link_text, xpath),
+
+    get_active_element = function()
+      session_get_active_element(self, private)
   ),
 
   private = list(
@@ -37,8 +53,8 @@ session <- R6Class(
     session_id = NULL,
     parameters = NULL,
 
-    make_request = function(endpoint, data = NULL)
-      session_make_request(self, private, endpoint, data)
+    make_request = function(endpoint, data = NULL, params = NULL)
+      session_make_request(self, private, endpoint, data, params)
   )
 )
 
@@ -140,4 +156,71 @@ session_get_title <- function(self, private) {
   )
 
   response$value
+}
+
+
+session_find_element <- function(self, private, css, link_text,
+                                 partial_link_text, xpath) {
+
+  find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
+
+  response <- private$make_request(
+    "FIND ELEMENT",
+    list(
+      using = unbox(find_expr$using),
+      value = unbox(find_expr$value)
+    )
+  )
+
+  element$new(
+    id = response$value$ELEMENT,
+    session = self,
+    session_private = private
+  )
+}
+
+
+parse_find_expr <- function(css, link_text, partial_link_text, xpath) {
+
+  if (is.null(css) + is.null(link_text) + is.null(partial_link_text) +
+      is.null(xpath) != 3) {
+    stop(
+      "Specify one of 'css', 'link_text', ",
+      "'partial_link_text' and 'xpath'"
+    )
+  }
+
+  if (!is.null(css)) {
+    list(using = "css selector", value = css)
+
+  } else if (!is.null(link_text)) {
+    list(using = "link text", value = link_text)
+
+  } else if (!is.null(partial_link_text)) {
+    list(using = "partial link text", value = partial_link_text)
+
+  } else if (!is.null(xpath)) {
+    list(using = "xpath", value = xpath)
+  }
+}
+
+
+session_find_elements <- function(self, private, css, link_text,
+                                  partial_link_text, xpath) {
+  ## TODO
+}
+
+
+## TODO: this does not seem to work
+session_get_active_element <- function(self, private) {
+
+  response <- private$make_request(
+    "GET ACTIVE ELEMENT"
+  )
+
+  element$new(
+    id = response$value$ELEMENT,
+    session = self,
+    session_private = private
+  )
 }

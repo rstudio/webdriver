@@ -23,7 +23,7 @@ endpoints <- list(
   "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
   "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
   "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
-  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size"
+  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
 
   ## frames
   "SWITCH TO FRAME"      = "POST   /session/:session_id/frame",
@@ -32,10 +32,10 @@ endpoints <- list(
 
   ## elements
   "FIND ELEMENT"         = "POST   /session/:session_id/element",
-  "FIND ELELENT FROM ELEMENT"
+  "FIND ELEMENT FROM ELEMENT"
                          = "POST   /session/:session_id/element/:element_id/element",
   "FIND ELEMENTS"        = "POST   /session/:session_id/elements",
-  "FIND ELELENTS FROM ELEMENT"
+  "FIND ELEMENTS FROM ELEMENT"
                          = "POST   /session/:session_id/element/:element_id/elements",
   "GET ACTIVE ELEMENT"   = "GET    /session/:session_id/element/active",
   "IS ELEMENT SELECTED"  = "GET    /session/:session_id/element/:element_id/selected",

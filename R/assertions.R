@@ -14,3 +14,9 @@ assert_count <- function(x) {
 }
 
 assert_port <- assert_count
+
+assert_session <- function(x) {
+  stopifnot(
+    inherits(x, "session")
+  )
+}
