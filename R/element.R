@@ -2,16 +2,83 @@
 #' HTML element
 #'
 #' @section Usage:
+#' \preformatted{e <- s$find_element(css = NULL, link_text = NULL,
+#'     partial_link_text = NULL, xpath = NULL)
 #'
-#' TODO
+#' e$find_element(css = NULL, link_text = NULL,
+#'     partial_link_text = NULL, xpath = NULL)
+#' e$find_elements(css = NULL, link_text = NULL,
+#'     partial_link_text = NULL, xpath = NULL)
+#'
+#' e$is_selected()
+#' e$get_attribute(name)
+#' e$get_property(name)
+#' e$get_css_value(name)
+#' e$get_text()
+#' e$get_name()
+#' e$get_rect()
+#' e$is_enabled()
+#' e$click()
+#' e$clear()
+#' e$send_keys(keys)
+#' }
 #'
 #' @section Arguments:
-#'
-#' TODO
+#' \describe{
+#'   \item{e}{An \code{element} object.}
+#'   \item{s}{A \code{\link{session}} object.}
+#'   \item{css}{Css selector to find an HTML element.}
+#'   \item{link_text}{Find HTML elements based on their \code{innerText}.}
+#'   \item{partial_link_text}{Find HTML elements based on their
+#'     \code{innerText}. It uses partial matching.}
+#'   \item{xpath}{Find HTML elements using XPath expressions.}
+#'   \item{name}{String scalar, named of attribute, property or css key.}
+#'   \item{keys}{Character vector of keys to send.}
+#' }
 #'
 #' @section Details:
 #'
-#' TODO
+#' To create \code{element} objects, you need to use the \code{find_element}
+#' (or \code{find_element}) method of a \code{\link{session}} object.
+#'
+#' \code{e$find_element()} finds the \emph{next} HTML element from the
+#' current one. You need to specify one of the \code{css}, \code{link_text},
+#' \code{partial_link_text} and \code{xpath} arguments. It returns a new
+#' \code{element} object.
+#'
+#' \code{e$find_elements()} finds all matching HTML elements starting from
+#' the current element. You need to specify one of the \code{css},
+#' \code{link_text}, \code{partial_link_text} and \code{xpath} arguments.
+#' It returns a list of newly created \code{element} objects.
+#'
+#' \code{e$is_selected()} returns \code{TRUE} is the element is currently
+#' selected, and \code{FALSE} otherwise.
+#'
+#' \code{$get_attribute()} queries an arbitrary HTML attribute.
+#'
+#' \code{$get_property()} queries an HTML property.
+#'
+#' \code{$get_css_value()} queries a CSS property of an element.
+#'
+#' \code{$get_text()} returns the \code{innerText} on an element.
+#'
+#' \code{$get_name()} returns the tag name of an element.
+#'
+#' \code{$get_rect()} returns the \sQuote{rectangle} of an element. It is
+#' named list with components \code{x}, \code{y}, \code{height} and
+#' \code{width}.
+#'
+#' \code{$is_enabled()} returns \code{TRUE} if the element is enabled,
+#' \code{FALSE} otherwise.
+#'
+#' \code{$click()} scrolls the element into view, and clicks the
+#' in-view centre point of it.
+#'
+#' \code{$clear()} scrolls the element into view, and then attempts to
+#' clear its value, checkedness or text content.
+#'
+#' \code{$send_keys()} scrolls the form control element into view, and
+#' sends the provided keys to it.
 #'
 #' @name element
 #' @importFrom R6 R6Class

@@ -1,17 +1,77 @@
 
-#' Webdriver session
+#' WebDriver session
 #'
+#' Drive a headless phantom.js browser via the WebDriver protocol.
+#' It needs phantom.js running in WebDriver mode.
+#' 
 #' @section Usage:
+#' \preformatted{s <- session$new(host = "localhost", port = 8910)
 #'
-#' TODO
+#' s$delete()
+#' s$go(url)
+#' s$get_url()
+#' s$go_back()
+#' s$go_forward()
+#' s$refresh()
+#' s$get_title()
+#' s$get_source()
+#' s$take_screenshot(file = NULL)
+#'
+#' s$find_element(css = NULL, link_text = NULL,
+#'     partial_link_text = NULL, xpath = NULL)
+#' s$find_elements(css = NULL, link_text = NULL,
+#'     partial_link_text = NULL, xpath = NULL)
+#' }
 #'
 #' @section Arguments:
-#'
-#' TODO
+#'\describe{
+#'   \item{s}{A \code{session} object.}
+#'   \item{host}{Host name of phantom.js.}
+#'   \item{port}{Port of phantom.js.}
+#'   \item{url}{URL to nagivate to.}
+#'   \item{file}{File name to save the screenshot to. If \code{NULL}, then
+#'     it will be shown on the R graphics device.}
+#'   \item{css}{Css selector to find an HTML element.}
+#'   \item{link_text}{Find HTML elements based on their \code{innerText}.}
+#'   \item{partial_link_text}{Find HTML elements based on their
+#'     \code{innerText}. It uses partial matching.}
+#'   \item{xpath}{Find HTML elements using XPath expressions.}
+#' }
 #'
 #' @section Details:
 #'
-#' TODO
+#' \code{$new()} creates a new WebDriver session.
+#'
+#' \code{$delete()} deletes a WebDriver session.
+#'
+#' \code{$go()} navigates to the supplied URL.
+#'
+#' \code{$get_url()} returns the current URL.
+#'
+#' \code{$go_back()} is like the web browser's back button. It goes back
+#' to the previous page.
+#'
+#' \code{$go_forward()} is like the web browser's forward button.
+#'
+#' \code{$refresh()} is like the web browser's refresh button.
+#'
+#' \code{$get_title()} returns the title of the current page.
+#'
+#' \code{$get_source()} returns the complete HTML source of a page,
+#' in a character scalar.
+#'
+#' \code{$take_screenshot()} takes a screenshot of the current page.
+#' You can save it to a PNG file with the \code{file} argument, or
+#' show it on the graphics device (if \code{file} is \code{NULL}).
+#'
+#' \code{$find_element()} finds a HTML element using a CSS selector,
+#' XPath expression, or the \code{innerHTML} of the element. If multiple
+#' elements match, then the first one is returned. The return value
+#' is an \code{\link{element}} object.
+#'
+#' \code{$find_elements()} finds HTML elements using a CSS selector,
+#' XPath expression, or the \code{innerHTML} of the element. All matching
+#' elements are returned in a list of \code{\link{element}} objects.
 #'
 #' @importFrom R6 R6Class
 #' @name session
