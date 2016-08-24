@@ -1,5 +1,22 @@
 
+#' Webdriver session
+#'
+#' @section Usage:
+#'
+#' TODO
+#'
+#' @section Arguments:
+#'
+#' TODO
+#'
+#' @section Details:
+#'
+#' TODO
+#'
 #' @importFrom R6 R6Class
+#' @name session
+NULL
+
 #' @export
 
 session <- R6Class(

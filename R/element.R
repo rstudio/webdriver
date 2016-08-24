@@ -1,5 +1,21 @@
 
+#' HTML element
+#'
+#' @section Usage:
+#'
+#' TODO
+#'
+#' @section Arguments:
+#'
+#' TODO
+#'
+#' @section Details:
+#'
+#' TODO
+#'
+#' @name element
 #' @importFrom R6 R6Class
+NULL
 
 element <- R6Class(
   "element",
