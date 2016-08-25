@@ -137,8 +137,9 @@ session <- R6Class(
     session_id = NULL,
     parameters = NULL,
 
-    make_request = function(endpoint, data = NULL, params = NULL)
-      session_make_request(self, private, endpoint, data, params)
+    make_request = function(endpoint, data = NULL, params = NULL,
+      headers = NULL)
+      session_make_request(self, private, endpoint, data, params, headers)
   )
 )
 
