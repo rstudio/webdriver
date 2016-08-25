@@ -231,7 +231,7 @@ element_get_css_value <- function(self, private, name) {
 
   response <- private$session_private$make_request(
     "GET ELEMENT CSS VALUE",
-    params = list(element_id = private$id, name = name)
+    params = list(element_id = private$id, property_name = name)
   )
 
   response$value
