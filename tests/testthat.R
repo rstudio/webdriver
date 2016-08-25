@@ -1,4 +1,4 @@
 library(testthat)
 library(webdriver)
 
-test_check("webdriver")
+if (Sys.getenv("NOT_CRAN", "") != "") test_check("webdriver")

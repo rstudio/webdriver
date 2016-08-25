@@ -18,8 +18,11 @@ Imports:
     R6,
     showimage
 Remotes:
+    gaborcsardi/processx,
     MangoTheCat/showimage
 Suggests: 
+    processx,
+    servr,
     testthat
 Encoding: UTF-8
 SystemRequirements: PhantomJS (http://phantomjs.org/)
