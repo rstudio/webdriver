@@ -37,7 +37,8 @@ endpoints <- list(
   "FIND ELEMENTS"        = "POST   /session/:session_id/elements",
   "FIND ELEMENTS FROM ELEMENT"
                          = "POST   /session/:session_id/element/:element_id/elements",
-  "GET ACTIVE ELEMENT"   = "GET    /session/:session_id/element/active",
+  ## In the standard this is a GET, but phantomjs expects a POST :(
+  "GET ACTIVE ELEMENT"   = "POST   /session/:session_id/element/active",
   "IS ELEMENT SELECTED"  = "GET    /session/:session_id/element/:element_id/selected",
   "GET ELEMENT ATTRIBUTE"= "GET    /session/:session_id/element/:element_id/attribute/:name",
   "GET ELEMENT PROPERTY" = "GET    /session/:session_id/element/:element_id/property/:name",

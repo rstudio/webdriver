@@ -88,8 +88,12 @@ test_that("find elements", {
   el3 <- s$find_element(partial_link_text = "project web")
   expect_equal(el3$get_text(), "R project web site")
 
-  el4 <- s$find_element(xpath = "//body/p")
-  expect_equal(el4$get_text(), "This is foo!")
+  el4 <- s$find_element(xpath = "//body/p/a")
+  expect_equal(el4$get_text(), "R project web site")
 
   ## TODO: find_elements is not implemented yet
+
+  el4$send_keys("")
+  el5 <- s$get_active_element()
+  expect_equal(el5$get_text(), "R project web site")
 })
