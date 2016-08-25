@@ -14,16 +14,31 @@ endpoints <- list(
   "GET TITLE"            = "GET    /session/:session_id/title",
 
   ## windows
-  "GET WINDOW HANDLE"    = "GET    /session/:session_id/window",
+  ## This is /window in the standard, /window_handle in phantomjs
+  ## "GET WINDOW HANDLE"    = "GET    /session/:session_id/window",
+  "GET WINDOW HANDLE"    = "GET    /session/:session_id/window_handle",
   "CLOSE WINDOW"         = "DELETE /session/:session_id/window",
   "SWITCH TO WINDOW"     = "POST   /session/:session_id/window",
-  "GET WINDOW HANDLES"   = "GET    /session/:session_id/window/handles",
+  ## This is window/handles in the standard, /window_handles in phantomjs
+  ## "GET WINDOW HANDLES"   = "GET    /session/:session_id/window/handles",
+  "GET WINDOW HANDLES"   = "GET    /session/:session_id/window_handles",
+  ## Not supported
   "FULLSCREEN WINDOW"    = "POST   /session/:session_id/window/fullscreen",
-  "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/maximize",
-  "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
-  "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
-  "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
-  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
+  ## non-standard
+  ## "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/maximize",
+  "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/:window_id/maximize",
+  ## non-standard
+  ## "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
+  "SET WINDOW SIZE"      = "POST   /session/:session_id/window/:window_id/size",
+  ## non-stadard
+  ## "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
+  "GET WINDOW POSITION"  = "GET    /session/:session_id/window/:window_id/position",
+  ## non-standard
+  ## "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
+  "SET WINDOW POSITION"  = "POST   /session/:session_id/window/:window_id/position",
+  ## This is also non-standard
+  ## "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
+  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/:window_id/size",
 
   ## frames
   "SWITCH TO FRAME"      = "POST   /session/:session_id/frame",

@@ -17,6 +17,10 @@ assert_count <- function(x) {
 
 assert_port <- assert_count
 
+assert_window_size <- assert_count
+
+assert_window_position <- assert_count
+
 assert_session <- function(x) {
   stopifnot(
     inherits(x, "session")

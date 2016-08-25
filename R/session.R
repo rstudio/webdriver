@@ -126,8 +126,15 @@ session <- R6Class(
                             partial_link_text, xpath),
 
     get_active_element = function()
-      session_get_active_element(self, private)
+      session_get_active_element(self, private),
 
+    ## Windows -------------------------------------------------
+
+    get_window = function()
+      session_get_window(self, private),
+
+    get_all_windows = function()
+      session_get_all_windows(self, private)
   ),
 
   private = list(
@@ -350,4 +357,33 @@ handle_screenshot <- function(response, file) {
 
   ## if 'file' was NULL, then show it on the graphics device
   if (is.null(file)) show_image(output)
+}
+
+
+session_get_window <- function(self, private) {
+
+  response <- private$make_request(
+    "GET WINDOW HANDLE"
+  )
+
+  window$new(
+    id = response$value,
+    session = self,
+    session_private = private
+  )
+}
+
+session_get_all_windows <- function(self, private) {
+
+  response <- private$make_request(
+    "GET WINDOW HANDLES"
+  )
+
+  lapply(response$value, function(id) {
+    window$new(
+      id = id,
+      session = self,
+      session_private = private
+    )
+  })
 }
