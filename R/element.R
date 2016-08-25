@@ -132,7 +132,7 @@ element <- R6Class(
       element_clear(self, private),
 
     send_keys = function(keys)
-      element_send_keys(self, private),
+      element_send_keys(self, private, keys),
 
     take_screenshot = function(file = NULL)
       element_take_screenshot(self, private, file)
@@ -308,6 +308,7 @@ element_send_keys <- function(self, private, keys) {
 
   response <- private$session_private$make_request(
     "ELEMENT SEND KEYS",
+    list(value = keys),
     params = list(element_id = private$id)
   )
 
