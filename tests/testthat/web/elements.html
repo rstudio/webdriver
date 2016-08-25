@@ -13,5 +13,47 @@
 
   <p><a href="http://www.r-project.org">R project web site</a></p>
 
+  <p>
+  <form>
+
+    First name:<br>
+    <input type="text" name="firstname" id="firstname"><br>
+    Last name:<br>
+    <input type="text" name="lastname" id="lastname">
+
+    <input type="radio" name="gender" value="male" checked> Male<br>
+    <input type="radio" name="gender" value="female"> Female<br>
+    <input type="radio" name="gender" value="other"> Other
+
+    <select name="cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <select disabled class="disabledselect">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <input type="checkbox" name="vehicle1" value="Bike">
+      I have a bike
+    </input><br>
+    <input type="checkbox" name="vehicle2" value="Car">I have a car</input>
+
+    <textarea name="message" rows="10" cols="30">
+      The cat was playing in the garden.
+    </textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+  </p>
+
+  <p class="clickme"><a href="check.html">ME! ME! ME!</a></p>
+
   </body>
 </html>
