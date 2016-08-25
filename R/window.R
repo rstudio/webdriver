@@ -1,4 +1,20 @@
 
+#' A browser window
+#'
+#' @section Usage:
+#'
+#' TODO
+#'
+#' @section Arguments:
+#'
+#' TODO
+#'
+#' @section Details:
+#'
+#' @name window
+#' @importFrom R6 R6Class
+NULL
+
 window <- R6Class(
   "window",
   public = list(
