@@ -2,14 +2,60 @@
 #' A browser window
 #'
 #' @section Usage:
+#' \preformatted{w <- s$get_window()
+#' wlist <- s$get_all_windows()
 #'
-#' TODO
+#' w$close()
+#' w$is_active()
+#' w$switch_to()
+#' w$maximize()
+#' w$get_size()
+#' w$set_size(width, height)
+#' w$get_position()
+#' w$set_position(x, y)
+#' }
 #'
 #' @section Arguments:
-#'
-#' TODO
+#' \describe{
+#'   \item{s}{A \code{\link{session}} object.}
+#'   \item{w}{A \code{window} object.}
+#'   \item{wlist}{A list of \code{window} objects.}
+#'   \item{width}{Integer scalar, requested width of the window.}
+#'   \item{height}{Integer scalar, requested height of the window.}
+#'   \item{x}{Integer scalar, requested horizontal window position.}
+#'   \item{y}{Integer scalar, requested vertical window position.}
+#' }
 #'
 #' @section Details:
+#'
+#' The \code{get_window} method of a \code{\link{session}} object
+#' returns the current browser window as a \code{window} object.
+#' The \code{get_all_windows} method returns a list of window objects,
+#' all browser windows.
+#'
+#' \code{w$close()} closes the window.
+#'
+#' \code{w$is_active()} returns \code{TRUE} if the window is active,
+#' \code{FALSE} otherwise.
+#'
+#' \code{w$switch_to} makes the window active.
+#'
+#' \code{w$maximize} maximizes the window. Currently it sets it to
+#' a fixed size.
+#'
+#' \code{w$get_size} returns the size of the window, in a list with
+#' elementh \code{width} and \code{height}, both integers.
+#'
+#' \code{w$set_size} sets the size of the window.
+#'
+#' \code{w$get_position} returns the position of the window on the
+#' screen. Phantom.js being headless, it always returns
+#' \code{list(x = 0, y = 0)}, and it is included to have a complete
+#' impelementation of the WebDriver standard.
+#'
+#' \code{w$set_position(x, y)} sets the position of the window on the
+#' screen. Phantom.js being headless, it has no effect, and it is included
+#' to have a complete implementation of the WebDriver standard.
 #'
 #' @name window
 #' @importFrom R6 R6Class
