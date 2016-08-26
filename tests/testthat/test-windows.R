@@ -28,6 +28,9 @@ test_that("window methods are OK", {
 
   expect_equal(s$get_url(), server$url("/window2.html"))
 
+  w2$close()
+  expect_equal(length(s$get_all_windows()), 1)
+
   w1$switch_to()
   expect_equal(s$get_url(), server$url("/window1.html"))
 
@@ -40,5 +43,5 @@ test_that("window methods are OK", {
   expect_equal(w1$get_size(), list(width = 1366, height = 768))
 
   w2$close()
-  expect_equal(length(s$get_all_windows()), 1)
+  expect_equal(length(s$get_all_windows()), 0)
 })

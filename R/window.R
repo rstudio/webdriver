@@ -75,7 +75,8 @@ window_initialize <- function(self, private, id, session,
 window_close <- function(self, private) {
 
   private$session_private$make_request(
-    "CLOSE WINDOW"
+    "CLOSE WINDOW",
+    list(name = unbox(private$id))
   )
 
   invisible(self)
