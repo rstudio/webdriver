@@ -40,36 +40,36 @@
 #'
 #' @section Details:
 #'
-#' \code{$new()} creates a new WebDriver session.
+#' \code{s$new()} creates a new WebDriver session.
 #'
-#' \code{$delete()} deletes a WebDriver session.
+#' \code{s$delete()} deletes a WebDriver session.
 #'
-#' \code{$go()} navigates to the supplied URL.
+#' \code{s$go()} navigates to the supplied URL.
 #'
-#' \code{$get_url()} returns the current URL.
+#' \code{s$get_url()} returns the current URL.
 #'
-#' \code{$go_back()} is like the web browser's back button. It goes back
+#' \code{s$go_back()} is like the web browser's back button. It goes back
 #' to the previous page.
 #'
-#' \code{$go_forward()} is like the web browser's forward button.
+#' \code{s$go_forward()} is like the web browser's forward button.
 #'
-#' \code{$refresh()} is like the web browser's refresh button.
+#' \code{s$refresh()} is like the web browser's refresh button.
 #'
-#' \code{$get_title()} returns the title of the current page.
+#' \code{s$get_title()} returns the title of the current page.
 #'
-#' \code{$get_source()} returns the complete HTML source of a page,
+#' \code{s$get_source()} returns the complete HTML source of a page,
 #' in a character scalar.
 #'
-#' \code{$take_screenshot()} takes a screenshot of the current page.
+#' \code{s$take_screenshot()} takes a screenshot of the current page.
 #' You can save it to a PNG file with the \code{file} argument, or
 #' show it on the graphics device (if \code{file} is \code{NULL}).
 #'
-#' \code{$find_element()} finds a HTML element using a CSS selector,
+#' \code{s$find_element()} finds a HTML element using a CSS selector,
 #' XPath expression, or the \code{innerHTML} of the element. If multiple
 #' elements match, then the first one is returned. The return value
 #' is an \code{\link{element}} object.
 #'
-#' \code{$find_elements()} finds HTML elements using a CSS selector,
+#' \code{s$find_elements()} finds HTML elements using a CSS selector,
 #' XPath expression, or the \code{innerHTML} of the element. All matching
 #' elements are returned in a list of \code{\link{element}} objects.
 #'

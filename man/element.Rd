@@ -64,30 +64,30 @@ It returns a list of newly created \code{element} objects.
 \code{e$is_selected()} returns \code{TRUE} is the element is currently
 selected, and \code{FALSE} otherwise.
 
-\code{$get_attribute()} queries an arbitrary HTML attribute.
+\code{e$get_attribute()} queries an arbitrary HTML attribute.
 
-\code{$get_property()} queries an HTML property.
+\code{e$get_property()} queries an HTML property.
 
-\code{$get_css_value()} queries a CSS property of an element.
+\code{e$get_css_value()} queries a CSS property of an element.
 
-\code{$get_text()} returns the \code{innerText} on an element.
+\code{e$get_text()} returns the \code{innerText} on an element.
 
-\code{$get_name()} returns the tag name of an element.
+\code{e$get_name()} returns the tag name of an element.
 
-\code{$get_rect()} returns the \sQuote{rectangle} of an element. It is
+\code{e$get_rect()} returns the \sQuote{rectangle} of an element. It is
 named list with components \code{x}, \code{y}, \code{height} and
 \code{width}.
 
-\code{$is_enabled()} returns \code{TRUE} if the element is enabled,
+\code{e$is_enabled()} returns \code{TRUE} if the element is enabled,
 \code{FALSE} otherwise.
 
-\code{$click()} scrolls the element into view, and clicks the
+\code{e$click()} scrolls the element into view, and clicks the
 in-view centre point of it.
 
-\code{$clear()} scrolls the element into view, and then attempts to
+\code{e$clear()} scrolls the element into view, and then attempts to
 clear its value, checkedness or text content.
 
-\code{$send_keys()} scrolls the form control element into view, and
+\code{e$send_keys()} scrolls the form control element into view, and
 sends the provided keys to it.
 }
 
