@@ -25,6 +25,9 @@ s$find_element(css = NULL, link_text = NULL,
     partial_link_text = NULL, xpath = NULL)
 s$find_elements(css = NULL, link_text = NULL,
     partial_link_text = NULL, xpath = NULL)
+
+s$execute_script(script, ...)
+s$execute_script_async(script, ...)
 }
 }
 
@@ -42,6 +45,10 @@ s$find_elements(css = NULL, link_text = NULL,
   \item{partial_link_text}{Find HTML elements based on their
     \code{innerText}. It uses partial matching.}
   \item{xpath}{Find HTML elements using XPath expressions.}
+  \item{script}{JavaScript code to execute. It will be placed in the
+    body of a function.}
+  \item{...}{Arguments to the script, they will be put in a list
+    called arguments.}
 }
 }
 
@@ -80,5 +87,17 @@ is an \code{\link{element}} object.
 \code{s$find_elements()} finds HTML elements using a CSS selector,
 XPath expression, or the \code{innerHTML} of the element. All matching
 elements are returned in a list of \code{\link{element}} objects.
+
+\code{s$execute_script()} executes JavaScript code. It places the code
+in the body of a function, and then calls the function with the
+additional arguments. These can be accessed from the function via the
+\code{arguments} array.
+
+\code{s$execute_script_async()} is similar, for asynchronous execution.
+It place the script in a body of a function, and then calls the function
+with the additional arguments and a callback function as the last
+argument. The script must call this callback function when it
+finishes its work. The first argument passed to the callback function
+is returned.
 }
 

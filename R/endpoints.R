@@ -67,8 +67,10 @@ endpoints <- list(
   "ELEMENT SEND KEYS"    = "POST   /session/:session_id/element/:element_id/value",
 
   "GET PAGE SOURCE"      = "GET    /session/:session_id/source",
-  "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute/sync",
-  "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute/async",
+  ## "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute/sync",
+  "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute",
+  ## "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute/async",
+  "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute_async",
 
   ## cookies
   "GET ALL COOKIES"      = "GET    /session/:session_id/cookie",

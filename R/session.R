@@ -3,7 +3,7 @@
 #'
 #' Drive a headless phantom.js browser via the WebDriver protocol.
 #' It needs phantom.js running in WebDriver mode.
-#' 
+#'
 #' @section Usage:
 #' \preformatted{s <- session$new(host = "localhost", port = 8910)
 #'
@@ -21,6 +21,9 @@
 #'     partial_link_text = NULL, xpath = NULL)
 #' s$find_elements(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
+#'
+#' s$execute_script(script, ...)
+#' s$execute_script_async(script, ...)
 #' }
 #'
 #' @section Arguments:
@@ -36,6 +39,10 @@
 #'   \item{partial_link_text}{Find HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
+#'   \item{script}{JavaScript code to execute. It will be placed in the
+#'     body of a function.}
+#'   \item{...}{Arguments to the script, they will be put in a list
+#'     called arguments.}
 #' }
 #'
 #' @section Details:
@@ -72,6 +79,18 @@
 #' \code{s$find_elements()} finds HTML elements using a CSS selector,
 #' XPath expression, or the \code{innerHTML} of the element. All matching
 #' elements are returned in a list of \code{\link{element}} objects.
+#'
+#' \code{s$execute_script()} executes JavaScript code. It places the code
+#' in the body of a function, and then calls the function with the
+#' additional arguments. These can be accessed from the function via the
+#' \code{arguments} array.
+#'
+#' \code{s$execute_script_async()} is similar, for asynchronous execution.
+#' It place the script in a body of a function, and then calls the function
+#' with the additional arguments and a callback function as the last
+#' argument. The script must call this callback function when it
+#' finishes its work. The first argument passed to the callback function
+#' is returned.
 #'
 #' @importFrom R6 R6Class
 #' @name session
@@ -134,7 +153,15 @@ session <- R6Class(
       session_get_window(self, private),
 
     get_all_windows = function()
-      session_get_all_windows(self, private)
+      session_get_all_windows(self, private),
+
+    ## Execute script ------------------------------------------
+
+    execute_script = function(script, ...)
+      session_execute_script(self, private, script, ...),
+
+    execute_script_async = function(script, ...)
+      session_execute_script_async(self, private, script, ...)
   ),
 
   private = list(
@@ -386,4 +413,32 @@ session_get_all_windows <- function(self, private) {
       session_private = private
     )
   })
+}
+
+session_execute_script <- function(self, private, script, ...) {
+
+  assert_string(script)
+
+  args <- lapply(list(...), unbox)
+
+  response <- private$make_request(
+    "EXECUTE SCRIPT",
+    list(script = unbox(script), args = args)
+  )
+
+  response$value
+}
+
+session_execute_script_async <- function(self, private, script, ...) {
+
+  assert_string(script)
+
+  args <- lapply(list(...), unbox)
+
+  response <- private$make_request(
+    "EXECUTE ASYNC SCRIPT",
+    list(script = unbox(script), args = args)
+  )
+
+  response$value
 }

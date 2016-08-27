@@ -97,3 +97,38 @@ test_that("find elements", {
   el5 <- s$get_active_element()
   expect_equal(el5$get_text(), "R project web site")
 })
+
+test_that("execute script (sync)", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+
+  s$go(server$url("/elements.html"))
+
+  expect_equal(
+    s$execute_script("return 42 + 'foobar';"),
+    "42foobar"
+  )
+  expect_null(
+    s$execute_script("1 + 1;")
+  )
+  expect_equal(
+    s$execute_script("return arguments[0] + arguments[1]", 42, 24),
+    66
+  )
+  expect_error(
+    s$execute_script("syntax error"),
+    "Expected an identifier but found 'error' instead"
+  )
+})
+
+test_that("execute script (async)", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+
+  s$go(server$url("/elements.html"))
+
+  expect_equal(
+    s$execute_script_async("arguments[arguments.length - 1](42);"),
+    42
+  )
+})
