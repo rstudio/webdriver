@@ -24,6 +24,8 @@
 #'
 #' s$execute_script(script, ...)
 #' s$execute_script_async(script, ...)
+#'
+#' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
 #' }
 #'
 #' @section Arguments:
@@ -39,10 +41,16 @@
 #'   \item{partial_link_text}{Find HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
-#'   \item{script}{JavaScript code to execute. It will be placed in the
-#'     body of a function.}
+#'   \item{script}{For \code{execute_script} and
+#'     \code{execute_script_async}. JavaScript code to execute. It will be
+#'     placed in the body of a function.}
 #'   \item{...}{Arguments to the script, they will be put in a list
 #'     called arguments.}
+#'   \item{script}{For \code{set_timeout}. Script execution timeout,
+#'     in milliseconds. More below.}
+#'   \item{page_load}{Page load timeout, in milliseconds. More below.}
+#'   \item{implicit}{Implicit wait before calls that find elements, in
+#'     milliseconds. More below.}
 #' }
 #'
 #' @section Details:
@@ -91,6 +99,18 @@
 #' argument. The script must call this callback function when it
 #' finishes its work. The first argument passed to the callback function
 #' is returned.
+#'
+#' \code{s$set_timeout()} sets various timeouts. The \sQuote{script}
+#' timeout specifies a time to wait for scripts to run. The
+#' sQuote{page load} timeout specifies a time to wait for the page loading
+#' to complete. The \sQuote{implicit} specifies a time to wait for the
+#' implicit element location strategy when locating elements. Their defaults
+#' are different in the standard and in Phantom.js. In Phantom.js the
+#' \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
+#' and the \sQuote{implicit} waiting time is 200ms.
+#'
+#' @seealso The WebDriver standard at
+#' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
 #'
 #' @importFrom R6 R6Class
 #' @name session
@@ -161,7 +181,13 @@ session <- R6Class(
       session_execute_script(self, private, script, ...),
 
     execute_script_async = function(script, ...)
-      session_execute_script_async(self, private, script, ...)
+      session_execute_script_async(self, private, script, ...),
+
+    ## Timeouts ------------------------------------------------
+
+    set_timeout = function(script = NULL, page_load = NULL,
+      implicit = NULL)
+      session_set_timeout(self, private, script, page_load, implicit)
   ),
 
   private = list(
@@ -463,4 +489,34 @@ session_execute_script_async <- function(self, private, script, ...) {
   )
 
   response$value
+}
+
+session_set_timeout <- function(self, private, script, page_load,
+                                implicit) {
+
+  if (!is.null(script)) {
+    assert_timeout(script)
+    private$make_request(
+      "SET TIMEOUT",
+      list(type = unbox("script"), ms = unbox(script))
+    )
+  }
+
+  if (!is.null(page_load)) {
+    assert_timeout(page_load)
+    private$make_request(
+      "SET TIMEOUT",
+      list(type = unbox("page load"), ms = unbox(page_load))
+    )
+  }
+
+  if (!is.null(implicit)) {
+    assert_timeout(implicit)
+    private$make_request(
+      "SET TIMEOUT",
+      list(type = unbox("implicit"), ms = unbox(implicit))
+    )
+  }
+
+  invisible(self)
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head><title>check</title></head>
+  <body>
+    <p>Hello there!</p>
+  </body>
+  <script>
+    (function() {
+    setTimeout(
+        function() {
+        var div = document.createElement('div');
+        div.className = "slow";
+        document.body.appendChild(div);
+      },
+      100
+    );
+    })();
+  </script>
+</html>

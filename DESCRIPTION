@@ -20,7 +20,8 @@ Imports:
 Remotes:
     gaborcsardi/processx,
     MangoTheCat/showimage
-Suggests: 
+Suggests:
+    pingr,
     processx,
     servr,
     testthat
