@@ -9,7 +9,7 @@ default_headers <- c(
 #' @importFrom httr GET POST DELETE add_headers
 
 session_make_request <- function(self, private, endpoint, data, params,
-                                 headers = NULL) {
+                                 headers) {
 
   headers <- update(default_headers, as.character(headers))
 
