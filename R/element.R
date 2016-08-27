@@ -54,7 +54,8 @@
 #' \code{e$is_selected()} returns \code{TRUE} is the element is currently
 #' selected, and \code{FALSE} otherwise.
 #'
-#' \code{e$get_attribute()} queries an arbitrary HTML attribute.
+#' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
+#' does not exist, \code{NULL} is returned.
 #'
 #' \code{e$get_property()} queries an HTML property.
 #'

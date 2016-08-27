@@ -17,6 +17,7 @@ test_that("element methods are OK", {
 
   el <- s$find_element(css = ".foo")
   expect_equal(el$get_attribute("class"), "foo")
+  expect_null(el$get_attribute("xxx"))
 
   ## TODO: get_property does not work
 
