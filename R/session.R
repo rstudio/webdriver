@@ -201,18 +201,24 @@ session_initialize <- function(self, private, host, port) {
   private$session_id = response$sessionId %||% stop("Got no session_id")
   private$parameters = response$value
 
+  reg.finalizer(self, function(e) e$delete(), TRUE)
+
   invisible(self)
 }
 
 
 session_delete <- function(self, private) {
 
-  response <- private$make_request(
-    "DELETE SESSION",
-    list()
-  )
+  if (! is.null(private$session_id)) {
+    response <- private$make_request(
+      "DELETE SESSION",
+      list()
+    )
+  }
 
-  invisible(response$sessionId)
+  private$session_id <- NULL
+
+  invisible()
 }
 
 
