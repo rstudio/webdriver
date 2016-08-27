@@ -6,7 +6,7 @@ default_headers <- c(
 )
 
 #' @importFrom jsonlite toJSON
-#' @importFrom httr GET POST DELETE add_headers stop_for_status
+#' @importFrom httr GET POST DELETE add_headers
 
 session_make_request <- function(self, private, endpoint, data, params,
                                  headers = NULL) {
@@ -38,7 +38,7 @@ session_make_request <- function(self, private, endpoint, data, params,
     stop("Unexpected HTTP verb, internal webdriver error")
   }
 
-  stop_for_status(response)
+  report_error(response)
 
   parse_response(response)
 }
