@@ -326,7 +326,23 @@ parse_find_expr <- function(css, link_text, partial_link_text, xpath) {
 
 session_find_elements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
-  ## TODO
+  find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
+
+  response <- private$make_request(
+    "FIND ELEMENTS",
+    list(
+      using = unbox(find_expr$using),
+      value = unbox(find_expr$value)
+    )
+  )
+
+  lapply(response$value, function(el) {
+    element$new(
+      id = el$ELEMENT,
+      session = self,
+      session_private = private
+    )
+  })
 }
 
 

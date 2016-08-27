@@ -185,7 +185,25 @@ element_find_element <- function(self, private, css, link_text,
 
 element_find_elements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
-  ## TODO
+
+  find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
+
+  response <- private$session_private$make_request(
+    "FIND ELEMENTS FROM ELEMENT",
+    list(
+      using = unbox(find_expr$using),
+      value = unbox(find_expr$value)
+    ),
+    list(element_id = private$id)
+  )
+
+  lapply(response$value, function(el) {
+    element$new(
+      id = el$ELEMENT,
+      session = private$session,
+      session_private = private$session_private
+    )
+  })
 }
 
 

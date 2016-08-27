@@ -45,5 +45,10 @@ test_that("element methods are OK", {
   el$clear()
   expect_equal(el$get_attribute("value"), "")
 
+  form <- s$find_element(css = "form")
+  pars <- form$find_elements(css = "p")
+  expect_equal(length(pars), 7)
+  expect_true(is(pars[[1]], "element"))
+
   ## TODO: take_screenshot takes screenshot of whole screen
 })

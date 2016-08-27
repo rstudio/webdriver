@@ -91,11 +91,13 @@ test_that("find elements", {
   el4 <- s$find_element(xpath = "//body/p/a")
   expect_equal(el4$get_text(), "R project web site")
 
-  ## TODO: find_elements is not implemented yet
-
   el4$send_keys("")
   el5 <- s$get_active_element()
   expect_equal(el5$get_text(), "R project web site")
+
+  pars <- s$find_elements(css = "form p")
+  expect_equal(length(pars), 7)
+  expect_true(is(pars[[1]], "element"))
 })
 
 test_that("execute script (sync)", {
