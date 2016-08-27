@@ -20,10 +20,10 @@ create_condition <- function(response,
 
   cont <- content(response)
   json <- fromJSON(
-    cont$value$message,
+    cont[["value"]][["message"]],
     simplifyVector = FALSE
   )
-  message <- json$errorMessage %||% "WebDriver error"
+  message <- json[["errorMessage"]] %||% "WebDriver error"
   status <- cont$status
 
   structure(
