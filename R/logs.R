@@ -8,6 +8,8 @@ session_get_log_types <- function(self, private) {
   response$value
 }
 
+#' @importFrom utils tail
+
 session_read_log <- function(self, private, type) {
 
   assert_string(type)

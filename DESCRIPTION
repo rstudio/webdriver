@@ -16,7 +16,8 @@ Imports:
     httr,
     jsonlite,
     R6,
-    showimage
+    showimage,
+    utils
 Remotes:
     gaborcsardi/processx,
     MangoTheCat/showimage
