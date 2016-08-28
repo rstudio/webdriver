@@ -293,15 +293,27 @@ element_get_name <- function(self, private) {
   response$value
 }
 
+## GET ELEMENT RECT is not implemented by phantomjs, but we can
+## emulate it with two other endpoints: location and size
 
 element_get_rect <- function(self, private) {
 
-  response <- private$session_private$make_request(
-    "GET ELEMENT RECT",
+  response1 <- private$session_private$make_request(
+    "GET ELEMENT LOCATION",
     params = list(element_id = private$id)
   )
 
-  response$value
+  response2 <- private$session_private$make_request(
+    "GET ELEMENT SIZE",
+    params = list(element_id = private$id)
+  )
+
+  list(
+    x = response1$value$x,
+    y = response1$value$y,
+    width = response2$value$width,
+    height = response2$value$height
+  )
 }
 
 

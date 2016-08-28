@@ -27,8 +27,6 @@ test_that("element methods are OK", {
 
   expect_equal(el$get_name(), "p")
 
-  ## TODO: get_rect does not work
-
   sel <- s$find_element(css = "form select")
   expect_true(sel$is_enabled())
   sel2 <- s$find_element(css = ".disabledselect")
@@ -55,4 +53,14 @@ test_that("element methods are OK", {
 
 test_that("move mouse cursor", {
   ## TODO: we need session$click to test this
+})
+
+test_that("element rect", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+  s$go(server$url("/elements.html"))
+
+  el <- s$find_element(css = ".foo")
+  rect <- el$get_rect()
+  expect_equal(names(rect), c("x", "y", "width", "height"))
 })
