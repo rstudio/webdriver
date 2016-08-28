@@ -142,3 +142,23 @@ test_that("move mouse cursor", {
 test_that("mouse clicks", {
   ## TODO
 })
+
+test_that("logs", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+
+  s$go(server$url("/elements.html"))
+
+  s$execute_script("console.log('Just a start');")
+  s$execute_script("console.log('Hello world!');")
+  expect_equal(nrow(s$read_log()), 2)
+  s$execute_script("console.log('Hello again!');")
+  s$execute_script(paste0(
+    "console.log('A very long message, just to see how it will be ",
+    "printed to the screen in R');"))
+  log <- s$read_log()
+  expect_equal(nrow(log), 2)
+  expect_true(is.data.frame(log))
+  expect_match(log$message[1], "Hello again")
+  expect_equal(names(log), c("timestamp", "level", "message"))
+})

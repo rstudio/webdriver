@@ -101,5 +101,7 @@ endpoints <- list(
   "CLICK"                = "POST   /session/:session_id/click",
   "DOUBLECLICK"          = "POST   /session/:session_id/doubleclick",
   "BUTTONDOWN"           = "POST   /session/:session_id/buttondown",
-  "BUTTONUP"             = "POST   /session/:session_id/buttonup"
+  "BUTTONUP"             = "POST   /session/:session_id/buttonup",
+  "GET LOG TYPES"        = "GET    /session/:session_id/log/types",
+  "READ LOG"             = "POST   /session/:session_id/log"
 )

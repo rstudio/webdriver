@@ -32,6 +32,9 @@
 #' s$double_click(button = c("left", "middle", "right"))
 #' s$mouse_button_downclick(button = c("left", "middle", "right"))
 #' s$mouse_button_up(button = c("left", "middle", "right"))
+#'
+#' s$read_log(type = c("browser", "har"))
+#' s$get_log_types()
 #' }
 #'
 #' @section Arguments:
@@ -230,7 +233,15 @@ session <- R6Class(
       session_mouse_button_down(self, private, button),
 
     mouse_button_up = function(button = c("left", "middle", "right"))
-      session_mouse_button_up(self, private, button)
+      session_mouse_button_up(self, private, button),
+
+    ## Logs ----------------------------------------------------
+
+    get_log_types = function()
+      session_get_log_types(self, private),
+
+    read_log = function(type = "browser")
+      session_read_log(self, private, type)
   ),
 
   private = list(
@@ -239,6 +250,7 @@ session <- R6Class(
     port = NULL,
     session_id = NULL,
     parameters = NULL,
+    num_log_lines_shown = 0,
 
     make_request = function(endpoint, data = NULL, params = NULL,
       headers = NULL)
@@ -256,6 +268,7 @@ session_initialize <- function(self, private, host, port) {
 
   private$host <- host
   private$port <- port
+  private$num_log_lines_shown <- 0
 
   response <- private$make_request(
     "NEW SESSION",
