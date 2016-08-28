@@ -19,8 +19,6 @@ test_that("element methods are OK", {
   expect_equal(el$get_attribute("class"), "foo")
   expect_null(el$get_attribute("xxx"))
 
-  ## TODO: get_property does not work
-
   expect_equal(el$get_css_value("color"), "rgba(255, 0, 0, 1)")
 
   expect_equal(el$get_text(), "This is foo!")

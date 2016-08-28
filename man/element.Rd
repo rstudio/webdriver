@@ -18,7 +18,6 @@ e$find_elements(css = NULL, link_text = NULL,
 
 e$is_selected()
 e$get_attribute(name)
-e$get_property(name)
 e$get_css_value(name)
 e$get_text()
 e$get_name()
@@ -73,8 +72,6 @@ selected, and \code{FALSE} otherwise.
 
 \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
 does not exist, \code{NULL} is returned.
-
-\code{e$get_property()} queries an HTML property.
 
 \code{e$get_css_value()} queries a CSS property of an element.
 

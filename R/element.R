@@ -12,7 +12,6 @@
 #'
 #' e$is_selected()
 #' e$get_attribute(name)
-#' e$get_property(name)
 #' e$get_css_value(name)
 #' e$get_text()
 #' e$get_name()
@@ -63,8 +62,6 @@
 #'
 #' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
-#'
-#' \code{e$get_property()} queries an HTML property.
 #'
 #' \code{e$get_css_value()} queries a CSS property of an element.
 #'
@@ -119,9 +116,6 @@ element <- R6Class(
 
     get_attribute = function(name)
       element_get_attribute(self, private, name),
-
-    get_property = function(name)
-      element_get_property(self, private, name),
 
     get_css_value = function(name)
       element_get_css_value(self, private, name),
@@ -239,19 +233,6 @@ element_get_attribute <- function(self, private, name) {
 
   response <- private$session_private$make_request(
     "GET ELEMENT ATTRIBUTE",
-    params = list(element_id = private$id, name = name)
-  )
-
-  response$value
-}
-
-
-element_get_property <- function(self, private, name) {
-
-  assert_string(name)
-
-  response <- private$session_private$make_request(
-    "GET ELEMENT PROPERTY",
     params = list(element_id = private$id, name = name)
   )
 
