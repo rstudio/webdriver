@@ -97,6 +97,7 @@ endpoints <- list(
   ## -------------------------------------------------------------------
   ## Phantom JS specific endpoints
 
+  "STATUS"               = "GET    /session/:session_id",
   "MOVE MOUSE TO"        = "POST   /session/:session_id/moveto",
   "CLICK"                = "POST   /session/:session_id/click",
   "DOUBLECLICK"          = "POST   /session/:session_id/doubleclick",

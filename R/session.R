@@ -8,6 +8,8 @@
 #' \preformatted{s <- session$new(host = "localhost", port = 8910)
 #'
 #' s$delete()
+#' s$status()
+#'
 #' s$go(url)
 #' s$get_url()
 #' s$go_back()
@@ -74,6 +76,9 @@
 #' \code{s$new()} creates a new WebDriver session.
 #'
 #' \code{s$delete()} deletes a WebDriver session.
+#'
+#' \code{s$status()} returns a status message from the server. It is a
+#' named list, and contains version numbers and capabilities.
 #'
 #' \code{s$go()} navigates to the supplied URL.
 #'
@@ -164,6 +169,9 @@ session <- R6Class(
 
     delete = function()
       session_delete(self, private),
+
+    get_status = function()
+      session_get_status(self, private),
 
     go = function(url)
       session_go(self, private, url),
@@ -311,6 +319,13 @@ session_delete <- function(self, private) {
   invisible()
 }
 
+session_get_status <- function(self, private) {
+  response <- private$make_request(
+    "STATUS"
+  )
+
+  response$value
+}
 
 session_go <- function(self, private, url) {
 

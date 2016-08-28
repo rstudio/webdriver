@@ -12,6 +12,8 @@ It needs phantom.js running in WebDriver mode.
 \preformatted{s <- session$new(host = "localhost", port = 8910)
 
 s$delete()
+s$status()
+
 s$go(url)
 s$get_url()
 s$go_back()
@@ -82,6 +84,9 @@ s$get_log_types()
 \code{s$new()} creates a new WebDriver session.
 
 \code{s$delete()} deletes a WebDriver session.
+
+\code{s$status()} returns a status message from the server. It is a
+named list, and contains version numbers and capabilities.
 
 \code{s$go()} navigates to the supplied URL.
 
