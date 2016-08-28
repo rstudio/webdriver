@@ -66,6 +66,7 @@
 #'     current position.}
 #'   \item{button}{Mouse button. Either one of \code{"left"},
 #'     \code{"middle"}, \code{"right"}, or an integer between 1 and 3.}
+#'   \item{type}{Log type, a character scalar.}
 #' }
 #'
 #' @section Details:
@@ -137,6 +138,13 @@
 #' down (and keeping it down).
 #'
 #' \code{s$button_up()} emulates releasing the specified mouse button.
+#'
+#' \code{s$get_log_types()} returns the log types supported by the
+#' server, in a character vector.
+#'
+#' \code{s$read_log()} returns the log messages since the last
+#' \code{read_log} call, in a data frame with columns \code{timestamp},
+#' \code{level} and \code{message}.
 #'
 #' @seealso The WebDriver standard at
 #' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
