@@ -28,6 +28,10 @@
 #' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
 #'
 #' s$move_mouse_to(xoffset = 0, yoffset = 0)
+#' s$click(button = c("left", "middle", "right"))
+#' s$double_click(button = c("left", "middle", "right"))
+#' s$mouse_button_downclick(button = c("left", "middle", "right"))
+#' s$mouse_button_up(button = c("left", "middle", "right"))
 #' }
 #'
 #' @section Arguments:
@@ -52,11 +56,13 @@
 #'     in milliseconds. More below.}
 #'   \item{page_load}{Page load timeout, in milliseconds. More below.}
 #'   \item{implicit}{Implicit wait before calls that find elements, in
-#'     milliseconds. More below.},
+#'     milliseconds. More below.}
 #'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
 #'     current position.}
 #'   \item{yoffset}{Vertical offset for mouse movement, relative to the
 #'     current position.}
+#'   \item{button}{Mouse button. Either one of \code{"left"},
+#'     \code{"middle"}, \code{"right"}, or an integer between 1 and 3.}
 #' }
 #'
 #' @section Details:
@@ -117,6 +123,17 @@
 #'
 #' \code{s$move_mouse_to()} moves the mouse cursor by the specified
 #' offsets.
+#'
+#' \code{s$click()} clicks the mouse at its current position, using
+#' the specified button.
+#'
+#' \code{s$double_click()} emulates a double click with the specified
+#' mouse button.
+#'
+#' \code{s$button_down()} emulates pressing the specified mouse button
+#' down (and keeping it down).
+#'
+#' \code{s$button_up()} emulates releasing the specified mouse button.
 #'
 #' @seealso The WebDriver standard at
 #' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
@@ -198,10 +215,22 @@ session <- R6Class(
       implicit = NULL)
       session_set_timeout(self, private, script, page_load, implicit),
 
-    ## Move mouse ----------------------------------------------
+    ## Move mouse, clicks --------------------------------------
 
     move_mouse_to = function(xoffset, yoffset)
-      session_move_mouse_to(self, private, xoffset, yoffset)
+      session_move_mouse_to(self, private, xoffset, yoffset),
+
+    click = function(button = c("left", "middle", "right"))
+      session_click(self, private, button),
+
+    double_click = function(button = c("left", "middle", "right"))
+      session_double_click(self, private, button),
+
+    mouse_button_down = function(button = c("left", "middle", "right"))
+      session_mouse_button_down(self, private, button),
+
+    mouse_button_up = function(button = c("left", "middle", "right"))
+      session_mouse_button_up(self, private, button)
   ),
 
   private = list(
@@ -546,4 +575,31 @@ session_move_mouse_to <- function(self, private, xoffset, yoffset) {
   )
 
   invisible(self)
+}
+
+session_button <- function(self, private, type, button) {
+  assert_mouse_button(button)
+
+  private$make_request(
+    toupper(type),
+    list(button = unbox(button))
+  )
+
+  invisible(self)
+}
+
+session_click <- function(self, private, button) {
+  session_button(self, private, "click", button)
+}
+
+session_double_click <- function(self, private, button) {
+  session_button(self, private, "doubleclick", button)
+}
+
+session_mouse_button_down <- function(self, private, button) {
+  session_button(self, private, "buttondown", button)
+}
+
+session_mouse_button_up <- function(self, private, button) {
+  session_button(self, private, "buttonup", button)
 }
