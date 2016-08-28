@@ -1,5 +1,5 @@
 
-context("session")
+context("timeouts")
 
 server <- start_web_server("web")
 on.exit(stop_web_server(server), add = TRUE)
@@ -60,10 +60,10 @@ test_that("page load timeout", {
 test_that("implicit timeout", {
   s <- session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
-  s$go(server$url("/slow.html"))
 
-  ## Not there yet
+  ## Element not there yet, error
   s$set_timeout(implicit = 0);
+  s$go(server$url("/slow.html"))
   expect_error(
     s$find_element(css = "div.slow"),
     "Unable to find element with css selector"
