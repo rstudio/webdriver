@@ -141,9 +141,6 @@ element <- R6Class(
     send_keys = function(keys)
       element_send_keys(self, private, keys),
 
-    take_screenshot = function(file = NULL)
-      element_take_screenshot(self, private, file),
-
     move_mouse_to = function(xoffset = NULL, yoffset = NULL)
       element_move_mouse_to(self, private, xoffset, yoffset)
   ),
@@ -342,22 +339,6 @@ element_send_keys <- function(self, private, keys) {
   invisible(self)
 }
 
-
-## TODO: seems to return full screenshot?
-
-element_take_screenshot <- function(self, private, file) {
-
-  if (!is.null(file)) assert_filename(file)
-
-  response <- private$session_private$make_request(
-    "TAKE ELEMENT SCREENSHOT",
-    params = list(element_id = private$id)
-  )
-
-  handle_screenshot(response, file)
-
-  invisible(self)
-}
 
 element_move_mouse_to <- function(self, private, xoffset, yoffset) {
 

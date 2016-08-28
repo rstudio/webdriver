@@ -45,8 +45,6 @@ test_that("element methods are OK", {
   pars <- form$find_elements(css = "p")
   expect_equal(length(pars), 7)
   expect_true(is(pars[[1]], "element"))
-
-  ## TODO: take_screenshot takes screenshot of whole screen
 })
 
 test_that("move mouse cursor", {
