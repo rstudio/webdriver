@@ -30,6 +30,8 @@ s$execute_script(script, ...)
 s$execute_script_async(script, ...)
 
 s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
+
+s$move_mouse_to(xoffset = 0, yoffset = 0)
 }
 }
 
@@ -56,7 +58,11 @@ s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
     in milliseconds. More below.}
   \item{page_load}{Page load timeout, in milliseconds. More below.}
   \item{implicit}{Implicit wait before calls that find elements, in
-    milliseconds. More below.}
+    milliseconds. More below.},
+  \item{xoffset}{Horizontal offset for mouse movement, relative to the
+    current position.}
+  \item{yoffset}{Vertical offset for mouse movement, relative to the
+    current position.}
 }
 }
 
@@ -116,6 +122,9 @@ implicit element location strategy when locating elements. Their defaults
 are different in the standard and in Phantom.js. In Phantom.js the
 \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
 and the \sQuote{implicit} waiting time is 200ms.
+
+\code{s$move_mouse_to()} moves the mouse cursor by the specified
+offsets.
 }
 \seealso{
 The WebDriver standard at

@@ -52,3 +52,7 @@ test_that("element methods are OK", {
 
   ## TODO: take_screenshot takes screenshot of whole screen
 })
+
+test_that("move mouse cursor", {
+  ## TODO: we need session$click to test this
+})

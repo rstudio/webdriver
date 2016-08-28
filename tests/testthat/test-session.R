@@ -134,3 +134,7 @@ test_that("execute script (async)", {
     42
   )
 })
+
+test_that("move mouse cursor", {
+  ## TODO: we need session$click to test this
+})

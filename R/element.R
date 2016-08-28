@@ -21,6 +21,7 @@
 #' e$click()
 #' e$clear()
 #' e$send_keys(keys)
+#' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 #' }
 #'
 #' @section Arguments:
@@ -34,6 +35,12 @@
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
 #'   \item{name}{String scalar, named of attribute, property or css key.}
 #'   \item{keys}{Character vector of keys to send.}
+#'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
+#'     position of the element. If at least of of \code{xoffset} and
+#'     \code{yoffset} is \code{NULL}, then they are ignored.}
+#'   \item{yoffset}{Vertical offset for mouse movement, relative to the
+#'     position of the element. If at least of of \code{xoffset} and
+#'     \code{yoffset} is \code{NULL}, then they are ignored.}
 #' }
 #'
 #' @section Details:
@@ -80,6 +87,11 @@
 #'
 #' \code{e$send_keys()} scrolls the form control element into view, and
 #' sends the provided keys to it.
+#'
+#' \code{e$move_mouse_to()} moves the mouse cursor to the element, with
+#' the specified offsets. If one or both offsets are \code{NULL}, then
+#' it places the cursor on the center of the element. If the element is
+#' not on the screen, then is scrolls it into the screen first.
 #'
 #' @name element
 #' @importFrom R6 R6Class
@@ -136,7 +148,10 @@ element <- R6Class(
       element_send_keys(self, private, keys),
 
     take_screenshot = function(file = NULL)
-      element_take_screenshot(self, private, file)
+      element_take_screenshot(self, private, file),
+
+    move_mouse_to = function(xoffset = NULL, yoffset = NULL)
+      element_move_mouse_to(self, private, xoffset, yoffset)
   ),
 
   private = list(
@@ -347,6 +362,23 @@ element_take_screenshot <- function(self, private, file) {
   )
 
   handle_screenshot(response, file)
+
+  invisible(self)
+}
+
+element_move_mouse_to <- function(self, private, xoffset, yoffset) {
+
+  if (!is.null(xoffset)) assert_count(xoffset)
+  if (!is.null(yoffset)) assert_count(yoffset)
+
+  private$session_private$make_request(
+    "MOVE MOUSE TO",
+    list(
+      element = unbox(private$id),
+      xoffset = unbox(xoffset),
+      yoffst = unbox(yoffset)
+    )
+  )
 
   invisible(self)
 }

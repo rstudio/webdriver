@@ -26,6 +26,8 @@
 #' s$execute_script_async(script, ...)
 #'
 #' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
+#'
+#' s$move_mouse_to(xoffset = 0, yoffset = 0)
 #' }
 #'
 #' @section Arguments:
@@ -50,7 +52,11 @@
 #'     in milliseconds. More below.}
 #'   \item{page_load}{Page load timeout, in milliseconds. More below.}
 #'   \item{implicit}{Implicit wait before calls that find elements, in
-#'     milliseconds. More below.}
+#'     milliseconds. More below.},
+#'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
+#'     current position.}
+#'   \item{yoffset}{Vertical offset for mouse movement, relative to the
+#'     current position.}
 #' }
 #'
 #' @section Details:
@@ -108,6 +114,9 @@
 #' are different in the standard and in Phantom.js. In Phantom.js the
 #' \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
 #' and the \sQuote{implicit} waiting time is 200ms.
+#'
+#' \code{s$move_mouse_to()} moves the mouse cursor by the specified
+#' offsets.
 #'
 #' @seealso The WebDriver standard at
 #' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
@@ -187,7 +196,12 @@ session <- R6Class(
 
     set_timeout = function(script = NULL, page_load = NULL,
       implicit = NULL)
-      session_set_timeout(self, private, script, page_load, implicit)
+      session_set_timeout(self, private, script, page_load, implicit),
+
+    ## Move mouse ----------------------------------------------
+
+    move_mouse_to = function(xoffset, yoffset)
+      session_move_mouse_to(self, private, xoffset, yoffset)
   ),
 
   private = list(
@@ -517,6 +531,19 @@ session_set_timeout <- function(self, private, script, page_load,
       list(type = unbox("implicit"), ms = unbox(implicit))
     )
   }
+
+  invisible(self)
+}
+
+session_move_mouse_to <- function(self, private, xoffset, yoffset) {
+
+  assert_count(xoffset)
+  assert_count(yoffset)
+
+  private$make_request(
+    "MOVE MOUSE TO",
+    list(xoffset = unbox(xoffset), yoffset = unbox(yoffset))
+  )
 
   invisible(self)
 }

@@ -27,6 +27,7 @@ e$is_enabled()
 e$click()
 e$clear()
 e$send_keys(keys)
+e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 }
 }
 
@@ -42,6 +43,12 @@ e$send_keys(keys)
   \item{xpath}{Find HTML elements using XPath expressions.}
   \item{name}{String scalar, named of attribute, property or css key.}
   \item{keys}{Character vector of keys to send.}
+  \item{xoffset}{Horizontal offset for mouse movement, relative to the
+    position of the element. If at least of of \code{xoffset} and
+    \code{yoffset} is \code{NULL}, then they are ignored.}
+  \item{yoffset}{Vertical offset for mouse movement, relative to the
+    position of the element. If at least of of \code{xoffset} and
+    \code{yoffset} is \code{NULL}, then they are ignored.}
 }
 }
 
@@ -90,5 +97,10 @@ clear its value, checkedness or text content.
 
 \code{e$send_keys()} scrolls the form control element into view, and
 sends the provided keys to it.
+
+\code{e$move_mouse_to()} moves the mouse cursor to the element, with
+the specified offsets. If one or both offsets are \code{NULL}, then
+it places the cursor on the center of the element. If the element is
+not on the screen, then is scrolls it into the screen first.
 }
 

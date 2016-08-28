@@ -92,5 +92,10 @@ endpoints <- list(
   ## screenshots
   "TAKE SCREENSHOT"      = "GET    /session/:session_id/screenshot",
   "TAKE ELEMENT SCREENSHOT"
-                         = "GET    /session/:session_id/element/:element_id/screenshot"
+                         = "GET    /session/:session_id/element/:element_id/screenshot",
+
+  ## -------------------------------------------------------------------
+  ## Phantom JS specific endpoints
+
+  "MOVE MOUSE TO"        = "POST   /session/:session_id/moveto"
 )
