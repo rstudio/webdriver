@@ -1,4 +1,6 @@
 
+#' @importFrom utils packageName
+
 session_wait_for <- function(self, private, expr, check_interval,
                              timeout) {
 
