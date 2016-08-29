@@ -37,6 +37,8 @@
 #'
 #' s$read_log(type = c("browser", "har"))
 #' s$get_log_types()
+#'
+#' s$wait_for(expr, check_interval = 100, timeout = 3000)
 #' }
 #'
 #' @section Arguments:
@@ -69,6 +71,11 @@
 #'   \item{button}{Mouse button. Either one of \code{"left"},
 #'     \code{"middle"}, \code{"right"}, or an integer between 1 and 3.}
 #'   \item{type}{Log type, a character scalar.}
+#'   \item{expr}{A string scalar containing JavaScript code that
+#'     evaluates to the condition to wait for.}
+#'   \item{check_interval}{How often to check for the condition, in
+#'     milliseconds.}
+#'   \item{timeout}{Timeout for the condition, in milliseconds.}
 #' }
 #'
 #' @section Details:
@@ -150,6 +157,10 @@
 #' \code{s$read_log()} returns the log messages since the last
 #' \code{read_log} call, in a data frame with columns \code{timestamp},
 #' \code{level} and \code{message}.
+#'
+#' \code{s$wait_for()} waits until a JavaScript expression evaluates
+#' to \code{true}, or a timeout happens. It returns \code{TRUE} is the
+#' expression evaluated to \code{true}, possible after some waiting.
 #'
 #' @seealso The WebDriver standard at
 #' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
@@ -257,7 +268,12 @@ session <- R6Class(
       session_get_log_types(self, private),
 
     read_log = function(type = "browser")
-      session_read_log(self, private, type)
+      session_read_log(self, private, type),
+
+    ## Polling for a condition ---------------------------------
+
+    wait_for = function(expr, check_interval = 100, timeout = 3000)
+      session_wait_for(self, private, expr, check_interval, timeout)
   ),
 
   private = list(

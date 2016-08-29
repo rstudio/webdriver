@@ -11,3 +11,17 @@ update <- function(original, new) {
 
   original
 }
+
+read_file <- function(x) {
+  readChar(x, file.info(x)$size)
+}
+
+`%+%` <- function(l, r) {
+  assert_string(l)
+  assert_string(r)
+  paste0(l, r)
+}
+
+str <- function(x) {
+  as.character(x)
+}

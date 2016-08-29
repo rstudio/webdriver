@@ -41,6 +41,8 @@ s$mouse_button_up(button = c("left", "middle", "right"))
 
 s$read_log(type = c("browser", "har"))
 s$get_log_types()
+
+s$wait_for(expr, check_interval = 100, timeout = 3000)
 }
 }
 
@@ -75,6 +77,11 @@ s$get_log_types()
   \item{button}{Mouse button. Either one of \code{"left"},
     \code{"middle"}, \code{"right"}, or an integer between 1 and 3.}
   \item{type}{Log type, a character scalar.}
+  \item{expr}{A string scalar containing JavaScript code that
+    evaluates to the condition to wait for.}
+  \item{check_interval}{How often to check for the condition, in
+    milliseconds.}
+  \item{timeout}{Timeout for the condition, in milliseconds.}
 }
 }
 
@@ -158,6 +165,10 @@ server, in a character vector.
 \code{s$read_log()} returns the log messages since the last
 \code{read_log} call, in a data frame with columns \code{timestamp},
 \code{level} and \code{message}.
+
+\code{s$wait_for()} waits until a JavaScript expression evaluates
+to \code{true}, or a timeout happens. It returns \code{TRUE} is the
+expression evaluated to \code{true}, possible after some waiting.
 }
 \seealso{
 The WebDriver standard at
