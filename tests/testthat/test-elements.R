@@ -38,8 +38,14 @@ test_that("element methods are OK", {
   el <- s$find_element(css = "#firstname")
   el$send_keys("Gabor")
   expect_equal(el$get_attribute("value"), "Gabor")
+  expect_equal(el$get_value(), "Gabor")
   el$clear()
   expect_equal(el$get_attribute("value"), "")
+  expect_equal(el$get_value(), "")
+
+  el$set_value("Not Gabor")
+  expect_equal(el$get_value(), "Not Gabor")
+  el$clear()
 
   form <- s$find_element(css = "form")
   pars <- form$find_elements(css = "p")

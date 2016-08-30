@@ -11,6 +11,8 @@
 #'     partial_link_text = NULL, xpath = NULL)
 #'
 #' e$is_selected()
+#' e$get_value()
+#' e$set_value(value)
 #' e$get_attribute(name)
 #' e$get_css_value(name)
 #' e$get_text()
@@ -40,6 +42,7 @@
 #'   \item{yoffset}{Vertical offset for mouse movement, relative to the
 #'     position of the element. If at least of of \code{xoffset} and
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
+#'   \item{value}{Value to set, a character string.}
 #' }
 #'
 #' @section Details:
@@ -59,6 +62,12 @@
 #'
 #' \code{e$is_selected()} returns \code{TRUE} is the element is currently
 #' selected, and \code{FALSE} otherwise.
+#'
+#' \code{e$get_value()} returns the value of an input element, it is a
+#' shorthand for \code{e$get_attribute("value")}.
+#'
+#' \code{e$set_value()} sets the value of an input element, it is
+#' essentially equivalent to sending keys via \code{e$send_keys()}.
 #'
 #' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
@@ -113,6 +122,12 @@ element <- R6Class(
 
     is_selected = function()
       element_is_selected(self, private),
+
+    get_value = function()
+      element_get_value(self, private),
+
+    set_value = function(value)
+      element_set_value(self, private, value),
 
     get_attribute = function(name)
       element_get_attribute(self, private, name),
@@ -223,6 +238,22 @@ element_is_selected <- function(self, private) {
   response$value
 }
 
+element_get_value <- function(self, private) {
+  self$get_attribute("value")
+}
+
+element_set_value <- function(self, private, value) {
+
+  assert_string(value)
+
+  private$session_private$make_request(
+    "SET ELEMENT VALUE",
+    list(value = value),
+    params = list(element_id = private$id)
+  )
+
+  invisible(self)
+}
 
 element_get_attribute <- function(self, private, name) {
 
