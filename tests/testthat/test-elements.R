@@ -16,7 +16,8 @@ test_that("element methods are OK", {
   ## TODO: is_selected
 
   el <- s$find_element(css = ".foo")
-  expect_equal(el$get_attribute("class"), "foo")
+  expect_equal(el$get_attribute("class"), "foo bar")
+  expect_equal(el$get_class(), c("foo", "bar"))
   expect_null(el$get_attribute("xxx"))
 
   expect_equal(el$get_css_value("color"), "rgba(255, 0, 0, 1)")
@@ -51,6 +52,9 @@ test_that("element methods are OK", {
   pars <- form$find_elements(css = "p")
   expect_equal(length(pars), 7)
   expect_true(is(pars[[1]], "element"))
+
+  fn <- s$find_element("#firstname")
+  expect_equal(fn$get_data("foo"), "bar")
 })
 
 test_that("move mouse cursor", {

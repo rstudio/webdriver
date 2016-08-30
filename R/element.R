@@ -14,9 +14,11 @@
 #' e$get_value()
 #' e$set_value(value)
 #' e$get_attribute(name)
+#' e$get_class()
 #' e$get_css_value(name)
 #' e$get_text()
 #' e$get_name()
+#' e$get_data(name)
 #' e$get_rect()
 #' e$is_enabled()
 #' e$click()
@@ -34,7 +36,8 @@
 #'   \item{partial_link_text}{Find HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
-#'   \item{name}{String scalar, named of attribute, property or css key.}
+#'   \item{name}{String scalar, named of attribute, property or css key.
+#'     For \code{get_data}, the key of the data attribute.}
 #'   \item{keys}{Character vector of keys to send.}
 #'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
 #'     position of the element. If at least of of \code{xoffset} and
@@ -72,11 +75,16 @@
 #' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
 #'
+#' \code{e$get_class()} uses \code{e$get_attribute} to parse the
+#' \sQuote{class} attribute into a character vector.
+#'
 #' \code{e$get_css_value()} queries a CSS property of an element.
 #'
 #' \code{e$get_text()} returns the \code{innerText} on an element.
 #'
 #' \code{e$get_name()} returns the tag name of an element.
+#'
+#' \code{e$get_data()} is a shorthand for querying \code{data-*} attributes.
 #'
 #' \code{e$get_rect()} returns the \sQuote{rectangle} of an element. It is
 #' named list with components \code{x}, \code{y}, \code{height} and
@@ -132,6 +140,9 @@ element <- R6Class(
     get_attribute = function(name)
       element_get_attribute(self, private, name),
 
+    get_class = function()
+      element_get_class(self, private),
+
     get_css_value = function(name)
       element_get_css_value(self, private, name),
 
@@ -140,6 +151,9 @@ element <- R6Class(
 
     get_name = function()
       element_get_name(self, private),
+
+    get_data = function(name)
+      element_get_data(self, private, name),
 
     get_rect = function()
       element_get_rect(self, private),
@@ -268,6 +282,12 @@ element_get_attribute <- function(self, private, name) {
 }
 
 
+element_get_class <- function(self, private) {
+
+  class <- self$get_attribute("class")
+  strsplit(class, "\\s+")[[1]]
+}
+
 element_get_css_value <- function(self, private, name) {
 
   assert_string(name)
@@ -291,6 +311,11 @@ element_get_text <- function(self, private) {
   response$value
 }
 
+element_get_data <- function(self, private, name) {
+
+  assert_string(name)
+  self$get_attribute(paste0("data-", name))
+}
 
 element_get_name <- function(self, private) {
 
