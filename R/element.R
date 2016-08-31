@@ -25,6 +25,9 @@
 #' e$clear()
 #' e$send_keys(keys)
 #' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
+#'
+#' e$execute_script(script, ...)
+#' e$execute_script_async(script, ...)
 #' }
 #'
 #' @section Arguments:
@@ -107,6 +110,9 @@
 #' it places the cursor on the center of the element. If the element is
 #' not on the screen, then is scrolls it into the screen first.
 #'
+#' \code{e$execute_script()} and \code{e$execute_script_async()}
+#' call the method of the same name on the \code{\link{session}} object.
+#'
 #' @name element
 #' @importFrom R6 R6Class
 NULL
@@ -171,7 +177,13 @@ element <- R6Class(
       element_send_keys(self, private, keys),
 
     move_mouse_to = function(xoffset = NULL, yoffset = NULL)
-      element_move_mouse_to(self, private, xoffset, yoffset)
+      element_move_mouse_to(self, private, xoffset, yoffset),
+
+    execute_script = function(script, ...)
+      element_execute_script(self, private, script, ...),
+
+    execute_script_async = function(script, ...)
+      element_execute_script_async(self, private, script, ...)
   ),
 
   private = list(
@@ -411,4 +423,12 @@ element_move_mouse_to <- function(self, private, xoffset, yoffset) {
   )
 
   invisible(self)
+}
+
+element_execute_script <- function(self, private, script, ...) {
+  private$session$execute_script(script, ...)
+}
+
+element_execute_script_async <- function(self, private, script, ...) {
+  private$session$execute_script(script, ...)
 }

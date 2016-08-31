@@ -31,6 +31,9 @@ e$click()
 e$clear()
 e$send_keys(keys)
 e$move_mouse_to(xoffset = NULL, yoffset = NULL)
+
+e$execute_script(script, ...)
+e$execute_script_async(script, ...)
 }
 }
 
@@ -116,5 +119,8 @@ sends the provided keys to it.
 the specified offsets. If one or both offsets are \code{NULL}, then
 it places the cursor on the center of the element. If the element is
 not on the screen, then is scrolls it into the screen first.
+
+\code{e$execute_script()} and \code{e$execute_script_async()}
+call the method of the same name on the \code{\link{session}} object.
 }
 
