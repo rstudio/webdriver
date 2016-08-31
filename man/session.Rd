@@ -64,7 +64,8 @@ s$wait_for(expr, check_interval = 100, timeout = 3000)
     \code{execute_script_async}. JavaScript code to execute. It will be
     placed in the body of a function.}
   \item{...}{Arguments to the script, they will be put in a list
-    called arguments.}
+    called arguments. \code{\link{element}} objects are automatically
+    transformed to DOM element in JavaScript.}
   \item{script}{For \code{set_timeout}. Script execution timeout,
     in milliseconds. More below.}
   \item{page_load}{Page load timeout, in milliseconds. More below.}

@@ -112,6 +112,8 @@
 #'
 #' \code{e$execute_script()} and \code{e$execute_script_async()}
 #' call the method of the same name on the \code{\link{session}} object.
+#' The first argument of the script (\code{arguments[0]}) will always
+#' hold the element object itself.
 #'
 #' @name element
 #' @importFrom R6 R6Class
@@ -426,9 +428,9 @@ element_move_mouse_to <- function(self, private, xoffset, yoffset) {
 }
 
 element_execute_script <- function(self, private, script, ...) {
-  private$session$execute_script(script, ...)
+  private$session$execute_script(script, self, ...)
 }
 
 element_execute_script_async <- function(self, private, script, ...) {
-  private$session$execute_script(script, ...)
+  private$session$execute_script(script, self, ...)
 }

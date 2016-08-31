@@ -135,6 +135,20 @@ test_that("execute script (async)", {
   )
 })
 
+test_that("execute script with element arguments", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+
+  s$go(server$url("/elements.html"))
+
+  el = s$find_element(".foo")
+
+  expect_equal(
+    s$execute_script("return arguments[0].className;", el, 42),
+    "foo bar"
+  )
+})
+
 test_that("move mouse cursor", {
   ## TODO: we need session$click to test this
 })

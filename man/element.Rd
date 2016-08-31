@@ -122,5 +122,7 @@ not on the screen, then is scrolls it into the screen first.
 
 \code{e$execute_script()} and \code{e$execute_script_async()}
 call the method of the same name on the \code{\link{session}} object.
+The first argument of the script (\code{arguments[0]}) will always
+hold the element object itself.
 }
 

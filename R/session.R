@@ -58,7 +58,8 @@
 #'     \code{execute_script_async}. JavaScript code to execute. It will be
 #'     placed in the body of a function.}
 #'   \item{...}{Arguments to the script, they will be put in a list
-#'     called arguments.}
+#'     called arguments. \code{\link{element}} objects are automatically
+#'     transformed to DOM element in JavaScript.}
 #'   \item{script}{For \code{set_timeout}. Script execution timeout,
 #'     in milliseconds. More below.}
 #'   \item{page_load}{Page load timeout, in milliseconds. More below.}
@@ -558,11 +559,24 @@ session_get_all_windows <- function(self, private) {
   })
 }
 
+prepare_execute_args <- function(...) {
+  args <- list(...)
+  for (i in seq_along(args)) {
+    x <- args[[i]]
+    if (inherits(x, "element") && inherits(x, "R6")) {
+      args[[i]] <- list(ELEMENT = unbox(x$.__enclos_env__$private$id))
+    } else {
+      args[[i]] <- unbox(x)
+    }
+  }
+  args
+}
+
 session_execute_script <- function(self, private, script, ...) {
 
   assert_string(script)
 
-  args <- lapply(list(...), unbox)
+  args <- prepare_execute_args(...)
 
   response <- private$make_request(
     "EXECUTE SCRIPT",
@@ -576,7 +590,7 @@ session_execute_script_async <- function(self, private, script, ...) {
 
   assert_string(script)
 
-  args <- lapply(list(...), unbox)
+  args <- prepare_execute_args(...)
 
   response <- private$make_request(
     "EXECUTE ASYNC SCRIPT",
