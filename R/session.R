@@ -478,7 +478,6 @@ session_find_elements <- function(self, private, css, link_text,
 }
 
 
-## TODO: this does not seem to work
 session_get_active_element <- function(self, private) {
 
   response <- private$make_request(
