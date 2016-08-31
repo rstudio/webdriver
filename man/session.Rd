@@ -36,7 +36,7 @@ s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
 s$move_mouse_to(xoffset = 0, yoffset = 0)
 s$click(button = c("left", "middle", "right"))
 s$double_click(button = c("left", "middle", "right"))
-s$mouse_button_downclick(button = c("left", "middle", "right"))
+s$mouse_button_down(button = c("left", "middle", "right"))
 s$mouse_button_up(button = c("left", "middle", "right"))
 
 s$read_log(type = c("browser", "har"))
