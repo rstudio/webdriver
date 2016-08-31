@@ -128,14 +128,18 @@ elements are returned in a list of \code{\link{element}} objects.
 \code{s$execute_script()} executes JavaScript code. It places the code
 in the body of a function, and then calls the function with the
 additional arguments. These can be accessed from the function via the
-\code{arguments} array.
+\code{arguments} array. Returned DOM elements are automatically
+converted to \code{\link{element}} objects, even if they are inside
+a list (or list of list, etc.).
 
 \code{s$execute_script_async()} is similar, for asynchronous execution.
 It place the script in a body of a function, and then calls the function
 with the additional arguments and a callback function as the last
 argument. The script must call this callback function when it
 finishes its work. The first argument passed to the callback function
-is returned.
+is returned. Returned DOM elements are automatically converted to
+\code{\link{element}} objects, even if they are inside a list (or list
+of list, etc.).
 
 \code{s$set_timeout()} sets various timeouts. The \sQuote{script}
 timeout specifies a time to wait for scripts to run. The

@@ -120,14 +120,18 @@
 #' \code{s$execute_script()} executes JavaScript code. It places the code
 #' in the body of a function, and then calls the function with the
 #' additional arguments. These can be accessed from the function via the
-#' \code{arguments} array.
+#' \code{arguments} array. Returned DOM elements are automatically
+#' converted to \code{\link{element}} objects, even if they are inside
+#' a list (or list of list, etc.).
 #'
 #' \code{s$execute_script_async()} is similar, for asynchronous execution.
 #' It place the script in a body of a function, and then calls the function
 #' with the additional arguments and a callback function as the last
 #' argument. The script must call this callback function when it
 #' finishes its work. The first argument passed to the callback function
-#' is returned.
+#' is returned. Returned DOM elements are automatically converted to
+#' \code{\link{element}} objects, even if they are inside a list (or list
+#' of list, etc.).
 #'
 #' \code{s$set_timeout()} sets various timeouts. The \sQuote{script}
 #' timeout specifies a time to wait for scripts to run. The
@@ -572,6 +576,22 @@ prepare_execute_args <- function(...) {
   args
 }
 
+parse_script_response <- function(self, private, value) {
+  if (is.list(value) && length(value) == 1 && names(value) == "ELEMENT" &&
+      is.character(value[[1]]) && length(value[[1]]) == 1) {
+    ## Single element
+    element$new(value[[1]], self, private)
+
+  } else if (is.list(value)) {
+    ## List of things, look if one of them is an element
+    lapply(value, parse_script_response, self = self, private = private)
+
+  } else {
+    ## Do not touch
+    value
+  }
+}
+
 session_execute_script <- function(self, private, script, ...) {
 
   assert_string(script)
@@ -583,7 +603,7 @@ session_execute_script <- function(self, private, script, ...) {
     list(script = unbox(script), args = args)
   )
 
-  response$value
+  parse_script_response(self, private, response$value)
 }
 
 session_execute_script_async <- function(self, private, script, ...) {
@@ -597,7 +617,7 @@ session_execute_script_async <- function(self, private, script, ...) {
     list(script = unbox(script), args = args)
   )
 
-  response$value
+  parse_script_response(self, private, response$value)
 }
 
 session_set_timeout <- function(self, private, script, page_load,

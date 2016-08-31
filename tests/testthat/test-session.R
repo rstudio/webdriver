@@ -141,12 +141,49 @@ test_that("execute script with element arguments", {
 
   s$go(server$url("/elements.html"))
 
-  el = s$find_element(".foo")
+  el <- s$find_element(".foo")
 
+  expect_equal(
+    s$execute_script("return arguments[0].className;", el),
+    "foo bar"
+  )
   expect_equal(
     s$execute_script("return arguments[0].className;", el, 42),
     "foo bar"
   )
+  expect_equal(
+    s$execute_script("return arguments[1].className;", 42, el),
+    "foo bar"
+  )
+})
+
+test_that("execute script and return elements", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+
+  s$go(server$url("/elements.html"))
+  el <- s$find_element(".foo")
+
+  ## Single element
+  ret <- s$execute_script("return arguments[0];", el)
+  expect_true(inherits(ret, "element"))
+
+  ## List of elements
+  ret <- s$execute_script("return arguments;", el, el, el)
+  expect_true(is.list(ret))
+  expect_equal(length(ret), 3)
+  expect_true(inherits(ret[[1]], "element"))
+  expect_true(inherits(ret[[2]], "element"))
+  expect_true(inherits(ret[[3]], "element"))
+
+  ## List of elements and other stuff
+  ret <- s$execute_script("return arguments;", el, 42, el, 42 * 42)
+  expect_true(is.list(ret))
+  expect_equal(length(ret), 4)
+  expect_true(inherits(ret[[1]], "element"))
+  expect_equal(ret[[2]], 42)
+  expect_true(inherits(ret[[3]], "element"))
+  expect_equal(ret[[4]], 42 * 42)
 })
 
 test_that("move mouse cursor", {
