@@ -568,8 +568,10 @@ prepare_execute_args <- function(...) {
     x <- args[[i]]
     if (inherits(x, "element") && inherits(x, "R6")) {
       args[[i]] <- list(ELEMENT = unbox(x$.__enclos_env__$private$id))
-    } else {
+    } else if (length(x) == 1) {
       args[[i]] <- unbox(x)
+    } else {
+      x
     }
   }
   args
