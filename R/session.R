@@ -321,7 +321,7 @@ session_initialize <- function(self, private, host, port) {
   private$session_id = response$sessionId %||% stop("Got no session_id")
   private$parameters = response$value
 
-  reg.finalizer(self, function(e) e$delete(), TRUE)
+  ##  reg.finalizer(self, function(e) e$delete(), TRUE)
 
   ## Set implicit timeout to zero. According to the standard it should
   ## be zero, but phantomjs uses about 200 ms

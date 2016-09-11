@@ -13,7 +13,6 @@ test_that("can create a session", {
 })
 
 test_that("can go to URL", {
-
   s <- session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
@@ -28,6 +27,8 @@ test_that("basic operations", {
   on.exit(s$delete(), add = TRUE)
 
   ## $go
+  print(server$process$is_alive())
+  print(phantom$process$is_alive())
   s$go(server$url("/check.html"))
 
   ## $get_url

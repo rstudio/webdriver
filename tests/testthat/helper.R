@@ -6,10 +6,13 @@ start_web_server <- function(dir) {
   Rexe <- if (is_windows()) "R.exe" else "R"
   Rbin <- file.path(R.home("bin"), Rexe)
 
-  port <- random_port()
+  host <- Sys.getenv("SERVR_HOST", "127.0.0.1")
+  port <- as.numeric(Sys.getenv("SERVR_PORT", random_port()))
 
-  rcmd <- paste0(
-    "servr::httd('", dir, "', browser = FALSE, port = ", port, ")")
+  rcmd <- sprintf(
+    "servr::httd('%s', browser = FALSE, host = '%s', port = %d)",
+    dir, host, port
+  )
 
   cmd <- paste(Rbin, "-q -e", shQuote(rcmd))
 
@@ -22,7 +25,7 @@ start_web_server <- function(dir) {
     )
   }
 
-  baseurl <- paste0("http://127.0.0.1:", port)
+  baseurl <- sprintf("http://%s:%d", host, port)
   url <- function(x) paste0(baseurl, x)
   list(process = ws, port = port, baseurl = baseurl, url = url)
 }
@@ -36,12 +39,12 @@ start_phantomjs <- function() {
   phexe <- find_phantom()
   if (is.null(phexe)) stop("No phantom.js, exiting")
 
-  port <- random_port()
+  host <- Sys.getenv("WEBDRIVER_HOST", "127.0.0.1")
+  port <- as.numeric(Sys.getenv("WEBDRIVER_PORT", random_port()))
 
-  cmd <- paste0(
-    shQuote(phexe),
-    " --proxy-type=none --webdriver=127.0.0.1:",
-    port
+  cmd <- sprintf(
+    "%s --proxy-type=none --webdriver=%s:%d",
+    shQuote(phexe), host, port
   )
   ph <- processx::process$new(commandline = cmd)
 
