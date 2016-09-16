@@ -24,7 +24,7 @@ Remotes:
     gaborcsardi/debugme,
     MangoTheCat/processx,
     MangoTheCat/showimage
-Suggests:
+Suggests: 
     pingr,
     processx,
     servr,

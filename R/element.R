@@ -35,8 +35,9 @@
 #'   \item{e}{An \code{element} object.}
 #'   \item{s}{A \code{\link{session}} object.}
 #'   \item{css}{Css selector to find an HTML element.}
-#'   \item{link_text}{Find HTML elements based on their \code{innerText}.}
-#'   \item{partial_link_text}{Find HTML elements based on their
+#'   \item{link_text}{Find \code{<a>} HTML elements based on their
+#'     \code{innerText}.}
+#'   \item{partial_link_text}{Find \code{<a>} HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
 #'   \item{name}{String scalar, named of attribute, property or css key.

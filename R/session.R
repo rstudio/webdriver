@@ -81,7 +81,7 @@
 #'
 #' @section Details:
 #'
-#' \code{s$new()} creates a new WebDriver session.
+#' \code{session$new()} creates a new WebDriver session.
 #'
 #' \code{s$delete()} deletes a WebDriver session.
 #'
