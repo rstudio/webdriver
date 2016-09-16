@@ -500,7 +500,6 @@ session_get_source <- function(self, private) {
   response$value
 }
 
-#' @importFrom jsonlite base64_dec
 #' @importFrom showimage show_image
 
 session_take_screenshot <- function(self, private, file) {
@@ -516,6 +515,7 @@ session_take_screenshot <- function(self, private, file) {
   invisible(self)
 }
 
+#' @importFrom base64enc base64decode
 
 handle_screenshot <- function(response, file) {
 
@@ -525,7 +525,7 @@ handle_screenshot <- function(response, file) {
   }
 
   writeBin(
-    base64_dec(response$value),
+    base64decode(response$value),
     output
   )
 
