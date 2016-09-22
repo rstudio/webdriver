@@ -5,7 +5,7 @@
 #' It needs phantom.js running in WebDriver mode.
 #'
 #' @section Usage:
-#' \preformatted{s <- session$new(host = "localhost", port = 8910)
+#' \preformatted{s <- session$new(host = "127.0.0.1", port = 8910)
 #'
 #' s$delete()
 #' s$status()
@@ -180,7 +180,7 @@ session <- R6Class(
   "session",
   public = list(
 
-    initialize = function(host = "localhost", port = 8910)
+    initialize = function(host = "127.0.0.1", port = 8910)
       session_initialize(self, private, host, port),
 
     delete = function()

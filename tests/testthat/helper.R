@@ -19,7 +19,7 @@ start_web_server <- function(dir) {
     )
   }
 
-  baseurl <- paste0("http://localhost:", port)
+  baseurl <- paste0("http://127.0.0.1:", port)
   url <- function(x) paste0(baseurl, x)
   list(process = ws, port = port, baseurl = baseurl, url = url)
 }
@@ -32,7 +32,7 @@ start_phantomjs <- function() {
   check_external("phantomjs")
   port <- random_port()
 
-  cmd <- paste0("phantomjs --webdriver=localhost:", port)
+  cmd <- paste0("phantomjs --proxy-type=none --webdriver=127.0.0.1:", port)
   ph <- processx::process$new(commandline = cmd)
 
   if (! ph$is_alive()) {

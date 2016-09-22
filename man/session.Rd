@@ -9,7 +9,7 @@ It needs phantom.js running in WebDriver mode.
 }
 \section{Usage}{
 
-\preformatted{s <- session$new(host = "localhost", port = 8910)
+\preformatted{s <- session$new(host = "127.0.0.1", port = 8910)
 
 s$delete()
 s$status()
