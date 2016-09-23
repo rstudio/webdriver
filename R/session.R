@@ -578,8 +578,9 @@ prepare_execute_args <- function(...) {
 }
 
 parse_script_response <- function(self, private, value) {
-  if (is.list(value) && length(value) == 1 && names(value) == "ELEMENT" &&
-      is.character(value[[1]]) && length(value[[1]]) == 1) {
+  if (is.list(value) && length(value) == 1 && !is.null(names(value)) &&
+      names(value) == "ELEMENT" && is.character(value[[1]]) &&
+      length(value[[1]]) == 1) {
     ## Single element
     element$new(value[[1]], self, private)
 
