@@ -322,6 +322,10 @@ session_initialize <- function(self, private, host, port) {
 
   reg.finalizer(self, function(e) e$delete(), TRUE)
 
+  ## Set implicit timeout to zero. According to the standard it should
+  ## be zero, but phantomjs uses about 200 ms
+  self$set_timeout(implicit = 0)
+
   invisible(self)
 }
 
