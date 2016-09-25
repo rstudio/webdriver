@@ -14,12 +14,14 @@ BugReports: https://github.com/gaborcsardi/webdriver/issues
 RoxygenNote: 5.0.1.9000
 Imports:
     base64enc,
+    debugme,
     httr,
     jsonlite,
     R6,
     showimage,
     utils
 Remotes:
+    gaborcsardi/debugme,
     gaborcsardi/processx,
     MangoTheCat/showimage
 Suggests:

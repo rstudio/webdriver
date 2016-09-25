@@ -213,6 +213,7 @@ element_initialize <- function(self, private, id, session,
 element_find_element <- function(self, private, css, link_text,
                                  partial_link_text, xpath) {
 
+  "!DEBUG element_find_element"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$session_private$make_request(
@@ -235,6 +236,7 @@ element_find_element <- function(self, private, css, link_text,
 element_find_elements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
 
+  "!DEBUG element_find_elements"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$session_private$make_request(
@@ -258,6 +260,7 @@ element_find_elements <- function(self, private, css, link_text,
 
 element_is_selected <- function(self, private) {
 
+  "!DEBUG element_is_selected"
   response <- private$session_private$make_request(
     "IS ELEMENT SELECTED",
     params = list(element_id = private$id)
@@ -267,11 +270,13 @@ element_is_selected <- function(self, private) {
 }
 
 element_get_value <- function(self, private) {
+  "!DEBUG element_get_value"
   self$get_attribute("value")
 }
 
 element_set_value <- function(self, private, value) {
 
+  "!DEBUG element_set_value"
   assert_string(value)
 
   private$session_private$make_request(
@@ -285,6 +290,7 @@ element_set_value <- function(self, private, value) {
 
 element_get_attribute <- function(self, private, name) {
 
+  "!DEBUG element_get_attribute"
   assert_string(name)
 
   response <- private$session_private$make_request(
@@ -298,12 +304,14 @@ element_get_attribute <- function(self, private, name) {
 
 element_get_class <- function(self, private) {
 
+  "!DEBUG element_get_class"
   class <- self$get_attribute("class")
   strsplit(class, "\\s+")[[1]]
 }
 
 element_get_css_value <- function(self, private, name) {
 
+  "!DEBUG element_get_css_value"
   assert_string(name)
 
   response <- private$session_private$make_request(
@@ -317,6 +325,7 @@ element_get_css_value <- function(self, private, name) {
 
 element_get_text <- function(self, private) {
 
+  "!DEBUG element_get_text"
   response <- private$session_private$make_request(
     "GET ELEMENT TEXT",
     params = list(element_id = private$id)
@@ -327,12 +336,14 @@ element_get_text <- function(self, private) {
 
 element_get_data <- function(self, private, name) {
 
+  "!DEBUG element_get_data"
   assert_string(name)
   self$get_attribute(paste0("data-", name))
 }
 
 element_get_name <- function(self, private) {
 
+  "!DEBUG element_get_name"
   response <- private$session_private$make_request(
     "GET ELEMENT TAG NAME",
     params = list(element_id = private$id)
@@ -346,6 +357,7 @@ element_get_name <- function(self, private) {
 
 element_get_rect <- function(self, private) {
 
+  "!DEBUG element_get_rect"
   response1 <- private$session_private$make_request(
     "GET ELEMENT LOCATION",
     params = list(element_id = private$id)
@@ -367,6 +379,7 @@ element_get_rect <- function(self, private) {
 
 element_id_enabled <- function(self, private) {
 
+  "!DEBUG element_id_enabled"
   response <- private$session_private$make_request(
     "IS ELEMENT ENABLED",
     params = list(element_id = private$id)
@@ -378,6 +391,7 @@ element_id_enabled <- function(self, private) {
 
 element_click <- function(self, private) {
 
+  "!DEBUG element_click"
   response <- private$session_private$make_request(
     "ELEMENT CLICK",
     params = list(element_id = private$id)
@@ -389,6 +403,7 @@ element_click <- function(self, private) {
 
 element_clear <- function(self, private) {
 
+  "!DEBUG element_clear"
   response <- private$session_private$make_request(
     "ELEMENT CLEAR",
     params = list(element_id = private$id)
@@ -400,6 +415,7 @@ element_clear <- function(self, private) {
 
 element_send_keys <- function(self, private, keys) {
 
+  "!DEBUG element_send_keys"
   response <- private$session_private$make_request(
     "ELEMENT SEND KEYS",
     list(value = keys),
@@ -411,6 +427,8 @@ element_send_keys <- function(self, private, keys) {
 
 
 element_move_mouse_to <- function(self, private, xoffset, yoffset) {
+
+  "!DEBUG element_move_mouse_to"
 
   if (!is.null(xoffset)) assert_count(xoffset)
   if (!is.null(yoffset)) assert_count(yoffset)
@@ -428,9 +446,11 @@ element_move_mouse_to <- function(self, private, xoffset, yoffset) {
 }
 
 element_execute_script <- function(self, private, script, ...) {
+  "!DEBUG element_execute_script"
   private$session$execute_script(script, self, ...)
 }
 
 element_execute_script_async <- function(self, private, script, ...) {
+  "!DEBUG element_execute_script_async"
   private$session$execute_script(script, self, ...)
 }

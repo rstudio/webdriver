@@ -120,6 +120,7 @@ window_initialize <- function(self, private, id, session,
 
 window_close <- function(self, private) {
 
+  "!DEBUG window_close"
   private$session_private$make_request(
     "CLOSE WINDOW",
     list(name = unbox(private$id))
@@ -130,12 +131,14 @@ window_close <- function(self, private) {
 
 window_is_active <- function(self, private) {
 
+  "!DEBUG window_is_active"
   active <- private$session$get_window()
   active$.__enclos_env__$private$id == private$id
 }
 
 window_switch_to <- function(self, private) {
 
+  "!DEBUG window_switch_to"
   private$session_private$make_request(
     "SWITCH TO WINDOW",
     list(name = unbox(private$id))
@@ -146,6 +149,7 @@ window_switch_to <- function(self, private) {
 
 ## window_make_fullscreen <- function(self, private) {
 
+##  "!DEBUG window_make_fullscreen"
 ##   private$session_private$make_request(
 ##     "FULLSCREEN WINDOW",
 ##   )
@@ -155,6 +159,7 @@ window_switch_to <- function(self, private) {
 
 window_maximize <- function(self, private) {
 
+  "!DEBUG window_maximize"
   private$session_private$make_request(
     "MAXIMIZE WINDOW",
     params = list(window_id = private$id)
@@ -165,6 +170,7 @@ window_maximize <- function(self, private) {
 
 window_get_size <- function(self, private) {
 
+  "!DEBUG window_get_size"
   response <- private$session_private$make_request(
     "GET WINDOW SIZE",
     params = list(window_id = private$id)
@@ -175,6 +181,7 @@ window_get_size <- function(self, private) {
 
 window_set_size <- function(self, private, width, height) {
 
+  "!DEBUG window_set_size"
   assert_window_size(width)
   assert_window_size(height)
 
@@ -192,6 +199,7 @@ window_set_size <- function(self, private, width, height) {
 
 window_get_position <- function(self, private) {
 
+  "!DEBUG window_get_position"
   response <- private$session_private$make_request(
     "GET WINDOW POSITION",
     params = list(window_id = private$id)
@@ -202,6 +210,7 @@ window_get_position <- function(self, private) {
 
 window_set_position <- function(self, private, x, y) {
 
+  "!DEBUG window_set_position"
   assert_window_position(x)
   assert_window_position(y)
 

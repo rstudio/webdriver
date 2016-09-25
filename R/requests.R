@@ -11,6 +11,7 @@ default_headers <- c(
 session_make_request <- function(self, private, endpoint, data, params,
                                  headers) {
 
+  "!DEBUG session_make_request"
   headers <- update(default_headers, as.character(headers))
 
   ep <- parse_endpoint(endpoint, private, params)
@@ -76,6 +77,7 @@ parse_endpoint <- function(endpoint, params, xparams) {
 
 parse_response <- function(response) {
 
+  "!DEBUG parse_response"
   content_type <- headers(response)$`content-type`
 
   if (is.null(content_type) || length(content_type) == 0) {

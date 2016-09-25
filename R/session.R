@@ -300,6 +300,7 @@ session <- R6Class(
 
 session_initialize <- function(self, private, host, port) {
 
+  "!DEBUG session_initialize"
   assert_string(host)
   assert_port(port)
 
@@ -332,6 +333,7 @@ session_initialize <- function(self, private, host, port) {
 
 session_delete <- function(self, private) {
 
+  "!DEBUG session_delete"
   if (! is.null(private$session_id)) {
     response <- private$make_request(
       "DELETE SESSION",
@@ -345,6 +347,7 @@ session_delete <- function(self, private) {
 }
 
 session_get_status <- function(self, private) {
+  "!DEBUG session_get_status"
   response <- private$make_request(
     "STATUS"
   )
@@ -354,6 +357,7 @@ session_get_status <- function(self, private) {
 
 session_go <- function(self, private, url) {
 
+  "!DEBUG session_go"
   assert_url(url)
 
   private$make_request(
@@ -367,6 +371,7 @@ session_go <- function(self, private, url) {
 
 session_get_url <- function(self, private) {
 
+  "!DEBUG session_get_url"
   response <- private$make_request(
     "GET CURRENT URL"
   )
@@ -377,6 +382,7 @@ session_get_url <- function(self, private) {
 
 session_go_back <- function(self, private) {
 
+  "!DEBUG session_go_back"
   private$make_request(
     "BACK"
   )
@@ -387,6 +393,7 @@ session_go_back <- function(self, private) {
 
 session_go_forward <- function(self, private) {
 
+  "!DEBUG session_go_forward"
   private$make_request(
     "FORWARD"
   )
@@ -397,6 +404,7 @@ session_go_forward <- function(self, private) {
 
 session_refresh <- function(self, private) {
 
+  "!DEBUG session_refresh"
   private$make_request(
     "REFRESH"
   )
@@ -406,6 +414,7 @@ session_refresh <- function(self, private) {
 
 
 session_get_title <- function(self, private) {
+  "!DEBUG session_get_title"
   response <- private$make_request(
     "GET TITLE"
   )
@@ -417,6 +426,7 @@ session_get_title <- function(self, private) {
 session_find_element <- function(self, private, css, link_text,
                                  partial_link_text, xpath) {
 
+  "!DEBUG session_find_element"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(
@@ -462,6 +472,7 @@ parse_find_expr <- function(css, link_text, partial_link_text, xpath) {
 
 session_find_elements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
+  "!DEBUG session_find_elements"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(
@@ -484,6 +495,7 @@ session_find_elements <- function(self, private, css, link_text,
 
 session_get_active_element <- function(self, private) {
 
+  "!DEBUG session_get_active_element"
   response <- private$make_request(
     "GET ACTIVE ELEMENT"
   )
@@ -497,6 +509,7 @@ session_get_active_element <- function(self, private) {
 
 
 session_get_source <- function(self, private) {
+  "!DEBUG session_get_source"
   response <- private$make_request(
     "GET PAGE SOURCE"
   )
@@ -508,6 +521,7 @@ session_get_source <- function(self, private) {
 
 session_take_screenshot <- function(self, private, file) {
 
+  "!DEBUG session_take_screenshot"
   if (!is.null(file)) assert_filename(file)
 
   response <- private$make_request(
@@ -540,6 +554,7 @@ handle_screenshot <- function(response, file) {
 
 session_get_window <- function(self, private) {
 
+  "!DEBUG session_get_window"
   response <- private$make_request(
     "GET WINDOW HANDLE"
   )
@@ -553,6 +568,7 @@ session_get_window <- function(self, private) {
 
 session_get_all_windows <- function(self, private) {
 
+  "!DEBUG session_get_all_windows"
   response <- private$make_request(
     "GET WINDOW HANDLES"
   )
@@ -600,6 +616,8 @@ parse_script_response <- function(self, private, value) {
 
 session_execute_script <- function(self, private, script, ...) {
 
+  "!DEBUG session_execute_script"
+
   assert_string(script)
 
   args <- prepare_execute_args(...)
@@ -613,6 +631,8 @@ session_execute_script <- function(self, private, script, ...) {
 }
 
 session_execute_script_async <- function(self, private, script, ...) {
+
+  "!DEBUG session_execute_script_async"
 
   assert_string(script)
 
@@ -628,6 +648,8 @@ session_execute_script_async <- function(self, private, script, ...) {
 
 session_set_timeout <- function(self, private, script, page_load,
                                 implicit) {
+
+  "!DEBUG session_set_timeout"
 
   if (!is.null(script)) {
     assert_timeout(script)
@@ -658,6 +680,8 @@ session_set_timeout <- function(self, private, script, page_load,
 
 session_move_mouse_to <- function(self, private, xoffset, yoffset) {
 
+  "!DEBUG session_move_mouse_to"
+
   assert_count(xoffset)
   assert_count(yoffset)
 
@@ -670,6 +694,8 @@ session_move_mouse_to <- function(self, private, xoffset, yoffset) {
 }
 
 session_button <- function(self, private, type, button) {
+  "!DEBUG session_button"
+
   assert_mouse_button(button)
 
   private$make_request(
@@ -681,17 +707,21 @@ session_button <- function(self, private, type, button) {
 }
 
 session_click <- function(self, private, button) {
+  "!DEBUG session_click"
   session_button(self, private, "click", button)
 }
 
 session_double_click <- function(self, private, button) {
+  "!DEBUG session_double_click"
   session_button(self, private, "doubleclick", button)
 }
 
 session_mouse_button_down <- function(self, private, button) {
+  "!DEBUG session_mouse_button_down"
   session_button(self, private, "buttondown", button)
 }
 
 session_mouse_button_up <- function(self, private, button) {
+  "!DEBUG session_mouse_button_up"
   session_button(self, private, "buttonup", button)
 }

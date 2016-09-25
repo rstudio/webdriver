@@ -4,6 +4,8 @@
 session_wait_for <- function(self, private, expr, check_interval,
                              timeout) {
 
+  "!DEBUG session_wait_for"
+
   assert_string(expr)
   assert_count(check_interval)
   assert_count(timeout)
