@@ -11,7 +11,7 @@ default_headers <- c(
 session_make_request <- function(self, private, endpoint, data, params,
                                  headers) {
 
-  "!DEBUG session_make_request"
+  "!DEBUG session_make_request `endpoint`"
   headers <- update(default_headers, as.character(headers))
 
   ep <- parse_endpoint(endpoint, private, params)

@@ -12,7 +12,7 @@ session_get_log_types <- function(self, private) {
 
 session_read_log <- function(self, private, type) {
 
-  "!DEBUG session_read_log"
+  "!DEBUG session_read_log `type`"
   assert_string(type)
 
   response <- private$make_request(

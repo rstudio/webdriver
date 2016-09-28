@@ -181,7 +181,7 @@ window_get_size <- function(self, private) {
 
 window_set_size <- function(self, private, width, height) {
 
-  "!DEBUG window_set_size"
+  "!DEBUG window_set_size `width`x`height`"
   assert_window_size(width)
   assert_window_size(height)
 
