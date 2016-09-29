@@ -29,10 +29,17 @@ stop_web_server <- function(server) {
 }
 
 start_phantomjs <- function() {
-  check_external("phantomjs")
+
+  phexe <- find_phantom()
+  if (is.null(phexe)) stop("No phantom.js, exiting")
+
   port <- random_port()
 
-  cmd <- paste0("phantomjs --proxy-type=none --webdriver=127.0.0.1:", port)
+  cmd <- paste0(
+    phexe,
+    " --proxy-type=none --webdriver=127.0.0.1:",
+    port
+  )
   ph <- processx::process$new(commandline = cmd)
 
   if (! ph$is_alive()) {
