@@ -27,8 +27,6 @@ test_that("basic operations", {
   on.exit(s$delete(), add = TRUE)
 
   ## $go
-  print(server$process$is_alive())
-  print(phantom$process$is_alive())
   s$go(server$url("/check.html"))
 
   ## $get_url
