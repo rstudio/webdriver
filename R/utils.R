@@ -25,3 +25,11 @@ read_file <- function(x) {
 str <- function(x) {
   as.character(x)
 }
+
+is_windows <- function() .Platform$OS.type == "windows"
+
+is_osx     <- function() Sys.info()[['sysname']] == 'Darwin'
+
+is_linux   <- function() Sys.info()[['sysname']] == 'Linux'
+
+dir_exists <- function(path) utils::file_test('-d', path)
