@@ -1,7 +1,10 @@
 
 start_web_server <- function(dir) {
 
-  Rbin <- file.path(R.home("bin"), "R")
+  Sys.unsetenv("R_TESTS")
+
+  Rexe <- if (is_windows()) "R.exe" else "R"
+  Rbin <- file.path(R.home("bin"), Rexe)
 
   port <- random_port()
 
@@ -14,7 +17,7 @@ start_web_server <- function(dir) {
 
   if (! ws$is_alive()) {
     stop(
-      "Failed to start phantomjs. Error: ",
+      "Failed to start servr web server. Error: ",
       strwrap(ws$read_error_lines())
     )
   }
@@ -36,7 +39,7 @@ start_phantomjs <- function() {
   port <- random_port()
 
   cmd <- paste0(
-    phexe,
+    shQuote(phexe),
     " --proxy-type=none --webdriver=127.0.0.1:",
     port
   )
