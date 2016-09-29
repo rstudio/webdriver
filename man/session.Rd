@@ -89,7 +89,7 @@ s$wait_for(expr, check_interval = 100, timeout = 3000)
 \section{Details}{
 
 
-\code{s$new()} creates a new WebDriver session.
+\code{session$new()} creates a new WebDriver session.
 
 \code{s$delete()} deletes a WebDriver session.
 

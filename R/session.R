@@ -81,7 +81,7 @@
 #'
 #' @section Details:
 #'
-#' \code{s$new()} creates a new WebDriver session.
+#' \code{session$new()} creates a new WebDriver session.
 #'
 #' \code{s$delete()} deletes a WebDriver session.
 #'
@@ -300,7 +300,7 @@ session <- R6Class(
 
 session_initialize <- function(self, private, host, port) {
 
-  "!DEBUG session_initialize"
+  "!DEBUG session_initialize `host`:`port`"
   assert_string(host)
   assert_port(port)
 
@@ -321,7 +321,7 @@ session_initialize <- function(self, private, host, port) {
   private$session_id = response$sessionId %||% stop("Got no session_id")
   private$parameters = response$value
 
-  reg.finalizer(self, function(e) e$delete(), TRUE)
+  ##  reg.finalizer(self, function(e) e$delete(), TRUE)
 
   ## Set implicit timeout to zero. According to the standard it should
   ## be zero, but phantomjs uses about 200 ms
@@ -357,7 +357,7 @@ session_get_status <- function(self, private) {
 
 session_go <- function(self, private, url) {
 
-  "!DEBUG session_go"
+  "!DEBUG session_go `url`"
   assert_url(url)
 
   private$make_request(
@@ -426,7 +426,7 @@ session_get_title <- function(self, private) {
 session_find_element <- function(self, private, css, link_text,
                                  partial_link_text, xpath) {
 
-  "!DEBUG session_find_element"
+  "!DEBUG session_find_element `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(
@@ -472,7 +472,7 @@ parse_find_expr <- function(css, link_text, partial_link_text, xpath) {
 
 session_find_elements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
-  "!DEBUG session_find_elements"
+  "!DEBUG session_find_elements `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(
@@ -694,7 +694,7 @@ session_move_mouse_to <- function(self, private, xoffset, yoffset) {
 }
 
 session_button <- function(self, private, type, button) {
-  "!DEBUG session_button"
+  "!DEBUG session_button `type` `button`"
 
   assert_mouse_button(button)
 
@@ -707,21 +707,21 @@ session_button <- function(self, private, type, button) {
 }
 
 session_click <- function(self, private, button) {
-  "!DEBUG session_click"
+  "!DEBUG session_click `button`"
   session_button(self, private, "click", button)
 }
 
 session_double_click <- function(self, private, button) {
-  "!DEBUG session_double_click"
+  "!DEBUG session_double_click `button`"
   session_button(self, private, "doubleclick", button)
 }
 
 session_mouse_button_down <- function(self, private, button) {
-  "!DEBUG session_mouse_button_down"
+  "!DEBUG session_mouse_button_down `button`"
   session_button(self, private, "buttondown", button)
 }
 
 session_mouse_button_up <- function(self, private, button) {
-  "!DEBUG session_mouse_button_up"
+  "!DEBUG session_mouse_button_up `button`"
   session_button(self, private, "buttonup", button)
 }

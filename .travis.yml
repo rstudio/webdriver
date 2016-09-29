@@ -1,30 +1,16 @@
-## Sample .travis.yml file for use with metacran/r-builder
-## See https://github.com/metacran/r-builder for details.
+language: r
+sudo: false
+cache: packages
 
-language: c
-sudo: required
-
-before_install:
-  - curl -OL https://raw.githubusercontent.com/metacran/r-builder/master/pkg-build.sh
-  - chmod 755 pkg-build.sh
-  - ./pkg-build.sh bootstrap
-
-install:
-  - ./pkg-build.sh install_deps
-
-script:
-  - ./pkg-build.sh run_tests
-
-after_failure:
-  - ./pkg-build.sh dump_logs
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+r:
+ - release
+ - devel
+ - oldrel
 
 env:
-  matrix:
-    - RVERSION=oldrel  DEBUGME=webdriver,processx
-    - RVERSION=release DEBUGME=webdriver,processx
-    - RVERSION=devel   DEBUGME=webdriver,processx
+  global:
+    - DEBUGME=webdriver,processx
+    - WEBDRIVER_HOST=127.0.0.1
+    - WEBDRIVER_PORT=8081
+    - SERVR_HOST=127.0.0.1
+    - SERVR_PORT=8082

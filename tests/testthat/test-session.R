@@ -13,7 +13,6 @@ test_that("can create a session", {
 })
 
 test_that("can go to URL", {
-
   s <- session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 

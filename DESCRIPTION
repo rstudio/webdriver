@@ -22,9 +22,9 @@ Imports:
     utils
 Remotes:
     gaborcsardi/debugme,
-    gaborcsardi/processx,
+    MangoTheCat/processx,
     MangoTheCat/showimage
-Suggests:
+Suggests: 
     pingr,
     processx,
     servr,
