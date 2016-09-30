@@ -18,7 +18,7 @@ session_wait_for <- function(self, private, expr, check_interval,
     "js", "webdriver-wait-for.js"
   ))
 
-  escaped <- gsub('"', '\\"', expr)
+  escaped <- gsub('"', '\\\\"', expr)
 
   js <-
     'var callback = arguments[0];

@@ -32,4 +32,9 @@ test_that("waiting for a condition", {
     s$wait_for("syntax error"),
     NA
   )
+
+  ## Quotes in the expression
+  expect_true(
+    s$wait_for('"foo" == "foo"')
+  )
 })
