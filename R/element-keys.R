@@ -96,10 +96,15 @@ key <- list(
 
 element_send_keys <- function(self, private, ...) {
 
+  keys <- list(...)
+  if (any(vapply(keys, is.null, TRUE))) {
+    stop("NULL key in send_key, probably a typo")
+  }
+
   "!DEBUG element_send_keys `private$id`"
   response <- private$session_private$make_request(
     "ELEMENT SEND KEYS",
-    list(value = paste(list(...), collapse = "")),
+    list(value = paste(keys, collapse = "")),
     params = list(element_id = private$id)
   )
 
