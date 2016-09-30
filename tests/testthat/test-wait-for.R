@@ -26,4 +26,10 @@ test_that("waiting for a condition", {
 
   ## We wait for a 'blue' class, but that does not happen
   expect_false(s$wait_for("$('#me').hasClass('blue')", timeout = 1000))
+
+  ## Syntax error in the wait expression returns NA
+  expect_identical(
+    s$wait_for("syntax error"),
+    NA
+  )
 })

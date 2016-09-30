@@ -18,15 +18,18 @@ session_wait_for <- function(self, private, expr, check_interval,
     "js", "webdriver-wait-for.js"
   ))
 
-  js <-
-    "var callback = arguments[0];
-     webdriver_wait_for(
-       function() { return (" %+% expr %+% "); },
-       { check_interval: " %+% str(check_interval) %+% ",
-         timeout: " %+% str(timeout) %+% ",
-         on_ready:   function() { callback(true); },
-         on_timeout: function() { callback(false); } }
-     );"
+  escaped <- gsub('"', '\\"', expr)
 
-  self$execute_script_async(paste0(waitjs, js))
+  js <-
+    'var callback = arguments[0];
+     webdriver_wait_for(
+       "' %+% escaped %+% '",
+       callback,
+       { check_interval: ' %+% str(check_interval) %+% ',
+         timeout: ' %+% str(timeout) %+% ' }
+     );'
+
+  ret <- self$execute_script_async(paste0(waitjs, js))
+
+  switch(ret, "error" = NA, "true" = TRUE, "timeout" = FALSE, NA)
 }

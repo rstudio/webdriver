@@ -173,7 +173,9 @@ server, in a character vector.
 
 \code{s$wait_for()} waits until a JavaScript expression evaluates
 to \code{true}, or a timeout happens. It returns \code{TRUE} is the
-expression evaluated to \code{true}, possible after some waiting.
+expression evaluated to \code{true}, possible after some waiting. If
+the expression has a syntax error or a runtime error happens, it
+returns \code{NA}.
 }
 \seealso{
 The WebDriver standard at
