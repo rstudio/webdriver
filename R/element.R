@@ -23,7 +23,7 @@
 #' e$is_enabled()
 #' e$click()
 #' e$clear()
-#' e$send_keys(keys)
+#' e$send_keys(...)
 #' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 #'
 #' e$execute_script(script, ...)
@@ -42,7 +42,6 @@
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
 #'   \item{name}{String scalar, named of attribute, property or css key.
 #'     For \code{get_data}, the key of the data attribute.}
-#'   \item{keys}{Character vector of keys to send.}
 #'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
 #'     position of the element. If at least of of \code{xoffset} and
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
@@ -50,6 +49,9 @@
 #'     position of the element. If at least of of \code{xoffset} and
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
 #'   \item{value}{Value to set, a character string.}
+#'   \item{...}{For \code{send_keys} the keys to send, see
+#'     \code{\link{key}}. For \code{execute_script} and
+#'     \code{execute_script_async} argument to supply to the script.}
 #' }
 #'
 #' @section Details:
@@ -104,7 +106,8 @@
 #' clear its value, checkedness or text content.
 #'
 #' \code{e$send_keys()} scrolls the form control element into view, and
-#' sends the provided keys to it.
+#' sends the provided keys to it. See \code{\link{key}} for a list of
+#' special keys that can be sent.
 #'
 #' \code{e$move_mouse_to()} moves the mouse cursor to the element, with
 #' the specified offsets. If one or both offsets are \code{NULL}, then
@@ -176,8 +179,8 @@ element <- R6Class(
     clear = function()
       element_clear(self, private),
 
-    send_keys = function(keys)
-      element_send_keys(self, private, keys),
+    send_keys = function(...)
+      element_send_keys(self, private, ...),
 
     move_mouse_to = function(xoffset = NULL, yoffset = NULL)
       element_move_mouse_to(self, private, xoffset, yoffset),
@@ -407,19 +410,6 @@ element_clear <- function(self, private) {
   "!DEBUG element_clear `private$id`"
   response <- private$session_private$make_request(
     "ELEMENT CLEAR",
-    params = list(element_id = private$id)
-  )
-
-  invisible(self)
-}
-
-
-element_send_keys <- function(self, private, keys) {
-
-  "!DEBUG element_send_keys `private$id`"
-  response <- private$session_private$make_request(
-    "ELEMENT SEND KEYS",
-    list(value = keys),
     params = list(element_id = private$id)
   )
 

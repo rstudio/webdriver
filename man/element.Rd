@@ -114,7 +114,8 @@ in-view centre point of it.
 clear its value, checkedness or text content.
 
 \code{e$send_keys()} scrolls the form control element into view, and
-sends the provided keys to it.
+sends the provided keys to it. See \code{\link{key}} for a list of
+special keys that can be sent.
 
 \code{e$move_mouse_to()} moves the mouse cursor to the element, with
 the specified offsets. If one or both offsets are \code{NULL}, then

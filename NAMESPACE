@@ -2,6 +2,7 @@
 
 S3method(print,webdriver_logs)
 export(install_phantomjs)
+export(key)
 export(session)
 importFrom(R6,R6Class)
 importFrom(base64enc,base64decode)

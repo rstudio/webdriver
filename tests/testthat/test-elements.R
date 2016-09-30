@@ -70,3 +70,18 @@ test_that("element rect", {
   rect <- el$get_rect()
   expect_equal(names(rect), c("x", "y", "width", "height"))
 })
+
+test_that("sending special keys", {
+  s <- session$new(port = phantom$port)
+  on.exit(s$delete(), add = TRUE)
+  s$go(server$url("/elements.html"))
+
+  textarea <- s$find_element("textarea")
+  textarea$send_keys(key$control, "a")  # select everything
+  textarea$send_keys(key$delete)        # delete
+  textarea$send_keys("line1", key$enter, "line2", key$enter)
+  expect_equal(
+    textarea$get_value(),
+    "line1\nline2\n"
+  )
+})
