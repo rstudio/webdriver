@@ -29,7 +29,7 @@ e$get_rect()
 e$is_enabled()
 e$click()
 e$clear()
-e$send_keys(keys)
+e$send_keys(...)
 e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 
 e$execute_script(script, ...)
@@ -50,7 +50,6 @@ e$execute_script_async(script, ...)
   \item{xpath}{Find HTML elements using XPath expressions.}
   \item{name}{String scalar, named of attribute, property or css key.
     For \code{get_data}, the key of the data attribute.}
-  \item{keys}{Character vector of keys to send.}
   \item{xoffset}{Horizontal offset for mouse movement, relative to the
     position of the element. If at least of of \code{xoffset} and
     \code{yoffset} is \code{NULL}, then they are ignored.}
@@ -58,6 +57,9 @@ e$execute_script_async(script, ...)
     position of the element. If at least of of \code{xoffset} and
     \code{yoffset} is \code{NULL}, then they are ignored.}
   \item{value}{Value to set, a character string.}
+  \item{...}{For \code{send_keys} the keys to send, see
+    \code{\link{key}}. For \code{execute_script} and
+    \code{execute_script_async} argument to supply to the script.}
 }
 }
 

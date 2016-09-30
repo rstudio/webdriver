@@ -15,7 +15,19 @@ Special keys, so that we can refer to them with an easier syntax
 \dontrun{
 el$send_keys("xyz")
 el$send_keys("x", "y", "z")
-el$send_keys("username", keys$enter, "password", keys$enter)
+el$send_keys("username", key$enter, "password", key$enter)
+
+## Sending CTRL+A
+el$send_keys(key$control, "a")
+
+## Note that modifier keys (control, alt, shift, meta) are sticky,
+## they remain in effect in the rest of the send_keys() call. E.g.
+## this sends CTRL+X and CTRL+S
+el$send_keys(key$control, "x", "s")
+
+## You will need multiple calls to release control and send CTRL+X S
+el$send_keys(key$control, "x")
+el$send_keys("s")
 }
 
 }
