@@ -14,9 +14,11 @@ BugReports: https://github.com/gaborcsardi/webdriver/issues
 RoxygenNote: 5.0.1.9000
 Imports:
     base64enc,
+    curl (>= 2.0),
     debugme,
     httr,
     jsonlite,
+    processx,
     R6,
     showimage,
     utils
@@ -26,7 +28,6 @@ Remotes:
     MangoTheCat/showimage
 Suggests: 
     pingr,
-    processx,
     servr,
     testthat
 Encoding: UTF-8

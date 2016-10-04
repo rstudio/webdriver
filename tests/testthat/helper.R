@@ -35,40 +35,13 @@ stop_web_server <- function(server) {
 }
 
 start_phantomjs <- function() {
-
-  phexe <- find_phantom()
-  if (is.null(phexe)) stop("No phantom.js, exiting")
-
-  host <- Sys.getenv("WEBDRIVER_HOST", "127.0.0.1")
-  port <- as.numeric(Sys.getenv("WEBDRIVER_PORT", random_port()))
-
-  cmd <- sprintf(
-    "%s --proxy-type=none --webdriver=%s:%d",
-    shQuote(phexe), host, port
-  )
-  ph <- processx::process$new(commandline = cmd)
-
-  if (! ph$is_alive()) {
-    stop(
-      "Failed to start phantomjs. Error: ",
-      strwrap(ph$read_error_lines())
-    )
-  }
-
-  ## Need to wait for phantomjs to initialize
-  Sys.sleep(1)
-
-  list(process = ph, port = port)
+  run_phantomjs()
 }
 
 check_external <- function(x) {
   if (Sys.which(x) == "") {
     stop("Cannot start '", x, "', make sure it is in the path")
   }
-}
-
-random_port <- function(min = 3000, max = 9000) {
-  if (min < max) sample(min:max, 1) else min
 }
 
 stop_phantomjs <- function(phantom) {
