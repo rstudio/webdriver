@@ -1,10 +1,10 @@
 
 `%||%` <- function(l, r) if (is.null(l)) r else l
 
-update <- function(original, new) {
+update_list <- function(original, new) {
 
   if (length(new)) {
-    assert_named(original)
+    if (length(original)) assert_named(original)
     assert_named(new)
     original[names(new)] <- new
   }

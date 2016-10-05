@@ -12,7 +12,7 @@ session_make_request <- function(self, private, endpoint, data, params,
                                  headers) {
 
   "!DEBUG session_make_request `endpoint`"
-  headers <- update(default_headers, as.character(headers))
+  headers <- update_list(default_headers, as.character(headers))
 
   ep <- parse_endpoint(self, private, endpoint, private, params)
 
