@@ -1,9 +1,6 @@
 
 context("windows")
 
-server <- start_web_server("web")
-on.exit(stop_web_server(server), add = TRUE)
-
 test_that("window methods are OK", {
 
   s <- session$new(port = phantom$port)

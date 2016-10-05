@@ -1,9 +1,6 @@
 
 context("element")
 
-server <- start_web_server("web")
-on.exit(stop_web_server(server), add = TRUE)
-
 test_that("element methods are OK", {
 
   s <- session$new(port = phantom$port)

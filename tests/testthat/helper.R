@@ -25,16 +25,20 @@ start_web_server <- function(dir) {
     )
   }
 
-  ## TODO: this is temporary: wait until it has started
-  Sys.sleep(1)
-
   baseurl <- sprintf("http://%s:%d", host, port)
   url <- function(x) paste0(baseurl, x)
+
+  ## Wait until it answers requests
+  res <- wait_for_http(url("/check.html"))
+  if (!res) {
+    stop(
+      "Cannot start web server, or cannot connect to it",
+      strwrap(ws$read_error_lines())
+    )
+  }
+
   list(process = ws, port = port, baseurl = baseurl, url = url)
 }
 
-stop_web_server <- function(server) {
-  server$process$kill()
-}
-
+server <- start_web_server("web")
 phantom <- run_phantomjs()
