@@ -37,13 +37,7 @@ assert_session <- function(x) {
 
 assert_named <- function(x) {
   stopifnot(
-    length(names(x)) == length(x) && all(names(x) != "")
-  )
-}
-
-assert_unnamed <- function(x) {
-  stopifnot(
-    is.null(names(x)) || all(names(x) == "")
+    !is.null(names(x)) && all(names(x) != "")
   )
 }
 
