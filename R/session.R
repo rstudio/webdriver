@@ -285,6 +285,7 @@ session <- R6Class(
 
   private = list(
 
+    type = "phantomjs",
     host = NULL,
     port = NULL,
     session_id = NULL,
