@@ -342,6 +342,10 @@ session_initialize <- function(self, private, host, port) {
   ## be zero, but phantomjs uses about 200 ms
   if (private$type == "phantomjs") self$set_timeout(implicit = 0)
 
+  ## Script timeout of chromedriver seems to be zero by default.
+  ## That's a little agressive, the standard says 30 seconds
+  if (private$type == "chromedriver") self$set_timeout(script = 30000)
+
   invisible(self)
 }
 

@@ -25,7 +25,7 @@ test_that("script timeout", {
   s$set_timeout(script = 50)
   expect_error(
     s$execute_script_async(script),
-    "Timed out waiting for asyncrhonous script result"
+    "timeout|Timed out"
   )
 })
 
@@ -43,7 +43,7 @@ test_that("page load timeout", {
   s$set_timeout(page_load = 100)
   expect_error(
     s$go("http://httpbin.org/delay/1"),
-    "URL .http://httpbin.org/delay/1. didn't load. Error: .timeout."
+    "timeout"
   )
 })
 

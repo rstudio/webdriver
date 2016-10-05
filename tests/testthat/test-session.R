@@ -45,12 +45,13 @@ test_that("basic operations", {
   expect_equal(s$get_title(), "check")
 
   ## $get_source
-  expect_equal(
+  src <- paste(
+    readLines(file.path("web", "check.html"))[-(1:2)],
+    collapse = "\n"
+  )
+  expect_match(
     gsub("\\s+", "", s$get_source()),
-    gsub(
-      "\\s+", "",
-      paste(readLines(file.path("web", "check.html")), collapse = "\n")
-    )
+    gsub("\\s+", "", src)
   )
 })
 
@@ -110,10 +111,7 @@ test_that("execute script (sync)", {
     s$execute_script("return arguments[0] + arguments[1]", 42, 24),
     66
   )
-  expect_error(
-    s$execute_script("syntax error"),
-    "Expected an identifier but found 'error' instead"
-  )
+  expect_error(s$execute_script("syntax error"))
 })
 
 test_that("execute script (async)", {
@@ -193,12 +191,16 @@ test_that("logs", {
 
   s$go(server$url("/elements.html"))
 
-  s$execute_script("console.log('Just a start');")
-  s$execute_script("console.log('Hello world!');")
+  ## Read out the logs first, chromedriver gives error for missing
+  ## favicon.ico
+  s$read_log()
+
+  s$execute_script("console.error('Just a start');")
+  s$execute_script("console.error('Hello world!');")
   expect_equal(nrow(s$read_log()), 2)
-  s$execute_script("console.log('Hello again!');")
+  s$execute_script("console.error('Hello again!');")
   s$execute_script(paste0(
-    "console.log('A very long message, just to see how it will be ",
+    "console.error('A very long message, just to see how it will be ",
     "printed to the screen in R');"))
   log <- s$read_log()
   expect_equal(nrow(log), 2)

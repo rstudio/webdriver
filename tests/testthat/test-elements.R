@@ -71,8 +71,16 @@ test_that("sending special keys", {
   s$go(server$url("/elements.html"))
 
   textarea <- s$find_element("textarea")
-  textarea$send_keys(key$control, "a")  # select everything
-  textarea$send_keys(key$delete)        # delete
+
+  ## Chromedriver cannot send command keys on OSX:
+  ## https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
+  ## So for that we clear the element manually instead
+  if (driver_type == "chromedriver") {
+    textarea$clear()
+  } else {
+    textarea$send_keys(key$control, "a")  # select everything
+    textarea$send_keys(key$backspace)     # delete
+  }
   textarea$send_keys("line1", key$enter, "line2", key$enter)
   expect_equal(
     textarea$get_value(),
