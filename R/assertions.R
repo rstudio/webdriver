@@ -37,7 +37,7 @@ assert_session <- function(x) {
 
 assert_named <- function(x) {
   stopifnot(
-    !is.null(names(x)) && all(names(x) == "")
+    !is.null(names(x)) && all(names(x) != "")
   )
 }
 
