@@ -4,9 +4,6 @@ context("timeouts")
 server <- start_web_server("web")
 on.exit(stop_web_server(server), add = TRUE)
 
-phantom <- start_phantomjs()
-on.exit(stop_phantomjs(phantom), add = TRUE)
-
 ## This is easy, we just set a short timeout and make
 ## sure that the supplied script takes longer.
 

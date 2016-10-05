@@ -25,6 +25,9 @@ start_web_server <- function(dir) {
     )
   }
 
+  ## TODO: this is temporary: wait until it has started
+  Sys.sleep(1)
+
   baseurl <- sprintf("http://%s:%d", host, port)
   url <- function(x) paste0(baseurl, x)
   list(process = ws, port = port, baseurl = baseurl, url = url)
@@ -34,16 +37,4 @@ stop_web_server <- function(server) {
   server$process$kill()
 }
 
-start_phantomjs <- function() {
-  run_phantomjs()
-}
-
-check_external <- function(x) {
-  if (Sys.which(x) == "") {
-    stop("Cannot start '", x, "', make sure it is in the path")
-  }
-}
-
-stop_phantomjs <- function(phantom) {
-  phantom$process$kill()
-}
+phantom <- run_phantomjs()
