@@ -4,7 +4,7 @@ endpoints <- list()
 ## Order is (mostly) according to
 ## https://w3c.github.io/webdriver/webdriver-spec.html#list-of-endpoints
 
-endpoints$phantomjs <- list(
+endpoints$generic <- list(
 
   "NEW SESSION"          = "POST   /session",
   "DELETE SESSION"       = "DELETE /session/:session_id",
@@ -16,31 +16,15 @@ endpoints$phantomjs <- list(
   "GET TITLE"            = "GET    /session/:session_id/title",
 
   ## windows
-  ## This is /window in the standard, /window_handle in phantomjs
-  ## "GET WINDOW HANDLE"    = "GET    /session/:session_id/window",
-  "GET WINDOW HANDLE"    = "GET    /session/:session_id/window_handle",
+  "GET WINDOW HANDLE"    = "GET    /session/:session_id/window",
   "CLOSE WINDOW"         = "DELETE /session/:session_id/window",
   "SWITCH TO WINDOW"     = "POST   /session/:session_id/window",
-  ## This is window/handles in the standard, /window_handles in phantomjs
-  ## "GET WINDOW HANDLES"   = "GET    /session/:session_id/window/handles",
-  "GET WINDOW HANDLES"   = "GET    /session/:session_id/window_handles",
-  ## Not supported
-  "FULLSCREEN WINDOW"    = "POST   /session/:session_id/window/fullscreen",
-  ## non-standard
-  ## "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/maximize",
-  "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/:window_id/maximize",
-  ## non-standard
-  ## "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
-  "SET WINDOW SIZE"      = "POST   /session/:session_id/window/:window_id/size",
-  ## non-stadard
-  ## "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
-  "GET WINDOW POSITION"  = "GET    /session/:session_id/window/:window_id/position",
-  ## non-standard
-  ## "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
-  "SET WINDOW POSITION"  = "POST   /session/:session_id/window/:window_id/position",
-  ## This is also non-standard
-  ## "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
-  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/:window_id/size",
+  "GET WINDOW HANDLES"   = "GET    /session/:session_id/window/handles",
+  "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/maximize",
+  "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
+  "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
+  "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
+  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
 
   ## frames
   "SWITCH TO FRAME"      = "POST   /session/:session_id/frame",
@@ -54,8 +38,7 @@ endpoints$phantomjs <- list(
   "FIND ELEMENTS"        = "POST   /session/:session_id/elements",
   "FIND ELEMENTS FROM ELEMENT"
                          = "POST   /session/:session_id/element/:element_id/elements",
-  ## In the standard this is a GET, but phantomjs expects a POST :(
-  "GET ACTIVE ELEMENT"   = "POST   /session/:session_id/element/active",
+  "GET ACTIVE ELEMENT"   = "GET    /session/:session_id/element/active",
   "IS ELEMENT SELECTED"  = "GET    /session/:session_id/element/:element_id/selected",
   "GET ELEMENT ATTRIBUTE"= "GET    /session/:session_id/element/:element_id/attribute/:name",
   "GET ELEMENT PROPERTY" = "GET    /session/:session_id/element/:element_id/property/:name",
@@ -69,10 +52,8 @@ endpoints$phantomjs <- list(
   "ELEMENT SEND KEYS"    = "POST   /session/:session_id/element/:element_id/value",
 
   "GET PAGE SOURCE"      = "GET    /session/:session_id/source",
-  ## "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute/sync",
-  "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute",
-  ## "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute/async",
-  "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute_async",
+  "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute/sync",
+  "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute/async",
 
   ## cookies
   "GET ALL COOKIES"      = "GET    /session/:session_id/cookie",
@@ -94,21 +75,5 @@ endpoints$phantomjs <- list(
   ## screenshots
   "TAKE SCREENSHOT"      = "GET    /session/:session_id/screenshot",
   "TAKE ELEMENT SCREENSHOT"
-                         = "GET    /session/:session_id/element/:element_id/screenshot",
-
-  ## -------------------------------------------------------------------
-  ## Phantom JS specific endpoints
-
-  "STATUS"               = "GET    /session/:session_id",
-  "MOVE MOUSE TO"        = "POST   /session/:session_id/moveto",
-  "CLICK"                = "POST   /session/:session_id/click",
-  "DOUBLECLICK"          = "POST   /session/:session_id/doubleclick",
-  "BUTTONDOWN"           = "POST   /session/:session_id/buttondown",
-  "BUTTONUP"             = "POST   /session/:session_id/buttonup",
-  "GET LOG TYPES"        = "GET    /session/:session_id/log/types",
-  "READ LOG"             = "POST   /session/:session_id/log",
-  "UPLOAD FILE"          = "POST   /session/:session_id/file",
-  "GET ELEMENT LOCATION" = "GET    /session/:session_id/element/:element_id/location",
-  "GET ELEMENT SIZE"     = "GET    /session/:session_id/element/:element_id/size",
-  "SET ELEMENT VALUE"    = "POST   /session/:session_id/element/:element_id/value"
+                         = "GET    /session/:session_id/element/:element_id/screenshot"
 )

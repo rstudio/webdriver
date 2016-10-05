@@ -32,3 +32,23 @@ Suggests:
     testthat
 Encoding: UTF-8
 SystemRequirements: PhantomJS (http://phantomjs.org/)
+Collate: 
+    'assertions.R'
+    'download.R'
+    'element-keys.R'
+    'element.R'
+    'utils.R'
+    'endpoints.R'
+    'endpoints-phantomjs.R'
+    'errors.R'
+    'install-phantomjs.R'
+    'logs.R'
+    'on-load.R'
+    'package.R'
+    'rematch.R'
+    'requests.R'
+    'run-phantomjs.R'
+    'session.R'
+    'wait-for-http.R'
+    'wait.R'
+    'window.R'
