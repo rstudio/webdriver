@@ -285,11 +285,11 @@ session <- R6Class(
 
   private = list(
 
-    type = "phantomjs",
+    type = "generic",                   # driver type: phantomjs, etc.
     host = NULL,
     port = NULL,
     session_id = NULL,
-    parameters = NULL,
+    parameters = NULL,                  # initial response from driver
     num_log_lines_shown = 0,
 
     make_request = function(endpoint, data = NULL, params = NULL,
@@ -321,14 +321,26 @@ session_initialize <- function(self, private, host, port) {
     )
   )
 
-  private$session_id = response$sessionId %||% stop("Got no session_id")
-  private$parameters = response$value
+  private$session_id <- response$sessionId %||% stop("Got no session_id")
+  private$parameters <- response$value
 
-  ##  reg.finalizer(self, function(e) e$delete(), TRUE)
+  ## Detect driver type
+  private$type <-
+    if (identical(response$value$driverName, "ghostdriver")) {
+      "phantomjs"
+    } else if (identical(response$value$browserName, "chrome") &&
+               !is.null(response$value$chrome$chromedriverVersion)) {
+      "chromedriver"
+    } else {
+      message("Unknown webdriver client, using generic interface")
+      "generic"
+    }
+
+  reg.finalizer(self, function(e) e$delete(), TRUE)
 
   ## Set implicit timeout to zero. According to the standard it should
   ## be zero, but phantomjs uses about 200 ms
-  self$set_timeout(implicit = 0)
+  if (private$type == "phantomjs") self$set_timeout(implicit = 0)
 
   invisible(self)
 }

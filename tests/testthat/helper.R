@@ -41,4 +41,6 @@ start_web_server <- function(dir) {
 }
 
 server <- start_web_server("web")
+
 phantom <- run_phantomjs()
+## phantom <- run_chromedriver()

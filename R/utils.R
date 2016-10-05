@@ -33,3 +33,7 @@ is_osx     <- function() Sys.info()[['sysname']] == 'Darwin'
 is_linux   <- function() Sys.info()[['sysname']] == 'Linux'
 
 dir_exists <- function(path) utils::file_test('-d', path)
+
+random_port <- function(min = 3000, max = 9000) {
+  if (min < max) sample(min:max, 1) else min
+}
