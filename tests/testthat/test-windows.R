@@ -31,11 +31,16 @@ test_that("window methods are OK", {
   w1$set_size(800, 600)
   expect_equal(w1$get_size(), list(width = 800, height = 600))
 
-  expect_equal(w1$get_position(), list(x = 0, y= 0))
+  if (driver_type == "phantomjs") {
+    expect_equal(w1$get_position(), list(x = 0, y = 0))
+    w1$maximize()
+    expect_equal(w1$get_size(), list(width = 1366, height = 768))
+  }
 
-  w1$maximize()
-  expect_equal(w1$get_size(), list(width = 1366, height = 768))
-
-  w2$close()
-  expect_equal(length(s$get_all_windows()), 0)
+  ## chromedriver closes the session if the last windows is closed,
+  ## apparently.
+  if (driver_type == "phantomjs") {
+    w2$close()
+    expect_equal(length(s$get_all_windows()), 0)
+  }
 })
