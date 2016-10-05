@@ -39,7 +39,7 @@ session_make_request <- function(self, private, endpoint, data, params,
     stop("Unexpected HTTP verb, internal webdriver error")
   }
 
-  report_error(response)
+  report_error(self, private, response)
 
   parse_response(response)
 }

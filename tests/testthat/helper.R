@@ -42,5 +42,13 @@ start_web_server <- function(dir) {
 
 server <- start_web_server("web")
 
-phantom <- run_phantomjs()
-## phantom <- run_chromedriver()
+# driver_type <- "chromedriver"
+driver_type <- "phantomjs"
+
+if (driver_type == "phantomjs") {
+  phantom <- run_phantomjs()
+} else if (driver_type == "chromedriver") {
+  phantom <- run_chromedriver()
+} else {
+  stop("Unknown driver type")
+}
