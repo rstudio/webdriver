@@ -3,6 +3,7 @@
 S3method(print,webdriver_logs)
 export(install_phantomjs)
 export(key)
+export(run_chromedriver)
 export(run_phantomjs)
 export(session)
 importFrom(R6,R6Class)

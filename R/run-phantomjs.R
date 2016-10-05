@@ -1,8 +1,4 @@
 
-random_port <- function(min = 3000, max = 9000) {
-  if (min < max) sample(min:max, 1) else min
-}
-
 #' Start up phantomjs on localhost, and a random port
 #'
 #' Throws and error if phantom cannot be found, or cannot be started.
