@@ -1,8 +1,10 @@
 
+endpoints <- list()
+
 ## Order is (mostly) according to
 ## https://w3c.github.io/webdriver/webdriver-spec.html#list-of-endpoints
 
-endpoints <- list(
+endpoints$phantomjs <- list(
 
   "NEW SESSION"          = "POST   /session",
   "DELETE SESSION"       = "DELETE /session/:session_id",

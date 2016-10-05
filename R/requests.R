@@ -14,7 +14,7 @@ session_make_request <- function(self, private, endpoint, data, params,
   "!DEBUG session_make_request `endpoint`"
   headers <- update(default_headers, as.character(headers))
 
-  ep <- parse_endpoint(endpoint, private, params)
+  ep <- parse_endpoint(self, private, endpoint, private, params)
 
   url <- paste0(
     "http://",
@@ -44,13 +44,15 @@ session_make_request <- function(self, private, endpoint, data, params,
   parse_response(response)
 }
 
-parse_endpoint <- function(endpoint, params, xparams) {
+parse_endpoint <- function(self, private, endpoint, params, xparams) {
 
-  if (! endpoint %in% names(endpoints)) {
+  session_endpoints <- endpoints[[private$type]]
+
+  if (! endpoint %in% names(session_endpoints)) {
     stop("Unknown webdriver API endpoint, internal error")
   }
 
-  template <- endpoints[[endpoint]]
+  template <- session_endpoints[[endpoint]]
 
   colons <- re_match_all(template, ":[a-zA-Z0-9_]+")$.match[[1]]
 
