@@ -183,8 +183,10 @@ session <- R6Class(
   "session",
   public = list(
 
-    initialize = function(host = "127.0.0.1", port = 8910, additional_parameters = NULL)
-      session_initialize(self, private, host, port, additional_parameters = additional_parameters),
+    initialize = function(host = "127.0.0.1", port = 8910, 
+                          additional_parameters = NULL)
+      session_initialize(self, private, host, port, 
+                         additional_parameters = additional_parameters),
 
     delete = function()
       session_delete(self, private),
@@ -302,7 +304,8 @@ session <- R6Class(
 
 #' @importFrom jsonlite unbox
 
-session_initialize <- function(self, private, host, port, additional_parameters = NULL) {
+session_initialize <- function(self, private, host, port,
+                               additional_parameters = NULL) {
 
   "!DEBUG session_initialize `host`:`port`"
   assert_string(host)
@@ -321,7 +324,7 @@ session_initialize <- function(self, private, host, port, additional_parameters 
   )
   response <- private$make_request(
     "NEW SESSION",
-    list(desiredCapabilities = desiredCapabilities)
+    list(desiredCapabilities = unbox_list(desiredCapabilities))
   )
 
   private$session_id <- response$sessionId %||% stop("Got no session_id")
