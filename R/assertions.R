@@ -7,6 +7,10 @@ assert_string <- function(x) {
   stopifnot(is_string(x))
 }
 
+assert_list_null <- function(x){
+  stopifnot(is.list(x) || is.null(x))
+}
+
 assert_url <- assert_string
 
 assert_filename <- assert_string

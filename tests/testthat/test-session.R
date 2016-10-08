@@ -208,3 +208,23 @@ test_that("logs", {
   expect_match(log$message[1], "Hello again")
   expect_equal(names(log), c("timestamp", "level", "message"))
 })
+
+
+test_that("can pass additional parameters", {
+  user_agent_string <- "my_user_agent"
+  ap <- list(phantomjs.page.settings.userAgent = unbox("my_user_agent"))
+  s <- session$new(port = phantom$port, additional_parameters = ap)
+  on.exit(s$delete(), add = TRUE)
+  uastr <- "phantomjs.page.settings.userAgent"
+  expect_identical(s$.__enclos_env__$private$parameters[[uastr]],
+                   user_agent_string)
+  
+})
+
+test_that("passing non list additonal paramters throws exception", {
+  expect_error(
+    s <- session$new(port = phantom$port,
+                     additional_parameters = "some string")
+  )
+  
+})

@@ -52,6 +52,7 @@ s$wait_for(expr, check_interval = 100, timeout = 3000)
   \item{s}{A \code{session} object.}
   \item{host}{Host name of phantom.js.}
   \item{port}{Port of phantom.js.}
+  \item{additional_parameters}{A list of additional arguments to pass as desired capabilities.}
   \item{url}{URL to nagivate to.}
   \item{file}{File name to save the screenshot to. If \code{NULL}, then
     it will be shown on the R graphics device.}

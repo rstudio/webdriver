@@ -46,6 +46,7 @@
 #'   \item{s}{A \code{session} object.}
 #'   \item{host}{Host name of phantom.js.}
 #'   \item{port}{Port of phantom.js.}
+#'   \item{additional_parameters}{A list of additional arguments to pass as desired capabilities.}
 #'   \item{url}{URL to nagivate to.}
 #'   \item{file}{File name to save the screenshot to. If \code{NULL}, then
 #'     it will be shown on the R graphics device.}
@@ -182,8 +183,10 @@ session <- R6Class(
   "session",
   public = list(
 
-    initialize = function(host = "127.0.0.1", port = 8910)
-      session_initialize(self, private, host, port),
+    initialize = function(host = "127.0.0.1", port = 8910, 
+                          additional_parameters = NULL)
+      session_initialize(self, private, host, port, 
+                         additional_parameters = additional_parameters),
 
     delete = function()
       session_delete(self, private),
@@ -299,24 +302,38 @@ session <- R6Class(
 )
 
 
-session_initialize <- function(self, private, host, port) {
+#' @importFrom jsonlite unbox
+
+session_initialize <- function(self, private, host, port,
+                               additional_parameters = NULL) {
 
   "!DEBUG session_initialize `host`:`port`"
   assert_string(host)
   assert_port(port)
-
+  assert_list_null(additional_parameters)
+  
   private$host <- host
   private$port <- port
   private$num_log_lines_shown <- 0
-
+  desiredCapabilities <- c(
+    list(
+      browserName = unbox("phantomjs"),
+      driverName  = unbox("ghostdriver")
+    ),
+    additional_parameters
+  )
   response <- private$make_request(
     "NEW SESSION",
+<<<<<<< 60ae6ed4e7ed988e538fa957ae6f7b08097dfdac
     list(
       desiredCapabilities = list(
         browserName = "phantomjs",
         driverName  = "ghostdriver"
       )
     )
+=======
+    list(desiredCapabilities = unbox_list(desiredCapabilities))
+>>>>>>> Add capabilities (#38)
   )
 
   private$session_id <- response$sessionId %||% stop("Got no session_id")
