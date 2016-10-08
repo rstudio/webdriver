@@ -329,6 +329,9 @@ session_initialize <- function(self, private, host, port) {
   ## be zero, but phantomjs uses about 200 ms
   self$set_timeout(implicit = 0)
 
+  ## Set initial windows size to something sane
+  self$get_window()$set_size(992, 744)
+
   invisible(self)
 }
 
