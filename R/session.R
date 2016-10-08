@@ -344,6 +344,9 @@ session_initialize <- function(self, private, host, port) {
   ## That's a little agressive, the standard says 30 seconds
   if (private$type == "chromedriver") self$set_timeout(script = 30000)
 
+  ## Set initial windows size to something sane
+  self$get_window()$set_size(992, 744)
+
   invisible(self)
 }
 
