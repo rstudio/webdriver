@@ -104,7 +104,7 @@ element_send_keys <- function(self, private, ...) {
   "!DEBUG element_send_keys `private$id`"
   response <- private$session_private$make_request(
     "ELEMENT SEND KEYS",
-    list(value = paste(keys, collapse = "")),
+    list(value = I(paste(keys, collapse = ""))),
     params = list(element_id = private$id)
   )
 
