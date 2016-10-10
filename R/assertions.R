@@ -41,6 +41,12 @@ assert_named <- function(x) {
   )
 }
 
+assert_unnamed <- function(x) {
+  stopifnot(
+    is.null(names(x)) || all(names(x) == "")
+  )
+}
+
 assert_mouse_button <- function(x) {
   if (is.numeric(x)) {
     x <- as.integer(x)

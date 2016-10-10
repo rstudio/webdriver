@@ -90,3 +90,10 @@ parse_response <- function(response) {
     content(response, as = "text")
   }
 }
+
+
+toJSON <- function(x, ..., auto_unbox = TRUE) {
+  # I(x) is so that length-1 atomic vectors get put in [] when auto_unbox is
+  # TRUE.
+  jsonlite::toJSON(I(x), auto_unbox = auto_unbox, ...)
+}

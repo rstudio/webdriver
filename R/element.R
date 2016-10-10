@@ -285,7 +285,7 @@ element_set_value <- function(self, private, value) {
 
   private$session_private$make_request(
     "SET ELEMENT VALUE",
-    list(value = value),
+    list(value = I(value)),
     params = list(element_id = private$id)
   )
 

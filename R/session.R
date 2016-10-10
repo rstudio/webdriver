@@ -437,8 +437,8 @@ session_find_element <- function(self, private, css, link_text,
   response <- private$make_request(
     "FIND ELEMENT",
     list(
-      using = unbox(find_expr$using),
-      value = unbox(find_expr$value)
+      using = find_expr$using,
+      value = find_expr$value
     )
   )
 
@@ -589,17 +589,15 @@ session_get_all_windows <- function(self, private) {
 
 prepare_execute_args <- function(...) {
   args <- list(...)
-  for (i in seq_along(args)) {
-    x <- args[[i]]
+  assert_unnamed(args)
+
+  lapply(args, function(x) {
     if (inherits(x, "element") && inherits(x, "R6")) {
-      args[[i]] <- list(ELEMENT = unbox(x$.__enclos_env__$private$id))
-    } else if (length(x) == 1) {
-      args[[i]] <- unbox(x)
+      list(ELEMENT = unbox(x$.__enclos_env__$private$id))
     } else {
       x
     }
-  }
-  args
+  })
 }
 
 parse_script_response <- function(self, private, value) {
