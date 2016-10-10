@@ -298,8 +298,6 @@ session <- R6Class(
 )
 
 
-#' @importFrom jsonlite unbox
-
 session_initialize <- function(self, private, host, port) {
 
   "!DEBUG session_initialize `host`:`port`"
@@ -314,8 +312,8 @@ session_initialize <- function(self, private, host, port) {
     "NEW SESSION",
     list(
       desiredCapabilities = list(
-        browserName = unbox("phantomjs"),
-        driverName  = unbox("ghostdriver")
+        browserName = "phantomjs",
+        driverName  = "ghostdriver"
       )
     )
   )
@@ -367,7 +365,7 @@ session_go <- function(self, private, url) {
 
   private$make_request(
     "GO",
-    list("url" = unbox(url))
+    list("url" = url)
   )
 
   invisible(self)
@@ -483,8 +481,8 @@ session_find_elements <- function(self, private, css, link_text,
   response <- private$make_request(
     "FIND ELEMENTS",
     list(
-      using = unbox(find_expr$using),
-      value = unbox(find_expr$value)
+      using = find_expr$using,
+      value = find_expr$value
     )
   )
 
@@ -593,7 +591,7 @@ prepare_execute_args <- function(...) {
 
   lapply(args, function(x) {
     if (inherits(x, "element") && inherits(x, "R6")) {
-      list(ELEMENT = unbox(x$.__enclos_env__$private$id))
+      list(ELEMENT = x$.__enclos_env__$private$id)
     } else {
       x
     }
@@ -627,7 +625,7 @@ session_execute_script <- function(self, private, script, ...) {
 
   response <- private$make_request(
     "EXECUTE SCRIPT",
-    list(script = unbox(script), args = args)
+    list(script = script, args = args)
   )
 
   parse_script_response(self, private, response$value)
@@ -643,7 +641,7 @@ session_execute_script_async <- function(self, private, script, ...) {
 
   response <- private$make_request(
     "EXECUTE ASYNC SCRIPT",
-    list(script = unbox(script), args = args)
+    list(script = script, args = args)
   )
 
   parse_script_response(self, private, response$value)
@@ -658,7 +656,7 @@ session_set_timeout <- function(self, private, script, page_load,
     assert_timeout(script)
     private$make_request(
       "SET TIMEOUT",
-      list(type = unbox("script"), ms = unbox(script))
+      list(type = "script", ms = script)
     )
   }
 
@@ -666,7 +664,7 @@ session_set_timeout <- function(self, private, script, page_load,
     assert_timeout(page_load)
     private$make_request(
       "SET TIMEOUT",
-      list(type = unbox("page load"), ms = unbox(page_load))
+      list(type = "page load", ms = page_load)
     )
   }
 
@@ -674,7 +672,7 @@ session_set_timeout <- function(self, private, script, page_load,
     assert_timeout(implicit)
     private$make_request(
       "SET TIMEOUT",
-      list(type = unbox("implicit"), ms = unbox(implicit))
+      list(type = "implicit", ms = implicit)
     )
   }
 
@@ -690,7 +688,7 @@ session_move_mouse_to <- function(self, private, xoffset, yoffset) {
 
   private$make_request(
     "MOVE MOUSE TO",
-    list(xoffset = unbox(xoffset), yoffset = unbox(yoffset))
+    list(xoffset = xoffset, yoffset = yoffset)
   )
 
   invisible(self)
@@ -703,7 +701,7 @@ session_button <- function(self, private, type, button) {
 
   private$make_request(
     toupper(type),
-    list(button = unbox(button))
+    list(button = button)
   )
 
   invisible(self)

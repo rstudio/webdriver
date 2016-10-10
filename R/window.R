@@ -123,7 +123,7 @@ window_close <- function(self, private) {
   "!DEBUG window_close"
   private$session_private$make_request(
     "CLOSE WINDOW",
-    list(name = unbox(private$id))
+    list(name = private$id)
   )
 
   invisible(self)
@@ -141,7 +141,7 @@ window_switch_to <- function(self, private) {
   "!DEBUG window_switch_to"
   private$session_private$make_request(
     "SWITCH TO WINDOW",
-    list(name = unbox(private$id))
+    list(name = private$id)
   )
 
   invisible(self)
@@ -188,8 +188,8 @@ window_set_size <- function(self, private, width, height) {
   private$session_private$make_request(
     "SET WINDOW SIZE",
     list(
-      width = unbox(width),
-      height = unbox(height)
+      width = width,
+      height = height
     ),
     params = list(window_id = private$id)
   )
@@ -217,8 +217,8 @@ window_set_position <- function(self, private, x, y) {
   private$session_private$make_request(
     "SET WINDOW POSITION",
     list(
-      x = unbox(x),
-      y = unbox(y)
+      x = x,
+      y = y
     ),
     params = list(window_id = private$id)
   )

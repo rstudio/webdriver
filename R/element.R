@@ -223,8 +223,8 @@ element_find_element <- function(self, private, css, link_text,
   response <- private$session_private$make_request(
     "FIND ELEMENT FROM ELEMENT",
     list(
-      using = unbox(find_expr$using),
-      value = unbox(find_expr$value)
+      using = find_expr$using,
+      value = find_expr$value
     ),
     list(element_id = private$id)
   )
@@ -246,8 +246,8 @@ element_find_elements <- function(self, private, css, link_text,
   response <- private$session_private$make_request(
     "FIND ELEMENTS FROM ELEMENT",
     list(
-      using = unbox(find_expr$using),
-      value = unbox(find_expr$value)
+      using = find_expr$using,
+      value = find_expr$value
     ),
     list(element_id = private$id)
   )
@@ -427,9 +427,9 @@ element_move_mouse_to <- function(self, private, xoffset, yoffset) {
   private$session_private$make_request(
     "MOVE MOUSE TO",
     list(
-      element = unbox(private$id),
-      xoffset = unbox(xoffset),
-      yoffst = unbox(yoffset)
+      element = private$id,
+      xoffset = xoffset,
+      yoffst = yoffset
     )
   )
 

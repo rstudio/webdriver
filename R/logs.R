@@ -17,7 +17,7 @@ session_read_log <- function(self, private, type) {
 
   response <- private$make_request(
     "READ LOG",
-    list(type = unbox(type))
+    list(type = type)
   )
 
   logs <- response$value
