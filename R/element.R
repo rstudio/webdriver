@@ -109,6 +109,10 @@
 #' sends the provided keys to it. See \code{\link{key}} for a list of
 #' special keys that can be sent.
 #'
+#' \code{s$upload_file()} uploads a file to a \code{<input type="file">}
+#' element. The \code{filename} argument can contain a single filename,
+#' or multiple filenames, for file inputs that can take multiple files.
+#'
 #' \code{e$move_mouse_to()} moves the mouse cursor to the element, with
 #' the specified offsets. If one or both offsets are \code{NULL}, then
 #' it places the cursor on the center of the element. If the element is
@@ -181,6 +185,9 @@ element <- R6Class(
 
     send_keys = function(...)
       element_send_keys(self, private, ...),
+
+    upload_file = function(filename)
+      element_upload_file(self, private, filename),
 
     move_mouse_to = function(xoffset = NULL, yoffset = NULL)
       element_move_mouse_to(self, private, xoffset, yoffset),
@@ -416,6 +423,35 @@ element_clear <- function(self, private) {
   invisible(self)
 }
 
+
+element_upload_file <- function(self, private, filename) {
+  # The file upload endpoint requires a CSS selector to pick out the element,
+  # so try to contsruct a selector for this element.
+  selector <- NULL
+
+  # Attempt id
+  id <- self$get_attribute("id")
+  if (length(id) > 0 && nzchar(id))
+    selector <- paste0("#", id)
+
+  # Attempt name
+  if (is.null(selector)) {
+    name <- self$get_attribute("name")
+    if (length(name) > 0 && nzchar(name))
+      selector <- paste0("input[type=file,name=", name, "]")
+  }
+
+  if (is.null(selector))
+    stop("File input element must have an id or name attribute.")
+
+  private$session_private$make_request(
+    "UPLOAD FILE",
+    data = list(
+      selector = selector,
+      filepath = as.list(filename)
+    )
+  )
+}
 
 element_move_mouse_to <- function(self, private, xoffset, yoffset) {
 

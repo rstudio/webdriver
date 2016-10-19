@@ -150,12 +150,6 @@ are different in the standard and in Phantom.js. In Phantom.js the
 \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
 and the \sQuote{implicit} waiting time is 200ms.
 
-\code{s$upload_file()} uploads a file to a \code{<input type="file">}
-element. The \code{selector} argument is a CSS selector that picks out
-the input element. The \code{filename} argument can contain a single
-filename, or multiple filenames, for file inputs that can take multiple
-files.
-
 \code{s$move_mouse_to()} moves the mouse cursor by the specified
 offsets.
 

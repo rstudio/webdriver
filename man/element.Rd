@@ -119,6 +119,10 @@ clear its value, checkedness or text content.
 sends the provided keys to it. See \code{\link{key}} for a list of
 special keys that can be sent.
 
+\code{s$upload_file()} uploads a file to a \code{<input type="file">}
+element. The \code{filename} argument can contain a single filename,
+or multiple filenames, for file inputs that can take multiple files.
+
 \code{e$move_mouse_to()} moves the mouse cursor to the element, with
 the specified offsets. If one or both offsets are \code{NULL}, then
 it places the cursor on the center of the element. If the element is
