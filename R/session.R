@@ -142,12 +142,6 @@
 #' \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
 #' and the \sQuote{implicit} waiting time is 200ms.
 #'
-#' \code{s$upload_file()} uploads a file to a \code{<input type="file">}
-#' element. The \code{selector} argument is a CSS selector that picks out
-#' the input element. The \code{filename} argument can contain a single
-#' filename, or multiple filenames, for file inputs that can take multiple
-#' files.
-#'
 #' \code{s$move_mouse_to()} moves the mouse cursor by the specified
 #' offsets.
 #'
@@ -257,11 +251,6 @@ session <- R6Class(
     set_timeout = function(script = NULL, page_load = NULL,
       implicit = NULL)
       session_set_timeout(self, private, script, page_load, implicit),
-
-    ## File upload ---------------------------------------------
-
-    upload_file = function(selector, filename)
-      session_upload_file(self, private, selector, filename),
 
     ## Move mouse, clicks --------------------------------------
 
@@ -688,16 +677,6 @@ session_set_timeout <- function(self, private, script, page_load,
   }
 
   invisible(self)
-}
-
-session_upload_file <- function(self, private, selector, filename) {
-  private$make_request(
-    "UPLOAD FILE",
-    data = list(
-      selector = selector,
-      filepath = as.list(filename)
-    )
-  )
 }
 
 session_move_mouse_to <- function(self, private, xoffset, yoffset) {
