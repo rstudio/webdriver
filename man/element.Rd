@@ -119,7 +119,7 @@ clear its value, checkedness or text content.
 sends the provided keys to it. See \code{\link{key}} for a list of
 special keys that can be sent.
 
-\code{s$upload_file()} uploads a file to a \code{<input type="file">}
+\code{e$upload_file()} uploads a file to a \code{<input type="file">}
 element. The \code{filename} argument can contain a single filename,
 or multiple filenames, for file inputs that can take multiple files.
 
