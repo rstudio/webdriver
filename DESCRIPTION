@@ -34,11 +34,13 @@ Encoding: UTF-8
 SystemRequirements: PhantomJS (http://phantomjs.org/)
 Collate: 
     'assertions.R'
+    'chrome-driver.R'
     'download.R'
+    'endpoints.R'
+    'driver.R'
     'element-keys.R'
     'element.R'
     'utils.R'
-    'endpoints.R'
     'endpoints-chromedriver.R'
     'endpoints-phantomjs.R'
     'errors.R'
@@ -46,6 +48,7 @@ Collate:
     'logs.R'
     'on-load.R'
     'package.R'
+    'phantom-driver.R'
     'rematch.R'
     'requests.R'
     'run-chromedriver.R'

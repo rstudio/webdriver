@@ -287,17 +287,11 @@ session <- R6Class(
   ),
 
   private = list(
-
-    type = "generic",                   # driver type: phantomjs, etc.
+    session_id = NULL,
     host = NULL,
     port = NULL,
-    session_id = NULL,
-    parameters = NULL,                  # initial response from driver
-    num_log_lines_shown = 0,
-
-    make_request = function(endpoint, data = NULL, params = NULL,
-      headers = NULL)
-      session_make_request(self, private, endpoint, data, params, headers)
+    driver = NULL,                      # driver object
+    parameters = NULL                   # initial response from driver
   )
 )
 
@@ -311,18 +305,16 @@ session_initialize <- function(self, private, host, port,
   assert_string(host)
   assert_port(port)
   assert_list_null(additional_parameters)
+
+  ## First we create a generic driver, to initialize the connection.
+  ## Then we auto-detect the driver type from the response
+  private$driver <- make_driver("generic")$new(self, private)
   
   private$host <- host
   private$port <- port
-  private$num_log_lines_shown <- 0
-  desiredCapabilities <- c(
-    list(
-      browserName = unbox("phantomjs"),
-      driverName  = unbox("ghostdriver")
-    ),
-    additional_parameters
-  )
-  response <- private$make_request(
+  desiredCapabilities <- c(list(), additional_parameters)
+
+  response <- private$driver$make_request(
     "NEW SESSION",
 <<<<<<< 60ae6ed4e7ed988e538fa957ae6f7b08097dfdac
     list(
@@ -340,7 +332,7 @@ session_initialize <- function(self, private, host, port,
   private$parameters <- response$value
 
   ## Detect driver type
-  private$type <-
+  driver_type <-
     if (identical(response$value$driverName, "ghostdriver")) {
       "phantomjs"
     } else if (identical(response$value$browserName, "chrome") &&
@@ -350,16 +342,9 @@ session_initialize <- function(self, private, host, port,
       message("Unknown webdriver client, using generic interface")
       "generic"
     }
+  private$driver <- make_driver(driver_type)$new(self, private)
 
   reg.finalizer(self, function(e) e$delete(), TRUE)
-
-  ## Set implicit timeout to zero. According to the standard it should
-  ## be zero, but phantomjs uses about 200 ms
-  if (private$type == "phantomjs") self$set_timeout(implicit = 0)
-
-  ## Script timeout of chromedriver seems to be zero by default.
-  ## That's a little agressive, the standard says 30 seconds
-  if (private$type == "chromedriver") self$set_timeout(script = 30000)
 
   ## Set initial windows size to something sane
   self$get_window()$set_size(992, 744)
@@ -372,7 +357,7 @@ session_delete <- function(self, private) {
 
   "!DEBUG session_delete"
   if (! is.null(private$session_id)) {
-    response <- private$make_request(
+    response <- private$driver$make_request(
       "DELETE SESSION",
       list()
     )
@@ -385,7 +370,7 @@ session_delete <- function(self, private) {
 
 session_get_status <- function(self, private) {
   "!DEBUG session_get_status"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "STATUS"
   )
 
@@ -397,7 +382,7 @@ session_go <- function(self, private, url) {
   "!DEBUG session_go `url`"
   assert_url(url)
 
-  private$make_request(
+  private$driver$make_request(
     "GO",
     list("url" = url)
   )
@@ -409,7 +394,7 @@ session_go <- function(self, private, url) {
 session_get_url <- function(self, private) {
 
   "!DEBUG session_get_url"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET CURRENT URL"
   )
 
@@ -420,7 +405,7 @@ session_get_url <- function(self, private) {
 session_go_back <- function(self, private) {
 
   "!DEBUG session_go_back"
-  private$make_request(
+  private$driver$make_request(
     "BACK"
   )
 
@@ -431,7 +416,7 @@ session_go_back <- function(self, private) {
 session_go_forward <- function(self, private) {
 
   "!DEBUG session_go_forward"
-  private$make_request(
+  private$driver$make_request(
     "FORWARD"
   )
 
@@ -442,7 +427,7 @@ session_go_forward <- function(self, private) {
 session_refresh <- function(self, private) {
 
   "!DEBUG session_refresh"
-  private$make_request(
+  private$driver$make_request(
     "REFRESH"
   )
 
@@ -452,7 +437,7 @@ session_refresh <- function(self, private) {
 
 session_get_title <- function(self, private) {
   "!DEBUG session_get_title"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET TITLE"
   )
 
@@ -466,7 +451,7 @@ session_find_element <- function(self, private, css, link_text,
   "!DEBUG session_find_element `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "FIND ELEMENT",
     list(
       using = find_expr$using,
@@ -512,7 +497,7 @@ session_find_elements <- function(self, private, css, link_text,
   "!DEBUG session_find_elements `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "FIND ELEMENTS",
     list(
       using = find_expr$using,
@@ -533,7 +518,7 @@ session_find_elements <- function(self, private, css, link_text,
 session_get_active_element <- function(self, private) {
 
   "!DEBUG session_get_active_element"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET ACTIVE ELEMENT"
   )
 
@@ -547,7 +532,7 @@ session_get_active_element <- function(self, private) {
 
 session_get_source <- function(self, private) {
   "!DEBUG session_get_source"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET PAGE SOURCE"
   )
 
@@ -561,7 +546,7 @@ session_take_screenshot <- function(self, private, file) {
   "!DEBUG session_take_screenshot"
   if (!is.null(file)) assert_filename(file)
 
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "TAKE SCREENSHOT"
   )
 
@@ -592,7 +577,7 @@ handle_screenshot <- function(response, file) {
 session_get_window <- function(self, private) {
 
   "!DEBUG session_get_window"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET WINDOW HANDLE"
   )
 
@@ -606,7 +591,7 @@ session_get_window <- function(self, private) {
 session_get_all_windows <- function(self, private) {
 
   "!DEBUG session_get_all_windows"
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "GET WINDOW HANDLES"
   )
 
@@ -657,7 +642,7 @@ session_execute_script <- function(self, private, script, ...) {
 
   args <- prepare_execute_args(...)
 
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "EXECUTE SCRIPT",
     list(script = script, args = args)
   )
@@ -673,7 +658,7 @@ session_execute_script_async <- function(self, private, script, ...) {
 
   args <- prepare_execute_args(...)
 
-  response <- private$make_request(
+  response <- private$driver$make_request(
     "EXECUTE ASYNC SCRIPT",
     list(script = script, args = args)
   )
@@ -688,7 +673,7 @@ session_set_timeout <- function(self, private, script, page_load,
 
   if (!is.null(script)) {
     assert_timeout(script)
-    private$make_request(
+    private$driver$make_request(
       "SET TIMEOUT",
       list(type = "script", ms = script)
     )
@@ -696,7 +681,7 @@ session_set_timeout <- function(self, private, script, page_load,
 
   if (!is.null(page_load)) {
     assert_timeout(page_load)
-    private$make_request(
+    private$driver$make_request(
       "SET TIMEOUT",
       list(type = "page load", ms = page_load)
     )
@@ -704,7 +689,7 @@ session_set_timeout <- function(self, private, script, page_load,
 
   if (!is.null(implicit)) {
     assert_timeout(implicit)
-    private$make_request(
+    private$driver$make_request(
       "SET TIMEOUT",
       list(type = "implicit", ms = implicit)
     )
@@ -720,7 +705,7 @@ session_move_mouse_to <- function(self, private, xoffset, yoffset) {
   assert_count(xoffset)
   assert_count(yoffset)
 
-  private$make_request(
+  private$driver$make_request(
     "MOVE MOUSE TO",
     list(xoffset = xoffset, yoffset = yoffset)
   )
@@ -733,7 +718,7 @@ session_button <- function(self, private, type, button) {
 
   assert_mouse_button(button)
 
-  private$make_request(
+  private$driver$make_request(
     toupper(type),
     list(button = button)
   )

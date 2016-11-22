@@ -2,7 +2,7 @@
 #' @include endpoints.R
 #' @include utils.R
 
-phantomjs_new <- list(
+endpoints_phantomjs <- list(
 
   ## This is /window in the standard, /window_handle in phantomjs
   "GET WINDOW HANDLE"    = "GET    /session/:session_id/window_handle",
@@ -51,5 +51,3 @@ phantomjs_new <- list(
   "GET ELEMENT SIZE"     = "GET    /session/:session_id/element/:element_id/size",
   "SET ELEMENT VALUE"    = "POST   /session/:session_id/element/:element_id/value"
 )
-
-endpoints$phantomjs <- update_list(endpoints$generic, phantomjs_new)

@@ -8,19 +8,18 @@ default_headers <- c(
 #' @importFrom jsonlite toJSON
 #' @importFrom httr GET POST DELETE add_headers
 
-session_make_request <- function(self, private, endpoint, data, params,
-                                 headers) {
+driver_make_request <- function(self, endpoint, data, params, headers) {
 
   "!DEBUG session_make_request `endpoint`"
   headers <- update_list(default_headers, as.character(headers))
 
-  ep <- parse_endpoint(self, private, endpoint, private, params)
+  ep <- parse_endpoint(self, endpoint, params, self$session_private)
 
   url <- paste0(
     "http://",
-    private$host,
+    self$session_private$host,
     ":",
-    private$port,
+    self$session_private$port,
     ep$endpoint
   )
 
@@ -39,20 +38,18 @@ session_make_request <- function(self, private, endpoint, data, params,
     stop("Unexpected HTTP verb, internal webdriver error")
   }
 
-  report_error(self, private, response)
+  report_error(self, response)
 
   parse_response(response)
 }
 
-parse_endpoint <- function(self, private, endpoint, params, xparams) {
+parse_endpoint <- function(self, endpoint, params, xparams) {
 
-  session_endpoints <- endpoints[[private$type]]
-
-  if (! endpoint %in% names(session_endpoints)) {
+  if (! endpoint %in% names(self$endpoints)) {
     stop("Unknown webdriver API endpoint, internal error")
   }
 
-  template <- session_endpoints[[endpoint]]
+  template <- self$endpoints[[endpoint]]
 
   colons <- re_match_all(template, ":[a-zA-Z0-9_]+")$.match[[1]]
 
