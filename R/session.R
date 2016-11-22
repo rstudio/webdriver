@@ -277,6 +277,23 @@ session <- R6Class(
     read_log = function(type = "browser")
       session_read_log(self, private, type),
 
+    ## Cookies -------------------------------------------------
+
+    get_all_cookies = function()
+      session_get_all_cookies(self, private),
+
+    get_cookie = function(name)
+      session_get_cookie(self, private, name),
+
+    add_cookie = function(name, value, domain = NULL, expiry = NULL)
+      session_add_cookie(self, private, name, value, domain, expiry),
+
+    delete_cookie = function(name)
+      session_delete_cookie(self, private, name),
+
+    delete_all_cookies = function()
+      session_delete_all_cookies(self, private),
+    
     ## Polling for a condition ---------------------------------
 
     wait_for = function(expr, check_interval = 100, timeout = 3000)

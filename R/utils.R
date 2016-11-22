@@ -1,6 +1,10 @@
 
 `%||%` <- function(l, r) if (is.null(l)) r else l
 
+drop_nulls <- function(l) {
+  l [! vapply(l, is.null, TRUE)]
+}
+
 update <- function(original, new) {
 
   if (length(new)) {
