@@ -13,7 +13,7 @@
 #' e$isSelected()
 #' e$getValue()
 #' e$setValue(value)
-#' e$get_attribute(name)
+#' e$getAttribute(name)
 #' e$get_class()
 #' e$get_css_value(name)
 #' e$get_text()
@@ -73,15 +73,15 @@
 #' selected, and \code{FALSE} otherwise.
 #'
 #' \code{e$getValue()} returns the value of an input element, it is a
-#' shorthand for \code{e$get_attribute("value")}.
+#' shorthand for \code{e$getAttribute("value")}.
 #'
 #' \code{e$setValue()} sets the value of an input element, it is
 #' essentially equivalent to sending keys via \code{e$send_keys()}.
 #'
-#' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
+#' \code{e$getAttribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
 #'
-#' \code{e$get_class()} uses \code{e$get_attribute} to parse the
+#' \code{e$get_class()} uses \code{e$getAttribute} to parse the
 #' \sQuote{class} attribute into a character vector.
 #'
 #' \code{e$get_css_value()} queries a CSS property of an element.
@@ -153,8 +153,8 @@ Element <- R6Class(
     setValue = function(value)
       element_setValue(self, private, value),
 
-    get_attribute = function(name)
-      element_get_attribute(self, private, name),
+    getAttribute = function(name)
+      element_getAttribute(self, private, name),
 
     get_class = function()
       element_get_class(self, private),
@@ -282,7 +282,7 @@ element_isSelected <- function(self, private) {
 
 element_getValue <- function(self, private) {
   "!DEBUG element_getValue `private$id`"
-  self$get_attribute("value")
+  self$getAttribute("value")
 }
 
 element_setValue <- function(self, private, value) {
@@ -299,9 +299,9 @@ element_setValue <- function(self, private, value) {
   invisible(self)
 }
 
-element_get_attribute <- function(self, private, name) {
+element_getAttribute <- function(self, private, name) {
 
-  "!DEBUG element_get_attribute `private$id` `name`"
+  "!DEBUG element_getAttribute `private$id` `name`"
   assert_string(name)
 
   response <- private$session_private$makeRequest(
@@ -316,7 +316,7 @@ element_get_attribute <- function(self, private, name) {
 element_get_class <- function(self, private) {
 
   "!DEBUG element_get_class `private$id`"
-  class <- self$get_attribute("class")
+  class <- self$getAttribute("class")
   strsplit(class, "\\s+")[[1]]
 }
 
@@ -349,7 +349,7 @@ element_get_data <- function(self, private, name) {
 
   "!DEBUG element_get_data `private$id` `name`"
   assert_string(name)
-  self$get_attribute(paste0("data-", name))
+  self$getAttribute(paste0("data-", name))
 }
 
 element_get_name <- function(self, private) {
@@ -430,13 +430,13 @@ element_upload_file <- function(self, private, filename) {
   selector <- NULL
 
   # Attempt id
-  id <- self$get_attribute("id")
+  id <- self$getAttribute("id")
   if (length(id) > 0 && nzchar(id))
     selector <- paste0("#", id)
 
   # Attempt name
   if (is.null(selector)) {
-    name <- self$get_attribute("name")
+    name <- self$getAttribute("name")
     if (length(name) > 0 && nzchar(name))
       selector <- paste0("input[type=file,name=", name, "]")
   }

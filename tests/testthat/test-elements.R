@@ -10,9 +10,9 @@ test_that("Element methods are OK", {
   ## TODO: isSelected
 
   el <- s$findElement(css = ".foo")
-  expect_equal(el$get_attribute("class"), "foo bar")
+  expect_equal(el$getAttribute("class"), "foo bar")
   expect_equal(el$get_class(), c("foo", "bar"))
-  expect_null(el$get_attribute("xxx"))
+  expect_null(el$getAttribute("xxx"))
 
   expect_equal(el$get_css_value("color"), "rgba(255, 0, 0, 1)")
 
@@ -32,10 +32,10 @@ test_that("Element methods are OK", {
 
   el <- s$findElement(css = "#firstname")
   el$send_keys("Gabor")
-  expect_equal(el$get_attribute("value"), "Gabor")
+  expect_equal(el$getAttribute("value"), "Gabor")
   expect_equal(el$getValue(), "Gabor")
   el$clear()
-  expect_equal(el$get_attribute("value"), "")
+  expect_equal(el$getAttribute("value"), "")
   expect_equal(el$getValue(), "")
 
   el$setValue("Not Gabor")
