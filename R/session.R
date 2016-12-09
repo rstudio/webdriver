@@ -35,7 +35,7 @@
 #' s$mouseButtonDown(button = c("left", "middle", "right"))
 #' s$mouse_button_up(button = c("left", "middle", "right"))
 #'
-#' s$read_log(type = c("browser", "har"))
+#' s$readLog(type = c("browser", "har"))
 #' s$getLogTypes()
 #'
 #' s$wait_for(expr, check_interval = 100, timeout = 3000)
@@ -159,8 +159,8 @@
 #' \code{s$getLogTypes()} returns the log types supported by the
 #' server, in a character vector.
 #'
-#' \code{s$read_log()} returns the log messages since the last
-#' \code{read_log} call, in a data frame with columns \code{timestamp},
+#' \code{s$readLog()} returns the log messages since the last
+#' \code{readLog} call, in a data frame with columns \code{timestamp},
 #' \code{level} and \code{message}.
 #'
 #' \code{s$wait_for()} waits until a JavaScript expression evaluates
@@ -274,8 +274,8 @@ Session <- R6Class(
     getLogTypes = function()
       session_getLogTypes(self, private),
 
-    read_log = function(type = "browser")
-      session_read_log(self, private, type),
+    readLog = function(type = "browser")
+      session_readLog(self, private, type),
 
     ## Polling for a condition ---------------------------------
 

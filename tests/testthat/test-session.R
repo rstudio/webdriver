@@ -195,12 +195,12 @@ test_that("logs", {
 
   s$executeScript("console.log('Just a start');")
   s$executeScript("console.log('Hello world!');")
-  expect_equal(nrow(s$read_log()), 2)
+  expect_equal(nrow(s$readLog()), 2)
   s$executeScript("console.log('Hello again!');")
   s$executeScript(paste0(
     "console.log('A very long message, just to see how it will be ",
     "printed to the screen in R');"))
-  log <- s$read_log()
+  log <- s$readLog()
   expect_equal(nrow(log), 2)
   expect_true(is.data.frame(log))
   expect_match(log$message[1], "Hello again")
