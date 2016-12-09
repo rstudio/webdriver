@@ -31,7 +31,7 @@
 #'
 #' s$moveMouseTo(xoffset = 0, yoffset = 0)
 #' s$click(button = c("left", "middle", "right"))
-#' s$double_click(button = c("left", "middle", "right"))
+#' s$doubleClick(button = c("left", "middle", "right"))
 #' s$mouse_button_down(button = c("left", "middle", "right"))
 #' s$mouse_button_up(button = c("left", "middle", "right"))
 #'
@@ -148,7 +148,7 @@
 #' \code{s$click()} clicks the mouse at its current position, using
 #' the specified button.
 #'
-#' \code{s$double_click()} emulates a double click with the specified
+#' \code{s$doubleClick()} emulates a double click with the specified
 #' mouse button.
 #'
 #' \code{s$button_down()} emulates pressing the specified mouse button
@@ -260,8 +260,8 @@ Session <- R6Class(
     click = function(button = c("left", "middle", "right"))
       session_click(self, private, button),
 
-    double_click = function(button = c("left", "middle", "right"))
-      session_double_click(self, private, button),
+    doubleClick = function(button = c("left", "middle", "right"))
+      session_doubleClick(self, private, button),
 
     mouse_button_down = function(button = c("left", "middle", "right"))
       session_mouse_button_down(self, private, button),
@@ -712,8 +712,8 @@ session_click <- function(self, private, button) {
   session_button(self, private, "click", button)
 }
 
-session_double_click <- function(self, private, button) {
-  "!DEBUG session_double_click `button`"
+session_doubleClick <- function(self, private, button) {
+  "!DEBUG session_doubleClick `button`"
   session_button(self, private, "doubleclick", button)
 }
 
