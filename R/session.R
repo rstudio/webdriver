@@ -235,8 +235,8 @@ Session <- R6Class(
     getWindow = function()
       session_getWindow(self, private),
 
-    get_all_windows = function()
-      session_get_all_windows(self, private),
+    getAllWindows = function()
+      session_getAllWindows(self, private),
 
     ## Execute script ------------------------------------------
 
@@ -569,9 +569,9 @@ session_getWindow <- function(self, private) {
   )
 }
 
-session_get_all_windows <- function(self, private) {
+session_getAllWindows <- function(self, private) {
 
-  "!DEBUG session_get_all_windows"
+  "!DEBUG session_getAllWindows"
   response <- private$make_request(
     "GET WINDOW HANDLES"
   )

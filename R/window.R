@@ -3,7 +3,7 @@
 #'
 #' @section Usage:
 #' \preformatted{w <- s$getWindow()
-#' wlist <- s$get_all_windows()
+#' wlist <- s$getAllWindows()
 #'
 #' w$close()
 #' w$is_active()
@@ -30,7 +30,7 @@
 #'
 #' The \code{getWindow} method of a \code{\link{Session}} object
 #' returns the current browser window as a \code{window} object.
-#' The \code{get_all_windows} method returns a list of window objects,
+#' The \code{getAllWindows} method returns a list of window objects,
 #' all browser windows.
 #'
 #' \code{w$close()} closes the window.
