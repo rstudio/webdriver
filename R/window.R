@@ -12,7 +12,7 @@
 #' w$getSize()
 #' w$setSize(width, height)
 #' w$getPosition()
-#' w$set_position(x, y)
+#' w$setPosition(x, y)
 #' }
 #'
 #' @section Arguments:
@@ -53,7 +53,7 @@
 #' \code{list(x = 0, y = 0)}, and it is included to have a complete
 #' impelementation of the WebDriver standard.
 #'
-#' \code{w$set_position(x, y)} sets the position of the window on the
+#' \code{w$setPosition(x, y)} sets the position of the window on the
 #' screen. Phantom.js being headless, it has no effect, and it is included
 #' to have a complete implementation of the WebDriver standard.
 #'
@@ -94,8 +94,8 @@ Window <- R6Class(
     getPosition = function()
       window_getPosition(self, private),
 
-    set_position = function(x, y)
-      window_set_position(self, private, x, y)
+    setPosition = function(x, y)
+      window_setPosition(self, private, x, y)
   ),
   private = list(
     id = NULL,
@@ -208,9 +208,9 @@ window_getPosition <- function(self, private) {
   response$value
 }
 
-window_set_position <- function(self, private, x, y) {
+window_setPosition <- function(self, private, x, y) {
 
-  "!DEBUG window_set_position"
+  "!DEBUG window_setPosition"
   assert_window_position(x)
   assert_window_position(y)
 
