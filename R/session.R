@@ -32,7 +32,7 @@
 #' s$moveMouseTo(xoffset = 0, yoffset = 0)
 #' s$click(button = c("left", "middle", "right"))
 #' s$doubleClick(button = c("left", "middle", "right"))
-#' s$mouse_button_down(button = c("left", "middle", "right"))
+#' s$mouseButtonDown(button = c("left", "middle", "right"))
 #' s$mouse_button_up(button = c("left", "middle", "right"))
 #'
 #' s$read_log(type = c("browser", "har"))
@@ -263,8 +263,8 @@ Session <- R6Class(
     doubleClick = function(button = c("left", "middle", "right"))
       session_doubleClick(self, private, button),
 
-    mouse_button_down = function(button = c("left", "middle", "right"))
-      session_mouse_button_down(self, private, button),
+    mouseButtonDown = function(button = c("left", "middle", "right"))
+      session_mouseButtonDown(self, private, button),
 
     mouse_button_up = function(button = c("left", "middle", "right"))
       session_mouse_button_up(self, private, button),
@@ -717,8 +717,8 @@ session_doubleClick <- function(self, private, button) {
   session_button(self, private, "doubleclick", button)
 }
 
-session_mouse_button_down <- function(self, private, button) {
-  "!DEBUG session_mouse_button_down `button`"
+session_mouseButtonDown <- function(self, private, button) {
+  "!DEBUG session_mouseButtonDown `button`"
   session_button(self, private, "buttondown", button)
 }
 
