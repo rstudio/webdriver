@@ -61,7 +61,7 @@ test_that("element rect", {
   s$go(server$url("/elements.html"))
 
   el <- s$findElement(css = ".foo")
-  rect <- el$get_rect()
+  rect <- el$getRect()
   expect_equal(names(rect), c("x", "y", "width", "height"))
 })
 

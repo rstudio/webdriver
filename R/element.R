@@ -19,7 +19,7 @@
 #' e$getText()
 #' e$getName()
 #' e$getData(name)
-#' e$get_rect()
+#' e$getRect()
 #' e$is_enabled()
 #' e$click()
 #' e$clear()
@@ -92,7 +92,7 @@
 #'
 #' \code{e$getData()} is a shorthand for querying \code{data-*} attributes.
 #'
-#' \code{e$get_rect()} returns the \sQuote{rectangle} of an element. It is
+#' \code{e$getRect()} returns the \sQuote{rectangle} of an element. It is
 #' named list with components \code{x}, \code{y}, \code{height} and
 #' \code{width}.
 #'
@@ -171,8 +171,8 @@ Element <- R6Class(
     getData = function(name)
       element_getData(self, private, name),
 
-    get_rect = function()
-      element_get_rect(self, private),
+    getRect = function()
+      element_getRect(self, private),
 
     is_enabled = function()
       element_id_enabled(self, private),
@@ -366,9 +366,9 @@ element_getName <- function(self, private) {
 ## GET ELEMENT RECT is not implemented by phantomjs, but we can
 ## emulate it with two other endpoints: location and size
 
-element_get_rect <- function(self, private) {
+element_getRect <- function(self, private) {
 
-  "!DEBUG element_get_rect `private$id`"
+  "!DEBUG element_getRect `private$id`"
   response1 <- private$session_private$makeRequest(
     "GET ELEMENT LOCATION",
     params = list(element_id = private$id)
