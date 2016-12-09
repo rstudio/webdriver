@@ -109,7 +109,7 @@
 #' sends the provided keys to it. See \code{\link{key}} for a list of
 #' special keys that can be sent.
 #'
-#' \code{e$upload_file()} uploads a file to a \code{<input type="file">}
+#' \code{e$uploadFile()} uploads a file to a \code{<input type="file">}
 #' element. The \code{filename} argument can contain a single filename,
 #' or multiple filenames, for file inputs that can take multiple files.
 #'
@@ -186,8 +186,8 @@ Element <- R6Class(
     sendKeys = function(...)
       element_sendKeys(self, private, ...),
 
-    upload_file = function(filename)
-      element_upload_file(self, private, filename),
+    uploadFile = function(filename)
+      element_uploadFile(self, private, filename),
 
     moveMouseTo = function(xoffset = NULL, yoffset = NULL)
       element_moveMouseTo(self, private, xoffset, yoffset),
@@ -424,7 +424,7 @@ element_clear <- function(self, private) {
 }
 
 
-element_upload_file <- function(self, private, filename) {
+element_uploadFile <- function(self, private, filename) {
   # The file upload endpoint requires a CSS selector to pick out the element,
   # so try to contsruct a selector for this element.
   selector <- NULL
