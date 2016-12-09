@@ -8,10 +8,10 @@ default_headers <- c(
 #' @importFrom jsonlite toJSON
 #' @importFrom httr GET POST DELETE add_headers
 
-session_make_request <- function(self, private, endpoint, data, params,
+session_makeRequest <- function(self, private, endpoint, data, params,
                                  headers) {
 
-  "!DEBUG session_make_request `endpoint`"
+  "!DEBUG session_makeRequest `endpoint`"
   headers <- update(default_headers, as.character(headers))
 
   ep <- parse_endpoint(endpoint, private, params)

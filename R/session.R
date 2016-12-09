@@ -291,9 +291,9 @@ Session <- R6Class(
     parameters = NULL,
     numLogLinesShown = 0,
 
-    make_request = function(endpoint, data = NULL, params = NULL,
+    makeRequest = function(endpoint, data = NULL, params = NULL,
       headers = NULL)
-      session_make_request(self, private, endpoint, data, params, headers)
+      session_makeRequest(self, private, endpoint, data, params, headers)
   )
 )
 
@@ -308,7 +308,7 @@ session_initialize <- function(self, private, host, port) {
   private$port <- port
   private$numLogLinesShown <- 0
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "NEW SESSION",
     list(
       desiredCapabilities = list(
@@ -338,7 +338,7 @@ session_delete <- function(self, private) {
 
   "!DEBUG session_delete"
   if (! is.null(private$session_id)) {
-    response <- private$make_request(
+    response <- private$makeRequest(
       "DELETE SESSION",
       list()
     )
@@ -351,7 +351,7 @@ session_delete <- function(self, private) {
 
 session_getStatus <- function(self, private) {
   "!DEBUG session_getStatus"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "STATUS"
   )
 
@@ -363,7 +363,7 @@ session_go <- function(self, private, url) {
   "!DEBUG session_go `url`"
   assert_url(url)
 
-  private$make_request(
+  private$makeRequest(
     "GO",
     list("url" = url)
   )
@@ -375,7 +375,7 @@ session_go <- function(self, private, url) {
 session_getUrl <- function(self, private) {
 
   "!DEBUG session_getUrl"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET CURRENT URL"
   )
 
@@ -386,7 +386,7 @@ session_getUrl <- function(self, private) {
 session_goBack <- function(self, private) {
 
   "!DEBUG session_goBack"
-  private$make_request(
+  private$makeRequest(
     "BACK"
   )
 
@@ -397,7 +397,7 @@ session_goBack <- function(self, private) {
 session_goForward <- function(self, private) {
 
   "!DEBUG session_goForward"
-  private$make_request(
+  private$makeRequest(
     "FORWARD"
   )
 
@@ -408,7 +408,7 @@ session_goForward <- function(self, private) {
 session_refresh <- function(self, private) {
 
   "!DEBUG session_refresh"
-  private$make_request(
+  private$makeRequest(
     "REFRESH"
   )
 
@@ -418,7 +418,7 @@ session_refresh <- function(self, private) {
 
 session_getTitle <- function(self, private) {
   "!DEBUG session_getTitle"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET TITLE"
   )
 
@@ -432,7 +432,7 @@ session_findElement <- function(self, private, css, link_text,
   "!DEBUG session_findElement `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "FIND ELEMENT",
     list(
       using = find_expr$using,
@@ -478,7 +478,7 @@ session_findElements <- function(self, private, css, link_text,
   "!DEBUG session_findElements `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "FIND ELEMENTS",
     list(
       using = find_expr$using,
@@ -499,7 +499,7 @@ session_findElements <- function(self, private, css, link_text,
 session_getActiveElement <- function(self, private) {
 
   "!DEBUG session_getActiveElement"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET ACTIVE ELEMENT"
   )
 
@@ -513,7 +513,7 @@ session_getActiveElement <- function(self, private) {
 
 session_getSource <- function(self, private) {
   "!DEBUG session_getSource"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET PAGE SOURCE"
   )
 
@@ -527,7 +527,7 @@ session_takeScreenshot <- function(self, private, file) {
   "!DEBUG session_takeScreenshot"
   if (!is.null(file)) assert_filename(file)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "TAKE SCREENSHOT"
   )
 
@@ -558,7 +558,7 @@ handle_screenshot <- function(response, file) {
 session_getWindow <- function(self, private) {
 
   "!DEBUG session_getWindow"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET WINDOW HANDLE"
   )
 
@@ -572,7 +572,7 @@ session_getWindow <- function(self, private) {
 session_getAllWindows <- function(self, private) {
 
   "!DEBUG session_getAllWindows"
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET WINDOW HANDLES"
   )
 
@@ -623,7 +623,7 @@ session_executeScript <- function(self, private, script, ...) {
 
   args <- prepare_execute_args(...)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "EXECUTE SCRIPT",
     list(script = script, args = args)
   )
@@ -639,7 +639,7 @@ session_executeScriptAsync <- function(self, private, script, ...) {
 
   args <- prepare_execute_args(...)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "EXECUTE ASYNC SCRIPT",
     list(script = script, args = args)
   )
@@ -654,7 +654,7 @@ session_setTimeout <- function(self, private, script, page_load,
 
   if (!is.null(script)) {
     assert_timeout(script)
-    private$make_request(
+    private$makeRequest(
       "SET TIMEOUT",
       list(type = "script", ms = script)
     )
@@ -662,7 +662,7 @@ session_setTimeout <- function(self, private, script, page_load,
 
   if (!is.null(page_load)) {
     assert_timeout(page_load)
-    private$make_request(
+    private$makeRequest(
       "SET TIMEOUT",
       list(type = "page load", ms = page_load)
     )
@@ -670,7 +670,7 @@ session_setTimeout <- function(self, private, script, page_load,
 
   if (!is.null(implicit)) {
     assert_timeout(implicit)
-    private$make_request(
+    private$makeRequest(
       "SET TIMEOUT",
       list(type = "implicit", ms = implicit)
     )
@@ -686,7 +686,7 @@ session_moveMouseTo <- function(self, private, xoffset, yoffset) {
   assert_count(xoffset)
   assert_count(yoffset)
 
-  private$make_request(
+  private$makeRequest(
     "MOVE MOUSE TO",
     list(xoffset = xoffset, yoffset = yoffset)
   )
@@ -699,7 +699,7 @@ session_button <- function(self, private, type, button) {
 
   assert_mouse_button(button)
 
-  private$make_request(
+  private$makeRequest(
     toupper(type),
     list(button = button)
   )

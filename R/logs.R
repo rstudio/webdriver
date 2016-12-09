@@ -1,7 +1,7 @@
 
 session_getLogTypes <- function(self, private) {
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET LOG TYPES"
   )
 
@@ -15,7 +15,7 @@ session_readLog <- function(self, private, type) {
   "!DEBUG session_readLog `type`"
   assert_string(type)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "READ LOG",
     list(type = type)
   )
