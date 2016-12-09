@@ -15,7 +15,7 @@
 #' s$goBack()
 #' s$goForward()
 #' s$refresh()
-#' s$get_title()
+#' s$getTitle()
 #' s$get_source()
 #' s$take_screenshot(file = NULL)
 #'
@@ -99,7 +99,7 @@
 #'
 #' \code{s$refresh()} is like the web browser's refresh button.
 #'
-#' \code{s$get_title()} returns the title of the current page.
+#' \code{s$getTitle()} returns the title of the current page.
 #'
 #' \code{s$get_source()} returns the complete HTML source of a page,
 #' in a character scalar.
@@ -206,8 +206,8 @@ Session <- R6Class(
     refresh = function()
       session_refresh(self, private),
 
-    get_title = function()
-      session_get_title(self, private),
+    getTitle = function()
+      session_getTitle(self, private),
 
     get_source = function()
       session_get_source(self, private),
@@ -416,8 +416,8 @@ session_refresh <- function(self, private) {
 }
 
 
-session_get_title <- function(self, private) {
-  "!DEBUG session_get_title"
+session_getTitle <- function(self, private) {
+  "!DEBUG session_getTitle"
   response <- private$make_request(
     "GET TITLE"
   )

@@ -41,8 +41,8 @@ test_that("basic operations", {
 
   ## $refresh, TODO: this would need a web app...
 
-  ## $get_title
-  expect_equal(s$get_title(), "check")
+  ## $getTitle
+  expect_equal(s$getTitle(), "check")
 
   ## $get_source
   expect_equal(
