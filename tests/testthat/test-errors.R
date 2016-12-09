@@ -16,7 +16,7 @@ test_that("no window", {
   expect_error(s$refresh(), "Window handle/name is invalid")
   expect_error(s$getTitle(), "Window handle/name is invalid")
   expect_error(s$getSource(), "Window handle/name is invalid")
-  expect_error(s$take_screenshot(), "Window handle/name is invalid")
+  expect_error(s$takeScreenshot(), "Window handle/name is invalid")
 
   ## This one does not give a proper error message
   expect_error(s$find_element(css = "<p>"), "WebDriver error")

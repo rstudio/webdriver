@@ -60,7 +60,7 @@ test_that("screenshot", {
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/check.html"))
 
-  s$take_screenshot(file = tmp <- tempfile())
+  s$takeScreenshot(file = tmp <- tempfile())
   on.exit(unlink(tmp), add = TRUE)
   expect_true(file.exists(tmp))
   expect_true(file.info(tmp)$size > 0)

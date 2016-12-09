@@ -17,7 +17,7 @@
 #' s$refresh()
 #' s$getTitle()
 #' s$getSource()
-#' s$take_screenshot(file = NULL)
+#' s$takeScreenshot(file = NULL)
 #'
 #' s$find_element(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
@@ -104,7 +104,7 @@
 #' \code{s$getSource()} returns the complete HTML source of a page,
 #' in a character scalar.
 #'
-#' \code{s$take_screenshot()} takes a screenshot of the current page.
+#' \code{s$takeScreenshot()} takes a screenshot of the current page.
 #' You can save it to a PNG file with the \code{file} argument, or
 #' show it on the graphics device (if \code{file} is \code{NULL}).
 #'
@@ -212,8 +212,8 @@ Session <- R6Class(
     getSource = function()
       session_getSource(self, private),
 
-    take_screenshot = function(file = NULL)
-      session_take_screenshot(self, private, file = file),
+    takeScreenshot = function(file = NULL)
+      session_takeScreenshot(self, private, file = file),
 
     ## Elements ------------------------------------------------
 
@@ -522,9 +522,9 @@ session_getSource <- function(self, private) {
 
 #' @importFrom showimage show_image
 
-session_take_screenshot <- function(self, private, file) {
+session_takeScreenshot <- function(self, private, file) {
 
-  "!DEBUG session_take_screenshot"
+  "!DEBUG session_takeScreenshot"
   if (!is.null(file)) assert_filename(file)
 
   response <- private$make_request(
