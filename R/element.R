@@ -24,7 +24,7 @@
 #' e$click()
 #' e$clear()
 #' e$send_keys(...)
-#' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
+#' e$moveMouseTo(xoffset = NULL, yoffset = NULL)
 #'
 #' e$executeScript(script, ...)
 #' e$executeScriptAsync(script, ...)
@@ -113,7 +113,7 @@
 #' element. The \code{filename} argument can contain a single filename,
 #' or multiple filenames, for file inputs that can take multiple files.
 #'
-#' \code{e$move_mouse_to()} moves the mouse cursor to the element, with
+#' \code{e$moveMouseTo()} moves the mouse cursor to the element, with
 #' the specified offsets. If one or both offsets are \code{NULL}, then
 #' it places the cursor on the center of the element. If the element is
 #' not on the screen, then is scrolls it into the screen first.
@@ -189,8 +189,8 @@ element <- R6Class(
     upload_file = function(filename)
       element_upload_file(self, private, filename),
 
-    move_mouse_to = function(xoffset = NULL, yoffset = NULL)
-      element_move_mouse_to(self, private, xoffset, yoffset),
+    moveMouseTo = function(xoffset = NULL, yoffset = NULL)
+      element_moveMouseTo(self, private, xoffset, yoffset),
 
     executeScript = function(script, ...)
       element_executeScript(self, private, script, ...),
@@ -453,9 +453,9 @@ element_upload_file <- function(self, private, filename) {
   )
 }
 
-element_move_mouse_to <- function(self, private, xoffset, yoffset) {
+element_moveMouseTo <- function(self, private, xoffset, yoffset) {
 
-  "!DEBUG element_move_mouse_to `private$id` `xoffset`, `yoffset`"
+  "!DEBUG element_moveMouseTo `private$id` `xoffset`, `yoffset`"
 
   if (!is.null(xoffset)) assert_count(xoffset)
   if (!is.null(yoffset)) assert_count(yoffset)

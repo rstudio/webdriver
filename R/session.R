@@ -29,7 +29,7 @@
 #'
 #' s$setTimeout(script = NULL, page_load = NULL, implicit = NULL)
 #'
-#' s$move_mouse_to(xoffset = 0, yoffset = 0)
+#' s$moveMouseTo(xoffset = 0, yoffset = 0)
 #' s$click(button = c("left", "middle", "right"))
 #' s$double_click(button = c("left", "middle", "right"))
 #' s$mouse_button_down(button = c("left", "middle", "right"))
@@ -142,7 +142,7 @@
 #' \sQuote{script} and \sQuote{page load} timeouts are set to infinity,
 #' and the \sQuote{implicit} waiting time is 200ms.
 #'
-#' \code{s$move_mouse_to()} moves the mouse cursor by the specified
+#' \code{s$moveMouseTo()} moves the mouse cursor by the specified
 #' offsets.
 #'
 #' \code{s$click()} clicks the mouse at its current position, using
@@ -254,8 +254,8 @@ Session <- R6Class(
 
     ## Move mouse, clicks --------------------------------------
 
-    move_mouse_to = function(xoffset, yoffset)
-      session_move_mouse_to(self, private, xoffset, yoffset),
+    moveMouseTo = function(xoffset, yoffset)
+      session_moveMouseTo(self, private, xoffset, yoffset),
 
     click = function(button = c("left", "middle", "right"))
       session_click(self, private, button),
@@ -679,9 +679,9 @@ session_setTimeout <- function(self, private, script, page_load,
   invisible(self)
 }
 
-session_move_mouse_to <- function(self, private, xoffset, yoffset) {
+session_moveMouseTo <- function(self, private, xoffset, yoffset) {
 
-  "!DEBUG session_move_mouse_to"
+  "!DEBUG session_moveMouseTo"
 
   assert_count(xoffset)
   assert_count(yoffset)
