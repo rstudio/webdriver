@@ -5,7 +5,7 @@
 #' It needs phantom.js running in WebDriver mode.
 #'
 #' @section Usage:
-#' \preformatted{s <- session$new(host = "127.0.0.1", port = 8910)
+#' \preformatted{s <- Session$new(host = "127.0.0.1", port = 8910)
 #'
 #' s$delete()
 #' s$status()
@@ -43,7 +43,7 @@
 #'
 #' @section Arguments:
 #'\describe{
-#'   \item{s}{A \code{session} object.}
+#'   \item{s}{A \code{Session} object.}
 #'   \item{host}{Host name of phantom.js.}
 #'   \item{port}{Port of phantom.js.}
 #'   \item{url}{URL to nagivate to.}
@@ -81,7 +81,7 @@
 #'
 #' @section Details:
 #'
-#' \code{session$new()} creates a new WebDriver session.
+#' \code{Session$new()} creates a new WebDriver session.
 #'
 #' \code{s$delete()} deletes a WebDriver session.
 #'
@@ -173,13 +173,13 @@
 #' \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
 #'
 #' @importFrom R6 R6Class
-#' @name session
+#' @name Session
 NULL
 
 #' @export
 
-session <- R6Class(
-  "session",
+Session <- R6Class(
+  "Session",
   public = list(
 
     initialize = function(host = "127.0.0.1", port = 8910)

@@ -3,7 +3,7 @@ context("element")
 
 test_that("element methods are OK", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
@@ -52,11 +52,11 @@ test_that("element methods are OK", {
 })
 
 test_that("move mouse cursor", {
-  ## TODO: we need session$click to test this
+  ## TODO: we need Session$click to test this
 })
 
 test_that("element rect", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
@@ -66,7 +66,7 @@ test_that("element rect", {
 })
 
 test_that("sending special keys", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 

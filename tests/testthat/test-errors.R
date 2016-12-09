@@ -3,7 +3,7 @@ context("errors")
 
 test_that("no window", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   ## Close the window
@@ -24,7 +24,7 @@ test_that("no window", {
 
 test_that("no window", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$get_window()$close()
@@ -34,7 +34,7 @@ test_that("no window", {
 
 test_that("no elements", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   expect_error(s$find_element(css = "foobar"), "Unable to find element")
@@ -42,7 +42,7 @@ test_that("no elements", {
 
 test_that("is_selected for non-selectable elements", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/check.html"))

@@ -1,13 +1,13 @@
 
-context("session")
+context("Session")
 
 test_that("can create a session", {
-  expect_silent(s <- session$new(port = phantom$port))
+  expect_silent(s <- Session$new(port = phantom$port))
   expect_silent(s$delete())
 })
 
 test_that("can go to URL", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/check.html"))
@@ -17,7 +17,7 @@ test_that("can go to URL", {
 
 test_that("basic operations", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   ## $go
@@ -56,7 +56,7 @@ test_that("basic operations", {
 
 test_that("screenshot", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/check.html"))
 
@@ -68,7 +68,7 @@ test_that("screenshot", {
 
 test_that("find elements", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
@@ -94,7 +94,7 @@ test_that("find elements", {
 })
 
 test_that("execute script (sync)", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/elements.html"))
@@ -117,7 +117,7 @@ test_that("execute script (sync)", {
 })
 
 test_that("execute script (async)", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/elements.html"))
@@ -129,7 +129,7 @@ test_that("execute script (async)", {
 })
 
 test_that("execute script with element arguments", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/elements.html"))
@@ -151,7 +151,7 @@ test_that("execute script with element arguments", {
 })
 
 test_that("execute script and return elements", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/elements.html"))
@@ -180,7 +180,7 @@ test_that("execute script and return elements", {
 })
 
 test_that("move mouse cursor", {
-  ## TODO: we need session$click to test this
+  ## TODO: we need Session$click to test this
 })
 
 test_that("mouse clicks", {
@@ -188,7 +188,7 @@ test_that("mouse clicks", {
 })
 
 test_that("logs", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/elements.html"))

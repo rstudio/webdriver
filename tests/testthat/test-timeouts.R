@@ -5,7 +5,7 @@ context("timeouts")
 ## sure that the supplied script takes longer.
 
 test_that("script timeout", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/check.html"))
 
@@ -36,7 +36,7 @@ test_that("page load timeout", {
   skip_on_cran()
   skip_if_offline()
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   ## Cannot connect if page load is low
@@ -52,7 +52,7 @@ test_that("page load timeout", {
 ## 200 ms wait, we find it already.
 
 test_that("implicit timeout", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   skip("FIXME: does not work, maybe phantom waits for the page to load")

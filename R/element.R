@@ -33,7 +33,7 @@
 #' @section Arguments:
 #' \describe{
 #'   \item{e}{An \code{element} object.}
-#'   \item{s}{A \code{\link{session}} object.}
+#'   \item{s}{A \code{\link{Session}} object.}
 #'   \item{css}{Css selector to find an HTML element.}
 #'   \item{link_text}{Find \code{<a>} HTML elements based on their
 #'     \code{innerText}.}
@@ -57,7 +57,7 @@
 #' @section Details:
 #'
 #' To create \code{element} objects, you need to use the \code{find_element}
-#' (or \code{find_element}) method of a \code{\link{session}} object.
+#' (or \code{find_element}) method of a \code{\link{Session}} object.
 #'
 #' \code{e$find_element()} finds the \emph{next} HTML element from the
 #' current one. You need to specify one of the \code{css}, \code{link_text},
@@ -119,7 +119,7 @@
 #' not on the screen, then is scrolls it into the screen first.
 #'
 #' \code{e$execute_script()} and \code{e$execute_script_async()}
-#' call the method of the same name on the \code{\link{session}} object.
+#' call the method of the same name on the \code{\link{Session}} object.
 #' The first argument of the script (\code{arguments[0]}) will always
 #' hold the element object itself.
 #'

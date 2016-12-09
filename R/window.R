@@ -17,7 +17,7 @@
 #'
 #' @section Arguments:
 #' \describe{
-#'   \item{s}{A \code{\link{session}} object.}
+#'   \item{s}{A \code{\link{Session}} object.}
 #'   \item{w}{A \code{window} object.}
 #'   \item{wlist}{A list of \code{window} objects.}
 #'   \item{width}{Integer scalar, requested width of the window.}
@@ -28,7 +28,7 @@
 #'
 #' @section Details:
 #'
-#' The \code{get_window} method of a \code{\link{session}} object
+#' The \code{get_window} method of a \code{\link{Session}} object
 #' returns the current browser window as a \code{window} object.
 #' The \code{get_all_windows} method returns a list of window objects,
 #' all browser windows.

@@ -3,7 +3,7 @@ context("windows")
 
 test_that("window methods are OK", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   w1 <- s$get_window()

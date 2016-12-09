@@ -3,7 +3,7 @@ context("waiting for a condition")
 
 test_that("waiting for a condition", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   ## This will add class 'red' to '#me', but only after 500ms
