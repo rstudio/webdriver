@@ -26,10 +26,10 @@ test_that("basic operations", {
   ## $getUrl
   expect_equal(s$getUrl(), server$url("/check.html"))
 
-  ## $go_back
+  ## $goBack
   s$go(server$url("/check2.html"))
   expect_match(s$get_source(), "Hello again")
-  s$go_back()
+  s$goBack()
   expect_equal(s$getUrl(), server$url("/check.html"))
   expect_match(s$get_source(), "Hello there")
 
@@ -37,7 +37,7 @@ test_that("basic operations", {
   s$go_forward()
   expect_equal(s$getUrl(), server$url("/check2.html"))
   expect_match(s$get_source(), "Hello again")
-  s$go_back()
+  s$goBack()
 
   ## $refresh, TODO: this would need a web app...
 

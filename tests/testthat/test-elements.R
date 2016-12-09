@@ -28,7 +28,7 @@ test_that("element methods are OK", {
   el <- s$find_element(css = ".clickme a")
   el$click()
   expect_equal(s$getUrl(), server$url("/check.html"))
-  s$go_back()
+  s$goBack()
 
   el <- s$find_element(css = "#firstname")
   el$send_keys("Gabor")
