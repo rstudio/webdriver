@@ -29,7 +29,7 @@ session_wait_for <- function(self, private, expr, check_interval,
          timeout: ' %+% str(timeout) %+% ' }
      );'
 
-  ret <- self$execute_script_async(paste0(waitjs, js))
+  ret <- self$executeScriptAsync(paste0(waitjs, js))
 
   switch(ret, "error" = NA, "true" = TRUE, "timeout" = FALSE, NA)
 }

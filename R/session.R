@@ -25,7 +25,7 @@
 #'     partial_link_text = NULL, xpath = NULL)
 #'
 #' s$execute_script(script, ...)
-#' s$execute_script_async(script, ...)
+#' s$executeScriptAsync(script, ...)
 #'
 #' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
 #'
@@ -55,7 +55,7 @@
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
 #'   \item{script}{For \code{execute_script} and
-#'     \code{execute_script_async}. JavaScript code to execute. It will be
+#'     \code{executeScriptAsync}. JavaScript code to execute. It will be
 #'     placed in the body of a function.}
 #'   \item{...}{Arguments to the script, they will be put in a list
 #'     called arguments. \code{\link{element}} objects are automatically
@@ -124,7 +124,7 @@
 #' converted to \code{\link{element}} objects, even if they are inside
 #' a list (or list of list, etc.).
 #'
-#' \code{s$execute_script_async()} is similar, for asynchronous execution.
+#' \code{s$executeScriptAsync()} is similar, for asynchronous execution.
 #' It place the script in a body of a function, and then calls the function
 #' with the additional arguments and a callback function as the last
 #' argument. The script must call this callback function when it
@@ -243,8 +243,8 @@ Session <- R6Class(
     execute_script = function(script, ...)
       session_execute_script(self, private, script, ...),
 
-    execute_script_async = function(script, ...)
-      session_execute_script_async(self, private, script, ...),
+    executeScriptAsync = function(script, ...)
+      session_executeScriptAsync(self, private, script, ...),
 
     ## Timeouts ------------------------------------------------
 
@@ -631,9 +631,9 @@ session_execute_script <- function(self, private, script, ...) {
   parse_script_response(self, private, response$value)
 }
 
-session_execute_script_async <- function(self, private, script, ...) {
+session_executeScriptAsync <- function(self, private, script, ...) {
 
-  "!DEBUG session_execute_script_async"
+  "!DEBUG session_executeScriptAsync"
 
   assert_string(script)
 

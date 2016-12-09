@@ -17,14 +17,14 @@ test_that("script timeout", {
   ## It runs fine if the timeout is large enough
   s$set_timeout(script = 200)
   expect_equal(
-    s$execute_script_async(script),
+    s$executeScriptAsync(script),
     42
   )
 
   ## But fails if the timeout is small
   s$set_timeout(script = 50)
   expect_error(
-    s$execute_script_async(script),
+    s$executeScriptAsync(script),
     "Timed out waiting for asyncrhonous script result"
   )
 })

@@ -27,7 +27,7 @@
 #' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 #'
 #' e$execute_script(script, ...)
-#' e$execute_script_async(script, ...)
+#' e$executeScriptAsync(script, ...)
 #' }
 #'
 #' @section Arguments:
@@ -51,7 +51,7 @@
 #'   \item{value}{Value to set, a character string.}
 #'   \item{...}{For \code{send_keys} the keys to send, see
 #'     \code{\link{key}}. For \code{execute_script} and
-#'     \code{execute_script_async} argument to supply to the script.}
+#'     \code{executeScriptAsync} argument to supply to the script.}
 #' }
 #'
 #' @section Details:
@@ -118,7 +118,7 @@
 #' it places the cursor on the center of the element. If the element is
 #' not on the screen, then is scrolls it into the screen first.
 #'
-#' \code{e$execute_script()} and \code{e$execute_script_async()}
+#' \code{e$execute_script()} and \code{e$executeScriptAsync()}
 #' call the method of the same name on the \code{\link{Session}} object.
 #' The first argument of the script (\code{arguments[0]}) will always
 #' hold the element object itself.
@@ -195,8 +195,8 @@ element <- R6Class(
     execute_script = function(script, ...)
       element_execute_script(self, private, script, ...),
 
-    execute_script_async = function(script, ...)
-      element_execute_script_async(self, private, script, ...)
+    executeScriptAsync = function(script, ...)
+      element_executeScriptAsync(self, private, script, ...)
   ),
 
   private = list(
@@ -477,7 +477,7 @@ element_execute_script <- function(self, private, script, ...) {
   private$session$execute_script(script, self, ...)
 }
 
-element_execute_script_async <- function(self, private, script, ...) {
-  "!DEBUG element_execute_script_async `private$id`"
+element_executeScriptAsync <- function(self, private, script, ...) {
+  "!DEBUG element_executeScriptAsync `private$id`"
   private$session$execute_script(script, self, ...)
 }

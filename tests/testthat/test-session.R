@@ -123,7 +123,7 @@ test_that("execute script (async)", {
   s$go(server$url("/elements.html"))
 
   expect_equal(
-    s$execute_script_async("arguments[arguments.length - 1](42);"),
+    s$executeScriptAsync("arguments[arguments.length - 1](42);"),
     42
   )
 })
