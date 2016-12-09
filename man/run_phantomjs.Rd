@@ -18,4 +18,3 @@ A list of \code{process}, the \code{processx::process} object,
 Throws and error if phantom cannot be found, or cannot be started.
 It works with a timeout of five seconds.
 }
-

@@ -17,4 +17,3 @@ element_sendKeys(self, private, ...)
 Send keys to element
 }
 \keyword{internal}
-

@@ -177,8 +177,8 @@ expression evaluated to \code{true}, possible after some waiting. If
 the expression has a syntax error or a runtime error happens, it
 returns \code{NA}.
 }
+
 \seealso{
 The WebDriver standard at
 \url{https://w3c.github.io/webdriver/webdriver-spec.html}.
 }
-
