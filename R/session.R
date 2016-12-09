@@ -27,7 +27,7 @@
 #' s$executeScript(script, ...)
 #' s$executeScriptAsync(script, ...)
 #'
-#' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
+#' s$setTimeout(script = NULL, page_load = NULL, implicit = NULL)
 #'
 #' s$move_mouse_to(xoffset = 0, yoffset = 0)
 #' s$click(button = c("left", "middle", "right"))
@@ -60,7 +60,7 @@
 #'   \item{...}{Arguments to the script, they will be put in a list
 #'     called arguments. \code{\link{element}} objects are automatically
 #'     transformed to DOM element in JavaScript.}
-#'   \item{script}{For \code{set_timeout}. Script execution timeout,
+#'   \item{script}{For \code{setTimeout}. Script execution timeout,
 #'     in milliseconds. More below.}
 #'   \item{page_load}{Page load timeout, in milliseconds. More below.}
 #'   \item{implicit}{Implicit wait before calls that find elements, in
@@ -133,7 +133,7 @@
 #' \code{\link{element}} objects, even if they are inside a list (or list
 #' of list, etc.).
 #'
-#' \code{s$set_timeout()} sets various timeouts. The \sQuote{script}
+#' \code{s$setTimeout()} sets various timeouts. The \sQuote{script}
 #' timeout specifies a time to wait for scripts to run. The
 #' sQuote{page load} timeout specifies a time to wait for the page loading
 #' to complete. The \sQuote{implicit} specifies a time to wait for the
@@ -248,9 +248,9 @@ Session <- R6Class(
 
     ## Timeouts ------------------------------------------------
 
-    set_timeout = function(script = NULL, page_load = NULL,
+    setTimeout = function(script = NULL, page_load = NULL,
       implicit = NULL)
-      session_set_timeout(self, private, script, page_load, implicit),
+      session_setTimeout(self, private, script, page_load, implicit),
 
     ## Move mouse, clicks --------------------------------------
 
@@ -325,7 +325,7 @@ session_initialize <- function(self, private, host, port) {
 
   ## Set implicit timeout to zero. According to the standard it should
   ## be zero, but phantomjs uses about 200 ms
-  self$set_timeout(implicit = 0)
+  self$setTimeout(implicit = 0)
 
   ## Set initial windows size to something sane
   self$getWindow()$set_size(992, 744)
@@ -647,10 +647,10 @@ session_executeScriptAsync <- function(self, private, script, ...) {
   parse_script_response(self, private, response$value)
 }
 
-session_set_timeout <- function(self, private, script, page_load,
+session_setTimeout <- function(self, private, script, page_load,
                                 implicit) {
 
-  "!DEBUG session_set_timeout"
+  "!DEBUG session_setTimeout"
 
   if (!is.null(script)) {
     assert_timeout(script)

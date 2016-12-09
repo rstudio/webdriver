@@ -15,14 +15,14 @@ test_that("script timeout", {
      setTimeout(function() { f(42); }, 100);"
 
   ## It runs fine if the timeout is large enough
-  s$set_timeout(script = 200)
+  s$setTimeout(script = 200)
   expect_equal(
     s$executeScriptAsync(script),
     42
   )
 
   ## But fails if the timeout is small
-  s$set_timeout(script = 50)
+  s$setTimeout(script = 50)
   expect_error(
     s$executeScriptAsync(script),
     "Timed out waiting for asyncrhonous script result"
@@ -40,7 +40,7 @@ test_that("page load timeout", {
   on.exit(s$delete(), add = TRUE)
 
   ## Cannot connect if page load is low
-  s$set_timeout(page_load = 100)
+  s$setTimeout(page_load = 100)
   expect_error(
     s$go("http://httpbin.org/delay/1"),
     "URL .http://httpbin.org/delay/1. didn't load. Error: .timeout."
@@ -58,7 +58,7 @@ test_that("implicit timeout", {
   skip("FIXME: does not work, maybe phantom waits for the page to load")
 
   ## Element not there yet, error
-  s$set_timeout(implicit = 0);
+  s$setTimeout(implicit = 0);
   s$go(server$url("/slow.html"))
   expect_error(
     s$findElement(css = "div.slow"),
@@ -66,6 +66,6 @@ test_that("implicit timeout", {
   )
 
   ## There after some wait
-  s$set_timeout(implicit = 200);
+  s$setTimeout(implicit = 200);
   expect_error(s$findElement(css = "div.slow"), NA)
 })
