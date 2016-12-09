@@ -1,7 +1,7 @@
 
-context("windows")
+context("Windows")
 
-test_that("window methods are OK", {
+test_that("Window methods are OK", {
 
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)

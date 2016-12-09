@@ -18,8 +18,8 @@
 #' @section Arguments:
 #' \describe{
 #'   \item{s}{A \code{\link{Session}} object.}
-#'   \item{w}{A \code{window} object.}
-#'   \item{wlist}{A list of \code{window} objects.}
+#'   \item{w}{A \code{Window} object.}
+#'   \item{wlist}{A list of \code{Window} objects.}
 #'   \item{width}{Integer scalar, requested width of the window.}
 #'   \item{height}{Integer scalar, requested height of the window.}
 #'   \item{x}{Integer scalar, requested horizontal window position.}
@@ -29,7 +29,7 @@
 #' @section Details:
 #'
 #' The \code{getWindow} method of a \code{\link{Session}} object
-#' returns the current browser window as a \code{window} object.
+#' returns the current browser window as a \code{Window} object.
 #' The \code{getAllWindows} method returns a list of window objects,
 #' all browser windows.
 #'
@@ -57,12 +57,12 @@
 #' screen. Phantom.js being headless, it has no effect, and it is included
 #' to have a complete implementation of the WebDriver standard.
 #'
-#' @name window
+#' @name Window
 #' @importFrom R6 R6Class
 NULL
 
-window <- R6Class(
-  "window",
+Window <- R6Class(
+  "Window",
   public = list(
 
     initialize = function(id, session, session_private) {

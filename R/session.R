@@ -562,7 +562,7 @@ session_getWindow <- function(self, private) {
     "GET WINDOW HANDLE"
   )
 
-  window$new(
+  Window$new(
     id = response$value,
     session = self,
     session_private = private
@@ -577,7 +577,7 @@ session_getAllWindows <- function(self, private) {
   )
 
   lapply(response$value, function(id) {
-    window$new(
+    Window$new(
       id = id,
       session = self,
       session_private = private
