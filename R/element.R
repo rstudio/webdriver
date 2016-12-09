@@ -2,12 +2,12 @@
 #' HTML element
 #'
 #' @section Usage:
-#' \preformatted{e <- s$find_element(css = NULL, link_text = NULL,
+#' \preformatted{e <- s$findElement(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
 #'
-#' e$find_element(css = NULL, link_text = NULL,
+#' e$findElement(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
-#' e$find_elements(css = NULL, link_text = NULL,
+#' e$findElements(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
 #'
 #' e$is_selected()
@@ -56,15 +56,15 @@
 #'
 #' @section Details:
 #'
-#' To create \code{element} objects, you need to use the \code{find_element}
-#' (or \code{find_element}) method of a \code{\link{Session}} object.
+#' To create \code{element} objects, you need to use the \code{findElement}
+#' (or \code{findElement}) method of a \code{\link{Session}} object.
 #'
-#' \code{e$find_element()} finds the \emph{next} HTML element from the
+#' \code{e$findElement()} finds the \emph{next} HTML element from the
 #' current one. You need to specify one of the \code{css}, \code{link_text},
 #' \code{partial_link_text} and \code{xpath} arguments. It returns a new
 #' \code{element} object.
 #'
-#' \code{e$find_elements()} finds all matching HTML elements starting from
+#' \code{e$findElements()} finds all matching HTML elements starting from
 #' the current element. You need to specify one of the \code{css},
 #' \code{link_text}, \code{partial_link_text} and \code{xpath} arguments.
 #' It returns a list of newly created \code{element} objects.
@@ -134,14 +134,14 @@ element <- R6Class(
     initialize = function(id, session, session_private)
       element_initialize(self, private, id, session, session_private),
 
-    find_element = function(css = NULL, link_text = NULL,
+    findElement = function(css = NULL, link_text = NULL,
       partial_link_text = NULL, xpath = NULL)
-      element_find_element(self, private, css, link_text,
+      element_findElement(self, private, css, link_text,
                            partial_link_text, xpath),
 
-    find_elements = function(css = NULL, link_text = NULL,
+    findElements = function(css = NULL, link_text = NULL,
       partial_link_text = NULL, xpath = NULL)
-      element_find_elements(self, private, css, link_text,
+      element_findElements(self, private, css, link_text,
                             partial_link_text, xpath),
 
     is_selected = function()
@@ -221,10 +221,10 @@ element_initialize <- function(self, private, id, session,
 }
 
 
-element_find_element <- function(self, private, css, link_text,
+element_findElement <- function(self, private, css, link_text,
                                  partial_link_text, xpath) {
 
-  "!DEBUG element_find_element `css %||% link_text %||% partial_link_text %||% xpath`"
+  "!DEBUG element_findElement `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$session_private$make_request(
@@ -244,10 +244,10 @@ element_find_element <- function(self, private, css, link_text,
 }
 
 
-element_find_elements <- function(self, private, css, link_text,
+element_findElements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
 
-  "!DEBUG element_find_elements `css %||% link_text %||% partial_link_text %||% xpath`"
+  "!DEBUG element_findElements `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$session_private$make_request(

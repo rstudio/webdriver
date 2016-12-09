@@ -19,9 +19,9 @@
 #' s$getSource()
 #' s$takeScreenshot(file = NULL)
 #'
-#' s$find_element(css = NULL, link_text = NULL,
+#' s$findElement(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
-#' s$find_elements(css = NULL, link_text = NULL,
+#' s$findElements(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
 #'
 #' s$execute_script(script, ...)
@@ -108,12 +108,12 @@
 #' You can save it to a PNG file with the \code{file} argument, or
 #' show it on the graphics device (if \code{file} is \code{NULL}).
 #'
-#' \code{s$find_element()} finds a HTML element using a CSS selector,
+#' \code{s$findElement()} finds a HTML element using a CSS selector,
 #' XPath expression, or the \code{innerHTML} of the element. If multiple
 #' elements match, then the first one is returned. The return value
 #' is an \code{\link{element}} object.
 #'
-#' \code{s$find_elements()} finds HTML elements using a CSS selector,
+#' \code{s$findElements()} finds HTML elements using a CSS selector,
 #' XPath expression, or the \code{innerHTML} of the element. All matching
 #' elements are returned in a list of \code{\link{element}} objects.
 #'
@@ -217,14 +217,14 @@ Session <- R6Class(
 
     ## Elements ------------------------------------------------
 
-    find_element = function(css = NULL, link_text = NULL,
+    findElement = function(css = NULL, link_text = NULL,
       partial_link_text = NULL, xpath = NULL)
-      session_find_element(self, private, css, link_text,
+      session_findElement(self, private, css, link_text,
                            partial_link_text, xpath),
 
-    find_elements = function(css = NULL, link_text = NULL,
+    findElements = function(css = NULL, link_text = NULL,
       partial_link_text = NULL, xpath = NULL)
-      session_find_elements(self, private, css, link_text,
+      session_findElements(self, private, css, link_text,
                             partial_link_text, xpath),
 
     get_active_element = function()
@@ -426,10 +426,10 @@ session_getTitle <- function(self, private) {
 }
 
 
-session_find_element <- function(self, private, css, link_text,
+session_findElement <- function(self, private, css, link_text,
                                  partial_link_text, xpath) {
 
-  "!DEBUG session_find_element `css %||% link_text %||% partial_link_text %||% xpath`"
+  "!DEBUG session_findElement `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(
@@ -473,9 +473,9 @@ parse_find_expr <- function(css, link_text, partial_link_text, xpath) {
 }
 
 
-session_find_elements <- function(self, private, css, link_text,
+session_findElements <- function(self, private, css, link_text,
                                   partial_link_text, xpath) {
-  "!DEBUG session_find_elements `css %||% link_text %||% partial_link_text %||% xpath`"
+  "!DEBUG session_findElements `css %||% link_text %||% partial_link_text %||% xpath`"
   find_expr <- parse_find_expr(css, link_text, partial_link_text, xpath)
 
   response <- private$make_request(

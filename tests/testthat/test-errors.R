@@ -19,7 +19,7 @@ test_that("no window", {
   expect_error(s$takeScreenshot(), "Window handle/name is invalid")
 
   ## This one does not give a proper error message
-  expect_error(s$find_element(css = "<p>"), "WebDriver error")
+  expect_error(s$findElement(css = "<p>"), "WebDriver error")
 })
 
 test_that("no window", {
@@ -37,7 +37,7 @@ test_that("no elements", {
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
-  expect_error(s$find_element(css = "foobar"), "Unable to find element")
+  expect_error(s$findElement(css = "foobar"), "Unable to find element")
 })
 
 test_that("is_selected for non-selectable elements", {
@@ -46,7 +46,7 @@ test_that("is_selected for non-selectable elements", {
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/check.html"))
-  el <- s$find_element(css = "p")
+  el <- s$findElement(css = "p")
 
   expect_error(el$is_selected(), "Element is not selectable")
 })

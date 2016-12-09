@@ -11,7 +11,7 @@ test_that("window methods are OK", {
 
   ## Click opens another window
   s$go(server$url("/window1.html"))
-  s$find_element("a")$click()
+  s$findElement("a")$click()
 
   ## Switch to the new window
   allw <- s$get_all_windows()

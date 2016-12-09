@@ -9,7 +9,7 @@ test_that("element methods are OK", {
 
   ## TODO: is_selected
 
-  el <- s$find_element(css = ".foo")
+  el <- s$findElement(css = ".foo")
   expect_equal(el$get_attribute("class"), "foo bar")
   expect_equal(el$get_class(), c("foo", "bar"))
   expect_null(el$get_attribute("xxx"))
@@ -20,17 +20,17 @@ test_that("element methods are OK", {
 
   expect_equal(el$get_name(), "p")
 
-  sel <- s$find_element(css = "form select")
+  sel <- s$findElement(css = "form select")
   expect_true(sel$is_enabled())
-  sel2 <- s$find_element(css = ".disabledselect")
+  sel2 <- s$findElement(css = ".disabledselect")
   expect_false(sel2$is_enabled())
 
-  el <- s$find_element(css = ".clickme a")
+  el <- s$findElement(css = ".clickme a")
   el$click()
   expect_equal(s$getUrl(), server$url("/check.html"))
   s$goBack()
 
-  el <- s$find_element(css = "#firstname")
+  el <- s$findElement(css = "#firstname")
   el$send_keys("Gabor")
   expect_equal(el$get_attribute("value"), "Gabor")
   expect_equal(el$get_value(), "Gabor")
@@ -42,12 +42,12 @@ test_that("element methods are OK", {
   expect_equal(el$get_value(), "Not Gabor")
   el$clear()
 
-  form <- s$find_element(css = "form")
-  pars <- form$find_elements(css = "p")
+  form <- s$findElement(css = "form")
+  pars <- form$findElements(css = "p")
   expect_equal(length(pars), 7)
   expect_true(is(pars[[1]], "element"))
 
-  fn <- s$find_element("#firstname")
+  fn <- s$findElement("#firstname")
   expect_equal(fn$get_data("foo"), "bar")
 })
 
@@ -60,7 +60,7 @@ test_that("element rect", {
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  el <- s$find_element(css = ".foo")
+  el <- s$findElement(css = ".foo")
   rect <- el$get_rect()
   expect_equal(names(rect), c("x", "y", "width", "height"))
 })
@@ -70,7 +70,7 @@ test_that("sending special keys", {
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  textarea <- s$find_element("textarea")
+  textarea <- s$findElement("textarea")
   textarea$send_keys(key$control, "a")  # select everything
   textarea$send_keys(key$delete)        # delete
   textarea$send_keys("line1", key$enter, "line2", key$enter)

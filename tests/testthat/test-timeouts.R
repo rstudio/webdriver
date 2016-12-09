@@ -61,11 +61,11 @@ test_that("implicit timeout", {
   s$set_timeout(implicit = 0);
   s$go(server$url("/slow.html"))
   expect_error(
-    s$find_element(css = "div.slow"),
+    s$findElement(css = "div.slow"),
     "Unable to find element with css selector"
   )
 
   ## There after some wait
   s$set_timeout(implicit = 200);
-  expect_error(s$find_element(css = "div.slow"), NA)
+  expect_error(s$findElement(css = "div.slow"), NA)
 })
