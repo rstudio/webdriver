@@ -84,7 +84,7 @@ test_that("find elements", {
   el4 <- s$findElement(xpath = "//body/p/a")
   expect_equal(el4$getText(), "R project web site")
 
-  el4$send_keys("")
+  el4$sendKeys("")
   el5 <- s$getActiveElement()
   expect_equal(el5$getText(), "R project web site")
 

@@ -31,7 +31,7 @@ test_that("Element methods are OK", {
   s$goBack()
 
   el <- s$findElement(css = "#firstname")
-  el$send_keys("Gabor")
+  el$sendKeys("Gabor")
   expect_equal(el$getAttribute("value"), "Gabor")
   expect_equal(el$getValue(), "Gabor")
   el$clear()
@@ -71,9 +71,9 @@ test_that("sending special keys", {
   s$go(server$url("/elements.html"))
 
   textarea <- s$findElement("textarea")
-  textarea$send_keys(key$control, "a")  # select everything
-  textarea$send_keys(key$delete)        # delete
-  textarea$send_keys("line1", key$enter, "line2", key$enter)
+  textarea$sendKeys(key$control, "a")  # select everything
+  textarea$sendKeys(key$delete)        # delete
+  textarea$sendKeys("line1", key$enter, "line2", key$enter)
   expect_equal(
     textarea$getValue(),
     "line1\nline2\n"

@@ -23,7 +23,7 @@
 #' e$isEnabled()
 #' e$click()
 #' e$clear()
-#' e$send_keys(...)
+#' e$sendKeys(...)
 #' e$moveMouseTo(xoffset = NULL, yoffset = NULL)
 #'
 #' e$executeScript(script, ...)
@@ -49,7 +49,7 @@
 #'     position of the element. If at least of of \code{xoffset} and
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
 #'   \item{value}{Value to set, a character string.}
-#'   \item{...}{For \code{send_keys} the keys to send, see
+#'   \item{...}{For \code{sendKeys} the keys to send, see
 #'     \code{\link{key}}. For \code{executeScript} and
 #'     \code{executeScriptAsync} argument to supply to the script.}
 #' }
@@ -76,7 +76,7 @@
 #' shorthand for \code{e$getAttribute("value")}.
 #'
 #' \code{e$setValue()} sets the value of an input element, it is
-#' essentially equivalent to sending keys via \code{e$send_keys()}.
+#' essentially equivalent to sending keys via \code{e$sendKeys()}.
 #'
 #' \code{e$getAttribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
@@ -105,7 +105,7 @@
 #' \code{e$clear()} scrolls the element into view, and then attempts to
 #' clear its value, checkedness or text content.
 #'
-#' \code{e$send_keys()} scrolls the form control element into view, and
+#' \code{e$sendKeys()} scrolls the form control element into view, and
 #' sends the provided keys to it. See \code{\link{key}} for a list of
 #' special keys that can be sent.
 #'
@@ -183,8 +183,8 @@ Element <- R6Class(
     clear = function()
       element_clear(self, private),
 
-    send_keys = function(...)
-      element_send_keys(self, private, ...),
+    sendKeys = function(...)
+      element_sendKeys(self, private, ...),
 
     upload_file = function(filename)
       element_upload_file(self, private, filename),
