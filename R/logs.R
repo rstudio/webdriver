@@ -30,10 +30,10 @@ session_readLog <- function(self, private, type) {
   if (identical(private$parameters$browserName, "phantomjs") &&
       !is.null(ver <- private$parameters$version) &&
       numeric_version(ver) <= numeric_version("2.1.1")) {
-    if (private$num_log_lines_shown != 0) {
-      logs <- tail(logs, - private$num_log_lines_shown)
+    if (private$numLogLinesShown != 0) {
+      logs <- tail(logs, - private$numLogLinesShown)
     }
-    private$num_log_lines_shown <- length(response$value)
+    private$numLogLinesShown <- length(response$value)
   }
 
   make_logs(logs)

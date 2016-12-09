@@ -289,7 +289,7 @@ Session <- R6Class(
     port = NULL,
     session_id = NULL,
     parameters = NULL,
-    num_log_lines_shown = 0,
+    numLogLinesShown = 0,
 
     make_request = function(endpoint, data = NULL, params = NULL,
       headers = NULL)
@@ -306,7 +306,7 @@ session_initialize <- function(self, private, host, port) {
 
   private$host <- host
   private$port <- port
-  private$num_log_lines_shown <- 0
+  private$numLogLinesShown <- 0
 
   response <- private$make_request(
     "NEW SESSION",
