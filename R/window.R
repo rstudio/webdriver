@@ -2,7 +2,7 @@
 #' A browser window
 #'
 #' @section Usage:
-#' \preformatted{w <- s$get_window()
+#' \preformatted{w <- s$getWindow()
 #' wlist <- s$get_all_windows()
 #'
 #' w$close()
@@ -28,7 +28,7 @@
 #'
 #' @section Details:
 #'
-#' The \code{get_window} method of a \code{\link{Session}} object
+#' The \code{getWindow} method of a \code{\link{Session}} object
 #' returns the current browser window as a \code{window} object.
 #' The \code{get_all_windows} method returns a list of window objects,
 #' all browser windows.
@@ -132,7 +132,7 @@ window_close <- function(self, private) {
 window_is_active <- function(self, private) {
 
   "!DEBUG window_is_active"
-  active <- private$session$get_window()
+  active <- private$session$getWindow()
   active$.__enclos_env__$private$id == private$id
 }
 

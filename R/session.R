@@ -232,8 +232,8 @@ Session <- R6Class(
 
     ## Windows -------------------------------------------------
 
-    get_window = function()
-      session_get_window(self, private),
+    getWindow = function()
+      session_getWindow(self, private),
 
     get_all_windows = function()
       session_get_all_windows(self, private),
@@ -328,7 +328,7 @@ session_initialize <- function(self, private, host, port) {
   self$set_timeout(implicit = 0)
 
   ## Set initial windows size to something sane
-  self$get_window()$set_size(992, 744)
+  self$getWindow()$set_size(992, 744)
 
   invisible(self)
 }
@@ -555,9 +555,9 @@ handle_screenshot <- function(response, file) {
 }
 
 
-session_get_window <- function(self, private) {
+session_getWindow <- function(self, private) {
 
-  "!DEBUG session_get_window"
+  "!DEBUG session_getWindow"
   response <- private$make_request(
     "GET WINDOW HANDLE"
   )

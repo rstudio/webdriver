@@ -6,7 +6,7 @@ test_that("window methods are OK", {
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
-  w1 <- s$get_window()
+  w1 <- s$getWindow()
   expect_true(w1$is_active())
 
   ## Click opens another window
@@ -16,7 +16,7 @@ test_that("window methods are OK", {
   ## Switch to the new window
   allw <- s$get_all_windows()
   if (allw[[1]]$is_active()) allw[[2]]$switch_to() else allw[[1]]$switch_to()
-  w2 <- s$get_window()
+  w2 <- s$getWindow()
   expect_false(w1$is_active())
   expect_true(w2$is_active())
 

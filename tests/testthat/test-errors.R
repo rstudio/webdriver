@@ -7,7 +7,7 @@ test_that("no window", {
   on.exit(s$delete(), add = TRUE)
 
   ## Close the window
-  s$get_window()$close()
+  s$getWindow()$close()
 
   expect_error(s$go("http://r-hub.io"), "Window handle/name is invalid")
   expect_error(s$getUrl(), "Window handle/name is invalid")
@@ -27,9 +27,9 @@ test_that("no window", {
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
-  s$get_window()$close()
+  s$getWindow()$close()
 
-  expect_error(s$get_window(), "Current window handle invalid")
+  expect_error(s$getWindow(), "Current window handle invalid")
 })
 
 test_that("no elements", {
