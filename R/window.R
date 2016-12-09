@@ -7,7 +7,7 @@
 #'
 #' w$close()
 #' w$isActive()
-#' w$switch_to()
+#' w$switchTo()
 #' w$maximize()
 #' w$get_size()
 #' w$set_size(width, height)
@@ -38,7 +38,7 @@
 #' \code{w$isActive()} returns \code{TRUE} if the window is active,
 #' \code{FALSE} otherwise.
 #'
-#' \code{w$switch_to} makes the window active.
+#' \code{w$switchTo} makes the window active.
 #'
 #' \code{w$maximize} maximizes the window. Currently it sets it to
 #' a fixed size.
@@ -75,8 +75,8 @@ Window <- R6Class(
     isActive = function()
       window_isActive(self, private),
 
-    switch_to = function()
-      window_switch_to(self, private),
+    switchTo = function()
+      window_switchTo(self, private),
 
     ## Not supported
     ## make_fullscreen = function()
@@ -136,9 +136,9 @@ window_isActive <- function(self, private) {
   active$.__enclos_env__$private$id == private$id
 }
 
-window_switch_to <- function(self, private) {
+window_switchTo <- function(self, private) {
 
-  "!DEBUG window_switch_to"
+  "!DEBUG window_switchTo"
   private$session_private$makeRequest(
     "SWITCH TO WINDOW",
     list(name = private$id)

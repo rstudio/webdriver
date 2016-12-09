@@ -15,7 +15,7 @@ test_that("Window methods are OK", {
 
   ## Switch to the new window
   allw <- s$getAllWindows()
-  if (allw[[1]]$isActive()) allw[[2]]$switch_to() else allw[[1]]$switch_to()
+  if (allw[[1]]$isActive()) allw[[2]]$switchTo() else allw[[1]]$switchTo()
   w2 <- s$getWindow()
   expect_false(w1$isActive())
   expect_true(w2$isActive())
@@ -25,7 +25,7 @@ test_that("Window methods are OK", {
   w2$close()
   expect_equal(length(s$getAllWindows()), 1)
 
-  w1$switch_to()
+  w1$switchTo()
   expect_equal(s$getUrl(), server$url("/window1.html"))
 
   w1$set_size(800, 600)
