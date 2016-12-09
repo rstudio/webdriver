@@ -78,7 +78,7 @@ test_that("find elements", {
   el2 <- s$findElement(link_text = "R project web site")
   expect_equal(el2$getText(), "R project web site")
 
-  el3 <- s$findElement(partial_link_text = "project web")
+  el3 <- s$findElement(partialLinkText = "project web")
   expect_equal(el3$getText(), "R project web site")
 
   el4 <- s$findElement(xpath = "//body/p/a")
