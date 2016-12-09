@@ -85,7 +85,7 @@ test_that("find elements", {
   expect_equal(el4$get_text(), "R project web site")
 
   el4$send_keys("")
-  el5 <- s$get_active_element()
+  el5 <- s$getActiveElement()
   expect_equal(el5$get_text(), "R project web site")
 
   pars <- s$findElements(css = "form p")

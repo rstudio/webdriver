@@ -227,8 +227,8 @@ Session <- R6Class(
       session_findElements(self, private, css, link_text,
                             partial_link_text, xpath),
 
-    get_active_element = function()
-      session_get_active_element(self, private),
+    getActiveElement = function()
+      session_getActiveElement(self, private),
 
     ## Windows -------------------------------------------------
 
@@ -496,9 +496,9 @@ session_findElements <- function(self, private, css, link_text,
 }
 
 
-session_get_active_element <- function(self, private) {
+session_getActiveElement <- function(self, private) {
 
-  "!DEBUG session_get_active_element"
+  "!DEBUG session_getActiveElement"
   response <- private$make_request(
     "GET ACTIVE ELEMENT"
   )
