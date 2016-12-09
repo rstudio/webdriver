@@ -188,8 +188,8 @@ Session <- R6Class(
     delete = function()
       session_delete(self, private),
 
-    get_status = function()
-      session_get_status(self, private),
+    getStatus = function()
+      session_getStatus(self, private),
 
     go = function(url)
       session_go(self, private, url),
@@ -349,8 +349,8 @@ session_delete <- function(self, private) {
   invisible()
 }
 
-session_get_status <- function(self, private) {
-  "!DEBUG session_get_status"
+session_getStatus <- function(self, private) {
+  "!DEBUG session_getStatus"
   response <- private$make_request(
     "STATUS"
   )
