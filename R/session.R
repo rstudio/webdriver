@@ -13,7 +13,7 @@
 #' s$go(url)
 #' s$getUrl()
 #' s$goBack()
-#' s$go_forward()
+#' s$goForward()
 #' s$refresh()
 #' s$get_title()
 #' s$get_source()
@@ -95,7 +95,7 @@
 #' \code{s$goBack()} is like the web browser's back button. It goes back
 #' to the previous page.
 #'
-#' \code{s$go_forward()} is like the web browser's forward button.
+#' \code{s$goForward()} is like the web browser's forward button.
 #'
 #' \code{s$refresh()} is like the web browser's refresh button.
 #'
@@ -200,8 +200,8 @@ Session <- R6Class(
     goBack = function()
       session_goBack(self, private),
 
-    go_forward = function()
-      session_go_forward(self, private),
+    goForward = function()
+      session_goForward(self, private),
 
     refresh = function()
       session_refresh(self, private),
@@ -394,9 +394,9 @@ session_goBack <- function(self, private) {
 }
 
 
-session_go_forward <- function(self, private) {
+session_goForward <- function(self, private) {
 
-  "!DEBUG session_go_forward"
+  "!DEBUG session_goForward"
   private$make_request(
     "FORWARD"
   )

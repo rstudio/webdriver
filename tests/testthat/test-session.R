@@ -33,8 +33,8 @@ test_that("basic operations", {
   expect_equal(s$getUrl(), server$url("/check.html"))
   expect_match(s$get_source(), "Hello there")
 
-  ## $go_forward
-  s$go_forward()
+  ## $goForward
+  s$goForward()
   expect_equal(s$getUrl(), server$url("/check2.html"))
   expect_match(s$get_source(), "Hello again")
   s$goBack()
