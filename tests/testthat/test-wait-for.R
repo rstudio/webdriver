@@ -10,13 +10,13 @@ test_that("waiting for a condition", {
   s$go(server$url("/wait-for-1.html"))
 
   ## It is not there yet
-  expect_false(s$execute_script("return $('#me').hasClass('red')"))
+  expect_false(s$executeScript("return $('#me').hasClass('red')"))
 
   ## Wait until it is there
   expect_true(s$wait_for("$('#me').hasClass('red')"))
 
   ## It is there now
-  expect_true(s$execute_script("return $('#me').hasClass('red')"))
+  expect_true(s$executeScript("return $('#me').hasClass('red')"))
 
   ## We wait for a 'blue' class, but that does not happen
   expect_false(s$wait_for("$('#me').hasClass('blue')", timeout = 1000))

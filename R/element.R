@@ -26,7 +26,7 @@
 #' e$send_keys(...)
 #' e$move_mouse_to(xoffset = NULL, yoffset = NULL)
 #'
-#' e$execute_script(script, ...)
+#' e$executeScript(script, ...)
 #' e$executeScriptAsync(script, ...)
 #' }
 #'
@@ -50,7 +50,7 @@
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
 #'   \item{value}{Value to set, a character string.}
 #'   \item{...}{For \code{send_keys} the keys to send, see
-#'     \code{\link{key}}. For \code{execute_script} and
+#'     \code{\link{key}}. For \code{executeScript} and
 #'     \code{executeScriptAsync} argument to supply to the script.}
 #' }
 #'
@@ -118,7 +118,7 @@
 #' it places the cursor on the center of the element. If the element is
 #' not on the screen, then is scrolls it into the screen first.
 #'
-#' \code{e$execute_script()} and \code{e$executeScriptAsync()}
+#' \code{e$executeScript()} and \code{e$executeScriptAsync()}
 #' call the method of the same name on the \code{\link{Session}} object.
 #' The first argument of the script (\code{arguments[0]}) will always
 #' hold the element object itself.
@@ -192,8 +192,8 @@ element <- R6Class(
     move_mouse_to = function(xoffset = NULL, yoffset = NULL)
       element_move_mouse_to(self, private, xoffset, yoffset),
 
-    execute_script = function(script, ...)
-      element_execute_script(self, private, script, ...),
+    executeScript = function(script, ...)
+      element_executeScript(self, private, script, ...),
 
     executeScriptAsync = function(script, ...)
       element_executeScriptAsync(self, private, script, ...)
@@ -472,12 +472,12 @@ element_move_mouse_to <- function(self, private, xoffset, yoffset) {
   invisible(self)
 }
 
-element_execute_script <- function(self, private, script, ...) {
-  "!DEBUG element_execute_script `private$id`"
-  private$session$execute_script(script, self, ...)
+element_executeScript <- function(self, private, script, ...) {
+  "!DEBUG element_executeScript `private$id`"
+  private$session$executeScript(script, self, ...)
 }
 
 element_executeScriptAsync <- function(self, private, script, ...) {
   "!DEBUG element_executeScriptAsync `private$id`"
-  private$session$execute_script(script, self, ...)
+  private$session$executeScript(script, self, ...)
 }

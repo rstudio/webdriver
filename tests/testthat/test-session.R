@@ -100,18 +100,18 @@ test_that("execute script (sync)", {
   s$go(server$url("/elements.html"))
 
   expect_equal(
-    s$execute_script("return 42 + 'foobar';"),
+    s$executeScript("return 42 + 'foobar';"),
     "42foobar"
   )
   expect_null(
-    s$execute_script("1 + 1;")
+    s$executeScript("1 + 1;")
   )
   expect_equal(
-    s$execute_script("return arguments[0] + arguments[1]", 42, 24),
+    s$executeScript("return arguments[0] + arguments[1]", 42, 24),
     66
   )
   expect_error(
-    s$execute_script("syntax error"),
+    s$executeScript("syntax error"),
     "Expected an identifier but found 'error' instead"
   )
 })
@@ -137,15 +137,15 @@ test_that("execute script with element arguments", {
   el <- s$findElement(".foo")
 
   expect_equal(
-    s$execute_script("return arguments[0].className;", el),
+    s$executeScript("return arguments[0].className;", el),
     "foo bar"
   )
   expect_equal(
-    s$execute_script("return arguments[0].className;", el, 42),
+    s$executeScript("return arguments[0].className;", el, 42),
     "foo bar"
   )
   expect_equal(
-    s$execute_script("return arguments[1].className;", 42, el),
+    s$executeScript("return arguments[1].className;", 42, el),
     "foo bar"
   )
 })
@@ -158,11 +158,11 @@ test_that("execute script and return elements", {
   el <- s$findElement(".foo")
 
   ## Single element
-  ret <- s$execute_script("return arguments[0];", el)
+  ret <- s$executeScript("return arguments[0];", el)
   expect_true(inherits(ret, "element"))
 
   ## List of elements
-  ret <- s$execute_script("return arguments;", el, el, el)
+  ret <- s$executeScript("return arguments;", el, el, el)
   expect_true(is.list(ret))
   expect_equal(length(ret), 3)
   expect_true(inherits(ret[[1]], "element"))
@@ -170,7 +170,7 @@ test_that("execute script and return elements", {
   expect_true(inherits(ret[[3]], "element"))
 
   ## List of elements and other stuff
-  ret <- s$execute_script("return arguments;", el, 42, el, 42 * 42)
+  ret <- s$executeScript("return arguments;", el, 42, el, 42 * 42)
   expect_true(is.list(ret))
   expect_equal(length(ret), 4)
   expect_true(inherits(ret[[1]], "element"))
@@ -193,11 +193,11 @@ test_that("logs", {
 
   s$go(server$url("/elements.html"))
 
-  s$execute_script("console.log('Just a start');")
-  s$execute_script("console.log('Hello world!');")
+  s$executeScript("console.log('Just a start');")
+  s$executeScript("console.log('Hello world!');")
   expect_equal(nrow(s$read_log()), 2)
-  s$execute_script("console.log('Hello again!');")
-  s$execute_script(paste0(
+  s$executeScript("console.log('Hello again!');")
+  s$executeScript(paste0(
     "console.log('A very long message, just to see how it will be ",
     "printed to the screen in R');"))
   log <- s$read_log()

@@ -24,7 +24,7 @@
 #' s$findElements(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
 #'
-#' s$execute_script(script, ...)
+#' s$executeScript(script, ...)
 #' s$executeScriptAsync(script, ...)
 #'
 #' s$set_timeout(script = NULL, page_load = NULL, implicit = NULL)
@@ -54,7 +54,7 @@
 #'   \item{partial_link_text}{Find HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
-#'   \item{script}{For \code{execute_script} and
+#'   \item{script}{For \code{executeScript} and
 #'     \code{executeScriptAsync}. JavaScript code to execute. It will be
 #'     placed in the body of a function.}
 #'   \item{...}{Arguments to the script, they will be put in a list
@@ -117,7 +117,7 @@
 #' XPath expression, or the \code{innerHTML} of the element. All matching
 #' elements are returned in a list of \code{\link{element}} objects.
 #'
-#' \code{s$execute_script()} executes JavaScript code. It places the code
+#' \code{s$executeScript()} executes JavaScript code. It places the code
 #' in the body of a function, and then calls the function with the
 #' additional arguments. These can be accessed from the function via the
 #' \code{arguments} array. Returned DOM elements are automatically
@@ -240,8 +240,8 @@ Session <- R6Class(
 
     ## Execute script ------------------------------------------
 
-    execute_script = function(script, ...)
-      session_execute_script(self, private, script, ...),
+    executeScript = function(script, ...)
+      session_executeScript(self, private, script, ...),
 
     executeScriptAsync = function(script, ...)
       session_executeScriptAsync(self, private, script, ...),
@@ -615,9 +615,9 @@ parse_script_response <- function(self, private, value) {
   }
 }
 
-session_execute_script <- function(self, private, script, ...) {
+session_executeScript <- function(self, private, script, ...) {
 
-  "!DEBUG session_execute_script"
+  "!DEBUG session_executeScript"
 
   assert_string(script)
 
