@@ -27,7 +27,7 @@
 #' s$executeScript(script, ...)
 #' s$executeScriptAsync(script, ...)
 #'
-#' s$setTimeout(script = NULL, page_load = NULL, implicit = NULL)
+#' s$setTimeout(script = NULL, pageLoad = NULL, implicit = NULL)
 #'
 #' s$moveMouseTo(xoffset = 0, yoffset = 0)
 #' s$click(button = c("left", "middle", "right"))
@@ -62,7 +62,7 @@
 #'     transformed to DOM element in JavaScript.}
 #'   \item{script}{For \code{setTimeout}. Script execution timeout,
 #'     in milliseconds. More below.}
-#'   \item{page_load}{Page load timeout, in milliseconds. More below.}
+#'   \item{pageLoad}{Page load timeout, in milliseconds. More below.}
 #'   \item{implicit}{Implicit wait before calls that find elements, in
 #'     milliseconds. More below.}
 #'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
@@ -248,9 +248,9 @@ Session <- R6Class(
 
     ## Timeouts ------------------------------------------------
 
-    setTimeout = function(script = NULL, page_load = NULL,
+    setTimeout = function(script = NULL, pageLoad = NULL,
       implicit = NULL)
-      session_setTimeout(self, private, script, page_load, implicit),
+      session_setTimeout(self, private, script, pageLoad, implicit),
 
     ## Move mouse, clicks --------------------------------------
 
@@ -647,7 +647,7 @@ session_executeScriptAsync <- function(self, private, script, ...) {
   parse_script_response(self, private, response$value)
 }
 
-session_setTimeout <- function(self, private, script, page_load,
+session_setTimeout <- function(self, private, script, pageLoad,
                                 implicit) {
 
   "!DEBUG session_setTimeout"
@@ -660,11 +660,11 @@ session_setTimeout <- function(self, private, script, page_load,
     )
   }
 
-  if (!is.null(page_load)) {
-    assert_timeout(page_load)
+  if (!is.null(pageLoad)) {
+    assert_timeout(pageLoad)
     private$makeRequest(
       "SET TIMEOUT",
-      list(type = "page load", ms = page_load)
+      list(type = "page load", ms = pageLoad)
     )
   }
 

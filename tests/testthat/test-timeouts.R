@@ -40,7 +40,7 @@ test_that("page load timeout", {
   on.exit(s$delete(), add = TRUE)
 
   ## Cannot connect if page load is low
-  s$setTimeout(page_load = 100)
+  s$setTimeout(pageLoad = 100)
   expect_error(
     s$go("http://httpbin.org/delay/1"),
     "URL .http://httpbin.org/delay/1. didn't load. Error: .timeout."
