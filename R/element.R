@@ -12,7 +12,7 @@
 #'
 #' e$isSelected()
 #' e$getValue()
-#' e$set_value(value)
+#' e$setValue(value)
 #' e$get_attribute(name)
 #' e$get_class()
 #' e$get_css_value(name)
@@ -75,7 +75,7 @@
 #' \code{e$getValue()} returns the value of an input element, it is a
 #' shorthand for \code{e$get_attribute("value")}.
 #'
-#' \code{e$set_value()} sets the value of an input element, it is
+#' \code{e$setValue()} sets the value of an input element, it is
 #' essentially equivalent to sending keys via \code{e$send_keys()}.
 #'
 #' \code{e$get_attribute()} queries an arbitrary HTML attribute. It is
@@ -150,8 +150,8 @@ Element <- R6Class(
     getValue = function()
       element_getValue(self, private),
 
-    set_value = function(value)
-      element_set_value(self, private, value),
+    setValue = function(value)
+      element_setValue(self, private, value),
 
     get_attribute = function(name)
       element_get_attribute(self, private, name),
@@ -285,9 +285,9 @@ element_getValue <- function(self, private) {
   self$get_attribute("value")
 }
 
-element_set_value <- function(self, private, value) {
+element_setValue <- function(self, private, value) {
 
-  "!DEBUG element_set_value `private$id`"
+  "!DEBUG element_setValue `private$id`"
   assert_string(value)
 
   private$session_private$makeRequest(

@@ -38,7 +38,7 @@ test_that("Element methods are OK", {
   expect_equal(el$get_attribute("value"), "")
   expect_equal(el$getValue(), "")
 
-  el$set_value("Not Gabor")
+  el$setValue("Not Gabor")
   expect_equal(el$getValue(), "Not Gabor")
   el$clear()
 
