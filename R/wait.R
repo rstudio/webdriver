@@ -1,13 +1,13 @@
 
 #' @importFrom utils packageName
 
-session_waitFor <- function(self, private, expr, check_interval,
+session_waitFor <- function(self, private, expr, checkInterval,
                              timeout) {
 
   "!DEBUG session_waitFor"
 
   assert_string(expr)
-  assert_count(check_interval)
+  assert_count(checkInterval)
   assert_count(timeout)
 
   ## Assemble all JS code to inject. First the code for the waiting
@@ -25,7 +25,7 @@ session_waitFor <- function(self, private, expr, check_interval,
      webdriver_wait_for(
        "' %+% escaped %+% '",
        callback,
-       { check_interval: ' %+% str(check_interval) %+% ',
+       { check_interval: ' %+% str(checkInterval) %+% ',
          timeout: ' %+% str(timeout) %+% ' }
      );'
 

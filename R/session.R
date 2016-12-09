@@ -38,7 +38,7 @@
 #' s$readLog(type = c("browser", "har"))
 #' s$getLogTypes()
 #'
-#' s$waitFor(expr, check_interval = 100, timeout = 3000)
+#' s$waitFor(expr, checkInterval = 100, timeout = 3000)
 #' }
 #'
 #' @section Arguments:
@@ -74,7 +74,7 @@
 #'   \item{type}{Log type, a character scalar.}
 #'   \item{expr}{A string scalar containing JavaScript code that
 #'     evaluates to the condition to wait for.}
-#'   \item{check_interval}{How often to check for the condition, in
+#'   \item{checkInterval}{How often to check for the condition, in
 #'     milliseconds.}
 #'   \item{timeout}{Timeout for the condition, in milliseconds.}
 #' }
@@ -279,8 +279,8 @@ Session <- R6Class(
 
     ## Polling for a condition ---------------------------------
 
-    waitFor = function(expr, check_interval = 100, timeout = 3000)
-      session_waitFor(self, private, expr, check_interval, timeout)
+    waitFor = function(expr, checkInterval = 100, timeout = 3000)
+      session_waitFor(self, private, expr, checkInterval, timeout)
   ),
 
   private = list(
