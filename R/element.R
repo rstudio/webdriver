@@ -233,7 +233,7 @@ element_findElement <- function(self, private, css, linkText,
       using = find_expr$using,
       value = find_expr$value
     ),
-    list(element_id = private$id)
+    list(elementId = private$id)
   )
 
   Element$new(
@@ -256,7 +256,7 @@ element_findElements <- function(self, private, css, linkText,
       using = find_expr$using,
       value = find_expr$value
     ),
-    list(element_id = private$id)
+    list(elementId = private$id)
   )
 
   lapply(response$value, function(el) {
@@ -274,7 +274,7 @@ element_isSelected <- function(self, private) {
   "!DEBUG element_isSelected `private$id`"
   response <- private$session_private$makeRequest(
     "IS ELEMENT SELECTED",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   response$value
@@ -293,7 +293,7 @@ element_setValue <- function(self, private, value) {
   private$session_private$makeRequest(
     "SET ELEMENT VALUE",
     list(value = I(value)),
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   invisible(self)
@@ -306,7 +306,7 @@ element_getAttribute <- function(self, private, name) {
 
   response <- private$session_private$makeRequest(
     "GET ELEMENT ATTRIBUTE",
-    params = list(element_id = private$id, name = name)
+    params = list(elementId = private$id, name = name)
   )
 
   response$value
@@ -327,7 +327,7 @@ element_getCssValue <- function(self, private, name) {
 
   response <- private$session_private$makeRequest(
     "GET ELEMENT CSS VALUE",
-    params = list(element_id = private$id, property_name = name)
+    params = list(elementId = private$id, property_name = name)
   )
 
   response$value
@@ -339,7 +339,7 @@ element_getText <- function(self, private) {
   "!DEBUG element_getText `private$id`"
   response <- private$session_private$makeRequest(
     "GET ELEMENT TEXT",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   response$value
@@ -357,7 +357,7 @@ element_getName <- function(self, private) {
   "!DEBUG element_getName `private$id`"
   response <- private$session_private$makeRequest(
     "GET ELEMENT TAG NAME",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   response$value
@@ -371,12 +371,12 @@ element_getRect <- function(self, private) {
   "!DEBUG element_getRect `private$id`"
   response1 <- private$session_private$makeRequest(
     "GET ELEMENT LOCATION",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   response2 <- private$session_private$makeRequest(
     "GET ELEMENT SIZE",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   list(
@@ -393,7 +393,7 @@ element_id_enabled <- function(self, private) {
   "!DEBUG element_id_enabled `private$id`"
   response <- private$session_private$makeRequest(
     "IS ELEMENT ENABLED",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   response$value
@@ -405,7 +405,7 @@ element_click <- function(self, private) {
   "!DEBUG element_click `private$id`"
   response <- private$session_private$makeRequest(
     "ELEMENT CLICK",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   invisible(private$session)
@@ -417,7 +417,7 @@ element_clear <- function(self, private) {
   "!DEBUG element_clear `private$id`"
   response <- private$session_private$makeRequest(
     "ELEMENT CLEAR",
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   invisible(self)

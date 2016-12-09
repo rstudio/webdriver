@@ -48,23 +48,23 @@ endpoints <- list(
   ## elements
   "FIND ELEMENT"         = "POST   /session/:sessionId/element",
   "FIND ELEMENT FROM ELEMENT"
-                         = "POST   /session/:sessionId/element/:element_id/element",
+                         = "POST   /session/:sessionId/element/:elementId/element",
   "FIND ELEMENTS"        = "POST   /session/:sessionId/elements",
   "FIND ELEMENTS FROM ELEMENT"
-                         = "POST   /session/:sessionId/element/:element_id/elements",
+                         = "POST   /session/:sessionId/element/:elementId/elements",
   ## In the standard this is a GET, but phantomjs expects a POST :(
   "GET ACTIVE ELEMENT"   = "POST   /session/:sessionId/element/active",
-  "IS ELEMENT SELECTED"  = "GET    /session/:sessionId/element/:element_id/selected",
-  "GET ELEMENT ATTRIBUTE"= "GET    /session/:sessionId/element/:element_id/attribute/:name",
-  "GET ELEMENT PROPERTY" = "GET    /session/:sessionId/element/:element_id/property/:name",
-  "GET ELEMENT CSS VALUE"= "GET    /session/:sessionId/element/:element_id/css/:property_name",
-  "GET ELEMENT TEXT"     = "GET    /session/:sessionId/element/:element_id/text",
-  "GET ELEMENT TAG NAME" = "GET    /session/:sessionId/element/:element_id/name",
-  "GET ELEMENT RECT"     = "GET    /session/:sessionId/element/:element_id/rect",
-  "IS ELEMENT ENABLED"   = "GET    /session/:sessionId/element/:element_id/enabled",
-  "ELEMENT CLICK"        = "POST   /session/:sessionId/element/:element_id/click",
-  "ELEMENT CLEAR"        = "POST   /session/:sessionId/element/:element_id/clear",
-  "ELEMENT SEND KEYS"    = "POST   /session/:sessionId/element/:element_id/value",
+  "IS ELEMENT SELECTED"  = "GET    /session/:sessionId/element/:elementId/selected",
+  "GET ELEMENT ATTRIBUTE"= "GET    /session/:sessionId/element/:elementId/attribute/:name",
+  "GET ELEMENT PROPERTY" = "GET    /session/:sessionId/element/:elementId/property/:name",
+  "GET ELEMENT CSS VALUE"= "GET    /session/:sessionId/element/:elementId/css/:property_name",
+  "GET ELEMENT TEXT"     = "GET    /session/:sessionId/element/:elementId/text",
+  "GET ELEMENT TAG NAME" = "GET    /session/:sessionId/element/:elementId/name",
+  "GET ELEMENT RECT"     = "GET    /session/:sessionId/element/:elementId/rect",
+  "IS ELEMENT ENABLED"   = "GET    /session/:sessionId/element/:elementId/enabled",
+  "ELEMENT CLICK"        = "POST   /session/:sessionId/element/:elementId/click",
+  "ELEMENT CLEAR"        = "POST   /session/:sessionId/element/:elementId/clear",
+  "ELEMENT SEND KEYS"    = "POST   /session/:sessionId/element/:elementId/value",
 
   "GET PAGE SOURCE"      = "GET    /session/:sessionId/source",
   ## "EXECUTE SCRIPT"       = "POST   /session/:sessionId/execute/sync",
@@ -92,7 +92,7 @@ endpoints <- list(
   ## screenshots
   "TAKE SCREENSHOT"      = "GET    /session/:sessionId/screenshot",
   "TAKE ELEMENT SCREENSHOT"
-                         = "GET    /session/:sessionId/element/:element_id/screenshot",
+                         = "GET    /session/:sessionId/element/:elementId/screenshot",
 
   ## -------------------------------------------------------------------
   ## Phantom JS specific endpoints
@@ -106,7 +106,7 @@ endpoints <- list(
   "GET LOG TYPES"        = "GET    /session/:sessionId/log/types",
   "READ LOG"             = "POST   /session/:sessionId/log",
   "UPLOAD FILE"          = "POST   /session/:sessionId/file",
-  "GET ELEMENT LOCATION" = "GET    /session/:sessionId/element/:element_id/location",
-  "GET ELEMENT SIZE"     = "GET    /session/:sessionId/element/:element_id/size",
-  "SET ELEMENT VALUE"    = "POST   /session/:sessionId/element/:element_id/value"
+  "GET ELEMENT LOCATION" = "GET    /session/:sessionId/element/:elementId/location",
+  "GET ELEMENT SIZE"     = "GET    /session/:sessionId/element/:elementId/size",
+  "SET ELEMENT VALUE"    = "POST   /session/:sessionId/element/:elementId/value"
 )

@@ -105,7 +105,7 @@ element_sendKeys <- function(self, private, ...) {
   response <- private$session_private$makeRequest(
     "ELEMENT SEND KEYS",
     list(value = I(paste(keys, collapse = ""))),
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   invisible(self)
