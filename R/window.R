@@ -9,7 +9,7 @@
 #' w$isActive()
 #' w$switchTo()
 #' w$maximize()
-#' w$get_size()
+#' w$getSize()
 #' w$set_size(width, height)
 #' w$get_position()
 #' w$set_position(x, y)
@@ -43,7 +43,7 @@
 #' \code{w$maximize} maximizes the window. Currently it sets it to
 #' a fixed size.
 #'
-#' \code{w$get_size} returns the size of the window, in a list with
+#' \code{w$getSize} returns the size of the window, in a list with
 #' elementh \code{width} and \code{height}, both integers.
 #'
 #' \code{w$set_size} sets the size of the window.
@@ -85,8 +85,8 @@ Window <- R6Class(
     maximize = function()
       window_maximize(self, private),
 
-    get_size = function()
-      window_get_size(self, private),
+    getSize = function()
+      window_getSize(self, private),
 
     set_size = function(width, height)
       window_set_size(self, private, width, height),
@@ -168,9 +168,9 @@ window_maximize <- function(self, private) {
   invisible(self)
 }
 
-window_get_size <- function(self, private) {
+window_getSize <- function(self, private) {
 
-  "!DEBUG window_get_size"
+  "!DEBUG window_getSize"
   response <- private$session_private$makeRequest(
     "GET WINDOW SIZE",
     params = list(window_id = private$id)

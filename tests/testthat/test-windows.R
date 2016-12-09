@@ -29,12 +29,12 @@ test_that("Window methods are OK", {
   expect_equal(s$getUrl(), server$url("/window1.html"))
 
   w1$set_size(800, 600)
-  expect_equal(w1$get_size(), list(width = 800, height = 600))
+  expect_equal(w1$getSize(), list(width = 800, height = 600))
 
   expect_equal(w1$get_position(), list(x = 0, y= 0))
 
   w1$maximize()
-  expect_equal(w1$get_size(), list(width = 1366, height = 768))
+  expect_equal(w1$getSize(), list(width = 1366, height = 768))
 
   w2$close()
   expect_equal(length(s$getAllWindows()), 0)
