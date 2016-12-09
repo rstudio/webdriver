@@ -11,7 +11,7 @@ test_that("can go to URL", {
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/check.html"))
-  src <- s$get_source()
+  src <- s$getSource()
   expect_match(src, "Hello there")
 })
 
@@ -28,15 +28,15 @@ test_that("basic operations", {
 
   ## $goBack
   s$go(server$url("/check2.html"))
-  expect_match(s$get_source(), "Hello again")
+  expect_match(s$getSource(), "Hello again")
   s$goBack()
   expect_equal(s$getUrl(), server$url("/check.html"))
-  expect_match(s$get_source(), "Hello there")
+  expect_match(s$getSource(), "Hello there")
 
   ## $goForward
   s$goForward()
   expect_equal(s$getUrl(), server$url("/check2.html"))
-  expect_match(s$get_source(), "Hello again")
+  expect_match(s$getSource(), "Hello again")
   s$goBack()
 
   ## $refresh, TODO: this would need a web app...
@@ -44,9 +44,9 @@ test_that("basic operations", {
   ## $getTitle
   expect_equal(s$getTitle(), "check")
 
-  ## $get_source
+  ## $getSource
   expect_equal(
-    gsub("\\s+", "", s$get_source()),
+    gsub("\\s+", "", s$getSource()),
     gsub(
       "\\s+", "",
       paste(readLines(file.path("web", "check.html")), collapse = "\n")

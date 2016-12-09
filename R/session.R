@@ -16,7 +16,7 @@
 #' s$goForward()
 #' s$refresh()
 #' s$getTitle()
-#' s$get_source()
+#' s$getSource()
 #' s$take_screenshot(file = NULL)
 #'
 #' s$find_element(css = NULL, link_text = NULL,
@@ -101,7 +101,7 @@
 #'
 #' \code{s$getTitle()} returns the title of the current page.
 #'
-#' \code{s$get_source()} returns the complete HTML source of a page,
+#' \code{s$getSource()} returns the complete HTML source of a page,
 #' in a character scalar.
 #'
 #' \code{s$take_screenshot()} takes a screenshot of the current page.
@@ -209,8 +209,8 @@ Session <- R6Class(
     getTitle = function()
       session_getTitle(self, private),
 
-    get_source = function()
-      session_get_source(self, private),
+    getSource = function()
+      session_getSource(self, private),
 
     take_screenshot = function(file = NULL)
       session_take_screenshot(self, private, file = file),
@@ -511,8 +511,8 @@ session_get_active_element <- function(self, private) {
 }
 
 
-session_get_source <- function(self, private) {
-  "!DEBUG session_get_source"
+session_getSource <- function(self, private) {
+  "!DEBUG session_getSource"
   response <- private$make_request(
     "GET PAGE SOURCE"
   )
