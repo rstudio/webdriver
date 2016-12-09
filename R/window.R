@@ -6,7 +6,7 @@
 #' wlist <- s$getAllWindows()
 #'
 #' w$close()
-#' w$is_active()
+#' w$isActive()
 #' w$switch_to()
 #' w$maximize()
 #' w$get_size()
@@ -35,7 +35,7 @@
 #'
 #' \code{w$close()} closes the window.
 #'
-#' \code{w$is_active()} returns \code{TRUE} if the window is active,
+#' \code{w$isActive()} returns \code{TRUE} if the window is active,
 #' \code{FALSE} otherwise.
 #'
 #' \code{w$switch_to} makes the window active.
@@ -72,8 +72,8 @@ Window <- R6Class(
     close = function()
       window_close(self, private),
 
-    is_active = function()
-      window_is_active(self, private),
+    isActive = function()
+      window_isActive(self, private),
 
     switch_to = function()
       window_switch_to(self, private),
@@ -129,9 +129,9 @@ window_close <- function(self, private) {
   invisible(self)
 }
 
-window_is_active <- function(self, private) {
+window_isActive <- function(self, private) {
 
-  "!DEBUG window_is_active"
+  "!DEBUG window_isActive"
   active <- private$session$getWindow()
   active$.__enclos_env__$private$id == private$id
 }

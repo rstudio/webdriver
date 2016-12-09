@@ -7,7 +7,7 @@ test_that("Window methods are OK", {
   on.exit(s$delete(), add = TRUE)
 
   w1 <- s$getWindow()
-  expect_true(w1$is_active())
+  expect_true(w1$isActive())
 
   ## Click opens another window
   s$go(server$url("/window1.html"))
@@ -15,10 +15,10 @@ test_that("Window methods are OK", {
 
   ## Switch to the new window
   allw <- s$getAllWindows()
-  if (allw[[1]]$is_active()) allw[[2]]$switch_to() else allw[[1]]$switch_to()
+  if (allw[[1]]$isActive()) allw[[2]]$switch_to() else allw[[1]]$switch_to()
   w2 <- s$getWindow()
-  expect_false(w1$is_active())
-  expect_true(w2$is_active())
+  expect_false(w1$isActive())
+  expect_true(w2$isActive())
 
   expect_equal(s$getUrl(), server$url("/window2.html"))
 
