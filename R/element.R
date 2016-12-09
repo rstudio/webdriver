@@ -17,7 +17,7 @@
 #' e$getClass()
 #' e$getCssValue(name)
 #' e$getText()
-#' e$get_name()
+#' e$getName()
 #' e$get_data(name)
 #' e$get_rect()
 #' e$is_enabled()
@@ -88,7 +88,7 @@
 #'
 #' \code{e$getText()} returns the \code{innerText} on an element.
 #'
-#' \code{e$get_name()} returns the tag name of an element.
+#' \code{e$getName()} returns the tag name of an element.
 #'
 #' \code{e$get_data()} is a shorthand for querying \code{data-*} attributes.
 #'
@@ -165,8 +165,8 @@ Element <- R6Class(
     getText = function()
       element_getText(self, private),
 
-    get_name = function()
-      element_get_name(self, private),
+    getName = function()
+      element_getName(self, private),
 
     get_data = function(name)
       element_get_data(self, private, name),
@@ -352,9 +352,9 @@ element_get_data <- function(self, private, name) {
   self$getAttribute(paste0("data-", name))
 }
 
-element_get_name <- function(self, private) {
+element_getName <- function(self, private) {
 
-  "!DEBUG element_get_name `private$id`"
+  "!DEBUG element_getName `private$id`"
   response <- private$session_private$makeRequest(
     "GET ELEMENT TAG NAME",
     params = list(element_id = private$id)
