@@ -1,7 +1,7 @@
 
-session_get_log_types <- function(self, private) {
+session_getLogTypes <- function(self, private) {
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "GET LOG TYPES"
   )
 
@@ -10,12 +10,12 @@ session_get_log_types <- function(self, private) {
 
 #' @importFrom utils tail
 
-session_read_log <- function(self, private, type) {
+session_readLog <- function(self, private, type) {
 
-  "!DEBUG session_read_log `type`"
+  "!DEBUG session_readLog `type`"
   assert_string(type)
 
-  response <- private$make_request(
+  response <- private$makeRequest(
     "READ LOG",
     list(type = type)
   )
@@ -30,10 +30,10 @@ session_read_log <- function(self, private, type) {
   if (identical(private$parameters$browserName, "phantomjs") &&
       !is.null(ver <- private$parameters$version) &&
       numeric_version(ver) <= numeric_version("2.1.1")) {
-    if (private$num_log_lines_shown != 0) {
-      logs <- tail(logs, - private$num_log_lines_shown)
+    if (private$numLogLinesShown != 0) {
+      logs <- tail(logs, - private$numLogLinesShown)
     }
-    private$num_log_lines_shown <- length(response$value)
+    private$numLogLinesShown <- length(response$value)
   }
 
   make_logs(logs)

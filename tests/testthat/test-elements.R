@@ -1,81 +1,81 @@
 
-context("element")
+context("Element")
 
-test_that("element methods are OK", {
+test_that("Element methods are OK", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  ## TODO: is_selected
+  ## TODO: isSelected
 
-  el <- s$find_element(css = ".foo")
-  expect_equal(el$get_attribute("class"), "foo bar")
-  expect_equal(el$get_class(), c("foo", "bar"))
-  expect_null(el$get_attribute("xxx"))
+  el <- s$findElement(css = ".foo")
+  expect_equal(el$getAttribute("class"), "foo bar")
+  expect_equal(el$getClass(), c("foo", "bar"))
+  expect_null(el$getAttribute("xxx"))
 
-  expect_equal(el$get_css_value("color"), "rgba(255, 0, 0, 1)")
+  expect_equal(el$getCssValue("color"), "rgba(255, 0, 0, 1)")
 
-  expect_equal(el$get_text(), "This is foo!")
+  expect_equal(el$getText(), "This is foo!")
 
-  expect_equal(el$get_name(), "p")
+  expect_equal(el$getName(), "p")
 
-  sel <- s$find_element(css = "form select")
-  expect_true(sel$is_enabled())
-  sel2 <- s$find_element(css = ".disabledselect")
-  expect_false(sel2$is_enabled())
+  sel <- s$findElement(css = "form select")
+  expect_true(sel$isEnabled())
+  sel2 <- s$findElement(css = ".disabledselect")
+  expect_false(sel2$isEnabled())
 
-  el <- s$find_element(css = ".clickme a")
+  el <- s$findElement(css = ".clickme a")
   el$click()
-  expect_equal(s$get_url(), server$url("/check.html"))
-  s$go_back()
+  expect_equal(s$getUrl(), server$url("/check.html"))
+  s$goBack()
 
-  el <- s$find_element(css = "#firstname")
-  el$send_keys("Gabor")
-  expect_equal(el$get_attribute("value"), "Gabor")
-  expect_equal(el$get_value(), "Gabor")
+  el <- s$findElement(css = "#firstname")
+  el$sendKeys("Gabor")
+  expect_equal(el$getAttribute("value"), "Gabor")
+  expect_equal(el$getValue(), "Gabor")
   el$clear()
-  expect_equal(el$get_attribute("value"), "")
-  expect_equal(el$get_value(), "")
+  expect_equal(el$getAttribute("value"), "")
+  expect_equal(el$getValue(), "")
 
-  el$set_value("Not Gabor")
-  expect_equal(el$get_value(), "Not Gabor")
+  el$setValue("Not Gabor")
+  expect_equal(el$getValue(), "Not Gabor")
   el$clear()
 
-  form <- s$find_element(css = "form")
-  pars <- form$find_elements(css = "p")
+  form <- s$findElement(css = "form")
+  pars <- form$findElements(css = "p")
   expect_equal(length(pars), 7)
-  expect_true(is(pars[[1]], "element"))
+  expect_true(is(pars[[1]], "Element"))
 
-  fn <- s$find_element("#firstname")
-  expect_equal(fn$get_data("foo"), "bar")
+  fn <- s$findElement("#firstname")
+  expect_equal(fn$getData("foo"), "bar")
 })
 
 test_that("move mouse cursor", {
-  ## TODO: we need session$click to test this
+  ## TODO: we need Session$click to test this
 })
 
 test_that("element rect", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  el <- s$find_element(css = ".foo")
-  rect <- el$get_rect()
+  el <- s$findElement(css = ".foo")
+  rect <- el$getRect()
   expect_equal(names(rect), c("x", "y", "width", "height"))
 })
 
 test_that("sending special keys", {
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  textarea <- s$find_element("textarea")
-  textarea$send_keys(key$control, "a")  # select everything
-  textarea$send_keys(key$delete)        # delete
-  textarea$send_keys("line1", key$enter, "line2", key$enter)
+  textarea <- s$findElement("textarea")
+  textarea$sendKeys(key$control, "a")  # select everything
+  textarea$sendKeys(key$delete)        # delete
+  textarea$sendKeys("line1", key$enter, "line2", key$enter)
   expect_equal(
-    textarea$get_value(),
+    textarea$getValue(),
     "line1\nline2\n"
   )
 })

@@ -3,50 +3,50 @@ context("errors")
 
 test_that("no window", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   ## Close the window
-  s$get_window()$close()
+  s$getWindow()$close()
 
   expect_error(s$go("http://r-hub.io"), "Window handle/name is invalid")
-  expect_error(s$get_url(), "Window handle/name is invalid")
-  expect_error(s$go_back(), "Window handle/name is invalid")
-  expect_error(s$go_forward(), "Window handle/name is invalid")
+  expect_error(s$getUrl(), "Window handle/name is invalid")
+  expect_error(s$goBack(), "Window handle/name is invalid")
+  expect_error(s$goForward(), "Window handle/name is invalid")
   expect_error(s$refresh(), "Window handle/name is invalid")
-  expect_error(s$get_title(), "Window handle/name is invalid")
-  expect_error(s$get_source(), "Window handle/name is invalid")
-  expect_error(s$take_screenshot(), "Window handle/name is invalid")
+  expect_error(s$getTitle(), "Window handle/name is invalid")
+  expect_error(s$getSource(), "Window handle/name is invalid")
+  expect_error(s$takeScreenshot(), "Window handle/name is invalid")
 
   ## This one does not give a proper error message
-  expect_error(s$find_element(css = "<p>"), "WebDriver error")
+  expect_error(s$findElement(css = "<p>"), "WebDriver error")
 })
 
 test_that("no window", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
-  s$get_window()$close()
+  s$getWindow()$close()
 
-  expect_error(s$get_window(), "Current window handle invalid")
+  expect_error(s$getWindow(), "Current window handle invalid")
 })
 
 test_that("no elements", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
-  expect_error(s$find_element(css = "foobar"), "Unable to find element")
+  expect_error(s$findElement(css = "foobar"), "Unable to find element")
 })
 
-test_that("is_selected for non-selectable elements", {
+test_that("isSelected for non-selectable elements", {
 
-  s <- session$new(port = phantom$port)
+  s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
 
   s$go(server$url("/check.html"))
-  el <- s$find_element(css = "p")
+  el <- s$findElement(css = "p")
 
-  expect_error(el$is_selected(), "Element is not selectable")
+  expect_error(el$isSelected(), "Element is not selectable")
 })

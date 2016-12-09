@@ -11,4 +11,3 @@ headless) web browser, and can be used to test web applications,
 including 'Shiny' apps. In theory it works with any 'WebDriver'
 implementation, but it was only tested with 'PhantomJS'.
 }
-

@@ -31,7 +31,7 @@ assert_timeout <- assert_count
 
 assert_session <- function(x) {
   stopifnot(
-    inherits(x, "session")
+    inherits(x, "Session")
   )
 }
 

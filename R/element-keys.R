@@ -13,21 +13,21 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' el$send_keys("xyz")
-#' el$send_keys("x", "y", "z")
-#' el$send_keys("username", key$enter, "password", key$enter)
+#' el$sendKeys("xyz")
+#' el$sendKeys("x", "y", "z")
+#' el$sendKeys("username", key$enter, "password", key$enter)
 #'
 #' ## Sending CTRL+A
-#' el$send_keys(key$control, "a")
+#' el$sendKeys(key$control, "a")
 #'
 #' ## Note that modifier keys (control, alt, shift, meta) are sticky,
-#' ## they remain in effect in the rest of the send_keys() call. E.g.
+#' ## they remain in effect in the rest of the sendKeys() call. E.g.
 #' ## this sends CTRL+X and CTRL+S
-#' el$send_keys(key$control, "x", "s")
+#' el$sendKeys(key$control, "x", "s")
 #'
 #' ## You will need multiple calls to release control and send CTRL+X S
-#' el$send_keys(key$control, "x")
-#' el$send_keys("s")
+#' el$sendKeys(key$control, "x")
+#' el$sendKeys("s")
 #' }
 #'
 #' @export
@@ -94,18 +94,18 @@ key <- list(
 #'
 #' @keywords internal
 
-element_send_keys <- function(self, private, ...) {
+element_sendKeys <- function(self, private, ...) {
 
   keys <- list(...)
   if (any(vapply(keys, is.null, TRUE))) {
     stop("NULL key in send_key, probably a typo")
   }
 
-  "!DEBUG element_send_keys `private$id`"
-  response <- private$session_private$make_request(
+  "!DEBUG element_sendKeys `private$id`"
+  response <- private$session_private$makeRequest(
     "ELEMENT SEND KEYS",
     list(value = I(paste(keys, collapse = ""))),
-    params = list(element_id = private$id)
+    params = list(elementId = private$id)
   )
 
   invisible(self)

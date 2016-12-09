@@ -4,10 +4,10 @@
 \alias{run_phantomjs}
 \title{Start up phantomjs on localhost, and a random port}
 \usage{
-run_phantomjs(debug_level = c("INFO", "ERROR", "WARN", "DEBUG"))
+run_phantomjs(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"))
 }
 \arguments{
-\item{debug_level}{Phantom.js debug level, possible values:
+\item{debugLevel}{Phantom.js debug level, possible values:
 \code{"INFO"}, \code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.}
 }
 \value{
@@ -18,4 +18,3 @@ A list of \code{process}, the \code{processx::process} object,
 Throws and error if phantom cannot be found, or cannot be started.
 It works with a timeout of five seconds.
 }
-
