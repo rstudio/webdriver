@@ -21,9 +21,9 @@ test_that("Element methods are OK", {
   expect_equal(el$getName(), "p")
 
   sel <- s$findElement(css = "form select")
-  expect_true(sel$is_enabled())
+  expect_true(sel$isEnabled())
   sel2 <- s$findElement(css = ".disabledselect")
-  expect_false(sel2$is_enabled())
+  expect_false(sel2$isEnabled())
 
   el <- s$findElement(css = ".clickme a")
   el$click()

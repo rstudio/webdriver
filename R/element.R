@@ -20,7 +20,7 @@
 #' e$getName()
 #' e$getData(name)
 #' e$getRect()
-#' e$is_enabled()
+#' e$isEnabled()
 #' e$click()
 #' e$clear()
 #' e$send_keys(...)
@@ -96,7 +96,7 @@
 #' named list with components \code{x}, \code{y}, \code{height} and
 #' \code{width}.
 #'
-#' \code{e$is_enabled()} returns \code{TRUE} if the element is enabled,
+#' \code{e$isEnabled()} returns \code{TRUE} if the element is enabled,
 #' \code{FALSE} otherwise.
 #'
 #' \code{e$click()} scrolls the element into view, and clicks the
@@ -174,7 +174,7 @@ Element <- R6Class(
     getRect = function()
       element_getRect(self, private),
 
-    is_enabled = function()
+    isEnabled = function()
       element_id_enabled(self, private),
 
     click = function()
