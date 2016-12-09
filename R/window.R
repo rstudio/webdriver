@@ -11,7 +11,7 @@
 #' w$maximize()
 #' w$getSize()
 #' w$setSize(width, height)
-#' w$get_position()
+#' w$getPosition()
 #' w$set_position(x, y)
 #' }
 #'
@@ -48,7 +48,7 @@
 #'
 #' \code{w$setSize} sets the size of the window.
 #'
-#' \code{w$get_position} returns the position of the window on the
+#' \code{w$getPosition} returns the position of the window on the
 #' screen. Phantom.js being headless, it always returns
 #' \code{list(x = 0, y = 0)}, and it is included to have a complete
 #' impelementation of the WebDriver standard.
@@ -91,8 +91,8 @@ Window <- R6Class(
     setSize = function(width, height)
       window_setSize(self, private, width, height),
 
-    get_position = function()
-      window_get_position(self, private),
+    getPosition = function()
+      window_getPosition(self, private),
 
     set_position = function(x, y)
       window_set_position(self, private, x, y)
@@ -197,9 +197,9 @@ window_setSize <- function(self, private, width, height) {
   invisible(self)
 }
 
-window_get_position <- function(self, private) {
+window_getPosition <- function(self, private) {
 
-  "!DEBUG window_get_position"
+  "!DEBUG window_getPosition"
   response <- private$session_private$makeRequest(
     "GET WINDOW POSITION",
     params = list(window_id = private$id)

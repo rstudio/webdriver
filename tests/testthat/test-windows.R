@@ -31,7 +31,7 @@ test_that("Window methods are OK", {
   w1$setSize(800, 600)
   expect_equal(w1$getSize(), list(width = 800, height = 600))
 
-  expect_equal(w1$get_position(), list(x = 0, y= 0))
+  expect_equal(w1$getPosition(), list(x = 0, y= 0))
 
   w1$maximize()
   expect_equal(w1$getSize(), list(width = 1366, height = 768))
