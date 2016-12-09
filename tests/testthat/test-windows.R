@@ -20,13 +20,13 @@ test_that("window methods are OK", {
   expect_false(w1$is_active())
   expect_true(w2$is_active())
 
-  expect_equal(s$get_url(), server$url("/window2.html"))
+  expect_equal(s$getUrl(), server$url("/window2.html"))
 
   w2$close()
   expect_equal(length(s$get_all_windows()), 1)
 
   w1$switch_to()
-  expect_equal(s$get_url(), server$url("/window1.html"))
+  expect_equal(s$getUrl(), server$url("/window1.html"))
 
   w1$set_size(800, 600)
   expect_equal(w1$get_size(), list(width = 800, height = 600))

@@ -10,7 +10,7 @@ test_that("no window", {
   s$get_window()$close()
 
   expect_error(s$go("http://r-hub.io"), "Window handle/name is invalid")
-  expect_error(s$get_url(), "Window handle/name is invalid")
+  expect_error(s$getUrl(), "Window handle/name is invalid")
   expect_error(s$go_back(), "Window handle/name is invalid")
   expect_error(s$go_forward(), "Window handle/name is invalid")
   expect_error(s$refresh(), "Window handle/name is invalid")

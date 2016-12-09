@@ -27,7 +27,7 @@ test_that("element methods are OK", {
 
   el <- s$find_element(css = ".clickme a")
   el$click()
-  expect_equal(s$get_url(), server$url("/check.html"))
+  expect_equal(s$getUrl(), server$url("/check.html"))
   s$go_back()
 
   el <- s$find_element(css = "#firstname")

@@ -23,19 +23,19 @@ test_that("basic operations", {
   ## $go
   s$go(server$url("/check.html"))
 
-  ## $get_url
-  expect_equal(s$get_url(), server$url("/check.html"))
+  ## $getUrl
+  expect_equal(s$getUrl(), server$url("/check.html"))
 
   ## $go_back
   s$go(server$url("/check2.html"))
   expect_match(s$get_source(), "Hello again")
   s$go_back()
-  expect_equal(s$get_url(), server$url("/check.html"))
+  expect_equal(s$getUrl(), server$url("/check.html"))
   expect_match(s$get_source(), "Hello there")
 
   ## $go_forward
   s$go_forward()
-  expect_equal(s$get_url(), server$url("/check2.html"))
+  expect_equal(s$getUrl(), server$url("/check2.html"))
   expect_match(s$get_source(), "Hello again")
   s$go_back()
 

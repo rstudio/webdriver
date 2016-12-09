@@ -11,7 +11,7 @@
 #' s$status()
 #'
 #' s$go(url)
-#' s$get_url()
+#' s$getUrl()
 #' s$go_back()
 #' s$go_forward()
 #' s$refresh()
@@ -90,7 +90,7 @@
 #'
 #' \code{s$go()} navigates to the supplied URL.
 #'
-#' \code{s$get_url()} returns the current URL.
+#' \code{s$getUrl()} returns the current URL.
 #'
 #' \code{s$go_back()} is like the web browser's back button. It goes back
 #' to the previous page.
@@ -194,8 +194,8 @@ Session <- R6Class(
     go = function(url)
       session_go(self, private, url),
 
-    get_url = function()
-      session_get_url(self, private),
+    getUrl = function()
+      session_getUrl(self, private),
 
     go_back = function()
       session_go_back(self, private),
@@ -372,9 +372,9 @@ session_go <- function(self, private, url) {
 }
 
 
-session_get_url <- function(self, private) {
+session_getUrl <- function(self, private) {
 
-  "!DEBUG session_get_url"
+  "!DEBUG session_getUrl"
   response <- private$make_request(
     "GET CURRENT URL"
   )
