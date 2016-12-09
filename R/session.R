@@ -440,7 +440,7 @@ session_findElement <- function(self, private, css, link_text,
     )
   )
 
-  element$new(
+  Element$new(
     id = response$value$ELEMENT,
     session = self,
     session_private = private
@@ -487,7 +487,7 @@ session_findElements <- function(self, private, css, link_text,
   )
 
   lapply(response$value, function(el) {
-    element$new(
+    Element$new(
       id = el$ELEMENT,
       session = self,
       session_private = private
@@ -503,7 +503,7 @@ session_getActiveElement <- function(self, private) {
     "GET ACTIVE ELEMENT"
   )
 
-  element$new(
+  Element$new(
     id = response$value$ELEMENT,
     session = self,
     session_private = private
@@ -590,7 +590,7 @@ prepare_execute_args <- function(...) {
   assert_unnamed(args)
 
   lapply(args, function(x) {
-    if (inherits(x, "element") && inherits(x, "R6")) {
+    if (inherits(x, "Element") && inherits(x, "R6")) {
       list(ELEMENT = x$.__enclos_env__$private$id)
     } else {
       x
@@ -603,7 +603,7 @@ parse_script_response <- function(self, private, value) {
       names(value) == "ELEMENT" && is.character(value[[1]]) &&
       length(value[[1]]) == 1) {
     ## Single element
-    element$new(value[[1]], self, private)
+    Element$new(value[[1]], self, private)
 
   } else if (is.list(value)) {
     ## List of things, look if one of them is an element

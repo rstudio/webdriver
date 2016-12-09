@@ -1,7 +1,7 @@
 
-context("element")
+context("Element")
 
-test_that("element methods are OK", {
+test_that("Element methods are OK", {
 
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
@@ -45,7 +45,7 @@ test_that("element methods are OK", {
   form <- s$findElement(css = "form")
   pars <- form$findElements(css = "p")
   expect_equal(length(pars), 7)
-  expect_true(is(pars[[1]], "element"))
+  expect_true(is(pars[[1]], "Element"))
 
   fn <- s$findElement("#firstname")
   expect_equal(fn$get_data("foo"), "bar")

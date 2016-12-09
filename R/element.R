@@ -32,7 +32,7 @@
 #'
 #' @section Arguments:
 #' \describe{
-#'   \item{e}{An \code{element} object.}
+#'   \item{e}{An \code{Element} object.}
 #'   \item{s}{A \code{\link{Session}} object.}
 #'   \item{css}{Css selector to find an HTML element.}
 #'   \item{link_text}{Find \code{<a>} HTML elements based on their
@@ -56,18 +56,18 @@
 #'
 #' @section Details:
 #'
-#' To create \code{element} objects, you need to use the \code{findElement}
+#' To create \code{Element} objects, you need to use the \code{findElement}
 #' (or \code{findElement}) method of a \code{\link{Session}} object.
 #'
 #' \code{e$findElement()} finds the \emph{next} HTML element from the
 #' current one. You need to specify one of the \code{css}, \code{link_text},
 #' \code{partial_link_text} and \code{xpath} arguments. It returns a new
-#' \code{element} object.
+#' \code{Element} object.
 #'
 #' \code{e$findElements()} finds all matching HTML elements starting from
 #' the current element. You need to specify one of the \code{css},
 #' \code{link_text}, \code{partial_link_text} and \code{xpath} arguments.
-#' It returns a list of newly created \code{element} objects.
+#' It returns a list of newly created \code{Element} objects.
 #'
 #' \code{e$is_selected()} returns \code{TRUE} is the element is currently
 #' selected, and \code{FALSE} otherwise.
@@ -123,12 +123,12 @@
 #' The first argument of the script (\code{arguments[0]}) will always
 #' hold the element object itself.
 #'
-#' @name element
+#' @name Element
 #' @importFrom R6 R6Class
 NULL
 
-element <- R6Class(
-  "element",
+Element <- R6Class(
+  "Element",
   public = list(
 
     initialize = function(id, session, session_private)
@@ -236,7 +236,7 @@ element_findElement <- function(self, private, css, link_text,
     list(element_id = private$id)
   )
 
-  element$new(
+  Element$new(
     id = response$value$ELEMENT,
     session = private$session,
     session_private = private$session_private
@@ -260,7 +260,7 @@ element_findElements <- function(self, private, css, link_text,
   )
 
   lapply(response$value, function(el) {
-    element$new(
+    Element$new(
       id = el$ELEMENT,
       session = private$session,
       session_private = private$session_private

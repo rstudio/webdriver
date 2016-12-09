@@ -90,7 +90,7 @@ test_that("find elements", {
 
   pars <- s$findElements(css = "form p")
   expect_equal(length(pars), 7)
-  expect_true(is(pars[[1]], "element"))
+  expect_true(is(pars[[1]], "Element"))
 })
 
 test_that("execute script (sync)", {
@@ -159,23 +159,23 @@ test_that("execute script and return elements", {
 
   ## Single element
   ret <- s$executeScript("return arguments[0];", el)
-  expect_true(inherits(ret, "element"))
+  expect_true(inherits(ret, "Element"))
 
   ## List of elements
   ret <- s$executeScript("return arguments;", el, el, el)
   expect_true(is.list(ret))
   expect_equal(length(ret), 3)
-  expect_true(inherits(ret[[1]], "element"))
-  expect_true(inherits(ret[[2]], "element"))
-  expect_true(inherits(ret[[3]], "element"))
+  expect_true(inherits(ret[[1]], "Element"))
+  expect_true(inherits(ret[[2]], "Element"))
+  expect_true(inherits(ret[[3]], "Element"))
 
   ## List of elements and other stuff
   ret <- s$executeScript("return arguments;", el, 42, el, 42 * 42)
   expect_true(is.list(ret))
   expect_equal(length(ret), 4)
-  expect_true(inherits(ret[[1]], "element"))
+  expect_true(inherits(ret[[1]], "Element"))
   expect_equal(ret[[2]], 42)
-  expect_true(inherits(ret[[3]], "element"))
+  expect_true(inherits(ret[[3]], "Element"))
   expect_equal(ret[[4]], 42 * 42)
 })
 
