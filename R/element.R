@@ -15,7 +15,7 @@
 #' e$setValue(value)
 #' e$getAttribute(name)
 #' e$getClass()
-#' e$get_css_value(name)
+#' e$getCssValue(name)
 #' e$get_text()
 #' e$get_name()
 #' e$get_data(name)
@@ -84,7 +84,7 @@
 #' \code{e$getClass()} uses \code{e$getAttribute} to parse the
 #' \sQuote{class} attribute into a character vector.
 #'
-#' \code{e$get_css_value()} queries a CSS property of an element.
+#' \code{e$getCssValue()} queries a CSS property of an element.
 #'
 #' \code{e$get_text()} returns the \code{innerText} on an element.
 #'
@@ -159,8 +159,8 @@ Element <- R6Class(
     getClass = function()
       element_getClass(self, private),
 
-    get_css_value = function(name)
-      element_get_css_value(self, private, name),
+    getCssValue = function(name)
+      element_getCssValue(self, private, name),
 
     get_text = function()
       element_get_text(self, private),
@@ -320,9 +320,9 @@ element_getClass <- function(self, private) {
   strsplit(class, "\\s+")[[1]]
 }
 
-element_get_css_value <- function(self, private, name) {
+element_getCssValue <- function(self, private, name) {
 
-  "!DEBUG element_get_css_value `private$id` `name`"
+  "!DEBUG element_getCssValue `private$id` `name`"
   assert_string(name)
 
   response <- private$session_private$makeRequest(
