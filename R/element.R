@@ -16,7 +16,7 @@
 #' e$getAttribute(name)
 #' e$getClass()
 #' e$getCssValue(name)
-#' e$get_text()
+#' e$getText()
 #' e$get_name()
 #' e$get_data(name)
 #' e$get_rect()
@@ -86,7 +86,7 @@
 #'
 #' \code{e$getCssValue()} queries a CSS property of an element.
 #'
-#' \code{e$get_text()} returns the \code{innerText} on an element.
+#' \code{e$getText()} returns the \code{innerText} on an element.
 #'
 #' \code{e$get_name()} returns the tag name of an element.
 #'
@@ -162,8 +162,8 @@ Element <- R6Class(
     getCssValue = function(name)
       element_getCssValue(self, private, name),
 
-    get_text = function()
-      element_get_text(self, private),
+    getText = function()
+      element_getText(self, private),
 
     get_name = function()
       element_get_name(self, private),
@@ -334,9 +334,9 @@ element_getCssValue <- function(self, private, name) {
 }
 
 
-element_get_text <- function(self, private) {
+element_getText <- function(self, private) {
 
-  "!DEBUG element_get_text `private$id`"
+  "!DEBUG element_getText `private$id`"
   response <- private$session_private$makeRequest(
     "GET ELEMENT TEXT",
     params = list(element_id = private$id)

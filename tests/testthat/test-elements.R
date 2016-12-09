@@ -16,7 +16,7 @@ test_that("Element methods are OK", {
 
   expect_equal(el$getCssValue("color"), "rgba(255, 0, 0, 1)")
 
-  expect_equal(el$get_text(), "This is foo!")
+  expect_equal(el$getText(), "This is foo!")
 
   expect_equal(el$get_name(), "p")
 

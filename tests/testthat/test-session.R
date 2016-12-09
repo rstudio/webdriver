@@ -73,20 +73,20 @@ test_that("find elements", {
   s$go(server$url("/elements.html"))
 
   el <- s$findElement(css = ".foo")
-  expect_equal(el$get_text(), "This is foo!")
+  expect_equal(el$getText(), "This is foo!")
 
   el2 <- s$findElement(link_text = "R project web site")
-  expect_equal(el2$get_text(), "R project web site")
+  expect_equal(el2$getText(), "R project web site")
 
   el3 <- s$findElement(partial_link_text = "project web")
-  expect_equal(el3$get_text(), "R project web site")
+  expect_equal(el3$getText(), "R project web site")
 
   el4 <- s$findElement(xpath = "//body/p/a")
-  expect_equal(el4$get_text(), "R project web site")
+  expect_equal(el4$getText(), "R project web site")
 
   el4$send_keys("")
   el5 <- s$getActiveElement()
-  expect_equal(el5$get_text(), "R project web site")
+  expect_equal(el5$getText(), "R project web site")
 
   pars <- s$findElements(css = "form p")
   expect_equal(length(pars), 7)
