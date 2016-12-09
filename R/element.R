@@ -2,12 +2,12 @@
 #' HTML element
 #'
 #' @section Usage:
-#' \preformatted{e <- s$findElement(css = NULL, link_text = NULL,
+#' \preformatted{e <- s$findElement(css = NULL, linkText = NULL,
 #'     partialLinkText = NULL, xpath = NULL)
 #'
-#' e$findElement(css = NULL, link_text = NULL,
+#' e$findElement(css = NULL, linkText = NULL,
 #'     partialLinkText = NULL, xpath = NULL)
-#' e$findElements(css = NULL, link_text = NULL,
+#' e$findElements(css = NULL, linkText = NULL,
 #'     partialLinkText = NULL, xpath = NULL)
 #'
 #' e$isSelected()
@@ -35,7 +35,7 @@
 #'   \item{e}{An \code{Element} object.}
 #'   \item{s}{A \code{\link{Session}} object.}
 #'   \item{css}{Css selector to find an HTML element.}
-#'   \item{link_text}{Find \code{<a>} HTML elements based on their
+#'   \item{linkText}{Find \code{<a>} HTML elements based on their
 #'     \code{innerText}.}
 #'   \item{partialLinkText}{Find \code{<a>} HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
@@ -60,13 +60,13 @@
 #' (or \code{findElement}) method of a \code{\link{Session}} object.
 #'
 #' \code{e$findElement()} finds the \emph{next} HTML element from the
-#' current one. You need to specify one of the \code{css}, \code{link_text},
+#' current one. You need to specify one of the \code{css}, \code{linkText},
 #' \code{partialLinkText} and \code{xpath} arguments. It returns a new
 #' \code{Element} object.
 #'
 #' \code{e$findElements()} finds all matching HTML elements starting from
 #' the current element. You need to specify one of the \code{css},
-#' \code{link_text}, \code{partialLinkText} and \code{xpath} arguments.
+#' \code{linkText}, \code{partialLinkText} and \code{xpath} arguments.
 #' It returns a list of newly created \code{Element} objects.
 #'
 #' \code{e$isSelected()} returns \code{TRUE} is the element is currently
@@ -134,14 +134,14 @@ Element <- R6Class(
     initialize = function(id, session, session_private)
       element_initialize(self, private, id, session, session_private),
 
-    findElement = function(css = NULL, link_text = NULL,
+    findElement = function(css = NULL, linkText = NULL,
       partialLinkText = NULL, xpath = NULL)
-      element_findElement(self, private, css, link_text,
+      element_findElement(self, private, css, linkText,
                            partialLinkText, xpath),
 
-    findElements = function(css = NULL, link_text = NULL,
+    findElements = function(css = NULL, linkText = NULL,
       partialLinkText = NULL, xpath = NULL)
-      element_findElements(self, private, css, link_text,
+      element_findElements(self, private, css, linkText,
                             partialLinkText, xpath),
 
     isSelected = function()
@@ -221,11 +221,11 @@ element_initialize <- function(self, private, id, session,
 }
 
 
-element_findElement <- function(self, private, css, link_text,
+element_findElement <- function(self, private, css, linkText,
                                  partialLinkText, xpath) {
 
-  "!DEBUG element_findElement `css %||% link_text %||% partialLinkText %||% xpath`"
-  find_expr <- parse_find_expr(css, link_text, partialLinkText, xpath)
+  "!DEBUG element_findElement `css %||% linkText %||% partialLinkText %||% xpath`"
+  find_expr <- parse_find_expr(css, linkText, partialLinkText, xpath)
 
   response <- private$session_private$makeRequest(
     "FIND ELEMENT FROM ELEMENT",
@@ -244,11 +244,11 @@ element_findElement <- function(self, private, css, link_text,
 }
 
 
-element_findElements <- function(self, private, css, link_text,
+element_findElements <- function(self, private, css, linkText,
                                   partialLinkText, xpath) {
 
-  "!DEBUG element_findElements `css %||% link_text %||% partialLinkText %||% xpath`"
-  find_expr <- parse_find_expr(css, link_text, partialLinkText, xpath)
+  "!DEBUG element_findElements `css %||% linkText %||% partialLinkText %||% xpath`"
+  find_expr <- parse_find_expr(css, linkText, partialLinkText, xpath)
 
   response <- private$session_private$makeRequest(
     "FIND ELEMENTS FROM ELEMENT",

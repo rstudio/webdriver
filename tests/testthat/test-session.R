@@ -75,7 +75,7 @@ test_that("find elements", {
   el <- s$findElement(css = ".foo")
   expect_equal(el$getText(), "This is foo!")
 
-  el2 <- s$findElement(link_text = "R project web site")
+  el2 <- s$findElement(linkText = "R project web site")
   expect_equal(el2$getText(), "R project web site")
 
   el3 <- s$findElement(partialLinkText = "project web")

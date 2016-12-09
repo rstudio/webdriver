@@ -19,9 +19,9 @@
 #' s$getSource()
 #' s$takeScreenshot(file = NULL)
 #'
-#' s$findElement(css = NULL, link_text = NULL,
+#' s$findElement(css = NULL, linkText = NULL,
 #'     partialLinkText = NULL, xpath = NULL)
-#' s$findElements(css = NULL, link_text = NULL,
+#' s$findElements(css = NULL, linkText = NULL,
 #'     partialLinkText = NULL, xpath = NULL)
 #'
 #' s$executeScript(script, ...)
@@ -50,7 +50,7 @@
 #'   \item{file}{File name to save the screenshot to. If \code{NULL}, then
 #'     it will be shown on the R graphics device.}
 #'   \item{css}{Css selector to find an HTML element.}
-#'   \item{link_text}{Find HTML elements based on their \code{innerText}.}
+#'   \item{linkText}{Find HTML elements based on their \code{innerText}.}
 #'   \item{partialLinkText}{Find HTML elements based on their
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
@@ -217,14 +217,14 @@ Session <- R6Class(
 
     ## Elements ------------------------------------------------
 
-    findElement = function(css = NULL, link_text = NULL,
+    findElement = function(css = NULL, linkText = NULL,
       partialLinkText = NULL, xpath = NULL)
-      session_findElement(self, private, css, link_text,
+      session_findElement(self, private, css, linkText,
                            partialLinkText, xpath),
 
-    findElements = function(css = NULL, link_text = NULL,
+    findElements = function(css = NULL, linkText = NULL,
       partialLinkText = NULL, xpath = NULL)
-      session_findElements(self, private, css, link_text,
+      session_findElements(self, private, css, linkText,
                             partialLinkText, xpath),
 
     getActiveElement = function()
@@ -426,11 +426,11 @@ session_getTitle <- function(self, private) {
 }
 
 
-session_findElement <- function(self, private, css, link_text,
+session_findElement <- function(self, private, css, linkText,
                                  partialLinkText, xpath) {
 
-  "!DEBUG session_findElement `css %||% link_text %||% partialLinkText %||% xpath`"
-  find_expr <- parse_find_expr(css, link_text, partialLinkText, xpath)
+  "!DEBUG session_findElement `css %||% linkText %||% partialLinkText %||% xpath`"
+  find_expr <- parse_find_expr(css, linkText, partialLinkText, xpath)
 
   response <- private$makeRequest(
     "FIND ELEMENT",
@@ -448,12 +448,12 @@ session_findElement <- function(self, private, css, link_text,
 }
 
 
-parse_find_expr <- function(css, link_text, partialLinkText, xpath) {
+parse_find_expr <- function(css, linkText, partialLinkText, xpath) {
 
-  if (is.null(css) + is.null(link_text) + is.null(partialLinkText) +
+  if (is.null(css) + is.null(linkText) + is.null(partialLinkText) +
       is.null(xpath) != 3) {
     stop(
-      "Specify one of 'css', 'link_text', ",
+      "Specify one of 'css', 'linkText', ",
       "'partialLinkText' and 'xpath'"
     )
   }
@@ -461,8 +461,8 @@ parse_find_expr <- function(css, link_text, partialLinkText, xpath) {
   if (!is.null(css)) {
     list(using = "css selector", value = css)
 
-  } else if (!is.null(link_text)) {
-    list(using = "link text", value = link_text)
+  } else if (!is.null(linkText)) {
+    list(using = "link text", value = linkText)
 
   } else if (!is.null(partialLinkText)) {
     list(using = "partial link text", value = partialLinkText)
@@ -473,10 +473,10 @@ parse_find_expr <- function(css, link_text, partialLinkText, xpath) {
 }
 
 
-session_findElements <- function(self, private, css, link_text,
+session_findElements <- function(self, private, css, linkText,
                                   partialLinkText, xpath) {
-  "!DEBUG session_findElements `css %||% link_text %||% partialLinkText %||% xpath`"
-  find_expr <- parse_find_expr(css, link_text, partialLinkText, xpath)
+  "!DEBUG session_findElements `css %||% linkText %||% partialLinkText %||% xpath`"
+  find_expr <- parse_find_expr(css, linkText, partialLinkText, xpath)
 
   response <- private$makeRequest(
     "FIND ELEMENTS",
