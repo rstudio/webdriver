@@ -11,7 +11,7 @@
 #'     partial_link_text = NULL, xpath = NULL)
 #'
 #' e$isSelected()
-#' e$get_value()
+#' e$getValue()
 #' e$set_value(value)
 #' e$get_attribute(name)
 #' e$get_class()
@@ -72,7 +72,7 @@
 #' \code{e$isSelected()} returns \code{TRUE} is the element is currently
 #' selected, and \code{FALSE} otherwise.
 #'
-#' \code{e$get_value()} returns the value of an input element, it is a
+#' \code{e$getValue()} returns the value of an input element, it is a
 #' shorthand for \code{e$get_attribute("value")}.
 #'
 #' \code{e$set_value()} sets the value of an input element, it is
@@ -147,8 +147,8 @@ Element <- R6Class(
     isSelected = function()
       element_isSelected(self, private),
 
-    get_value = function()
-      element_get_value(self, private),
+    getValue = function()
+      element_getValue(self, private),
 
     set_value = function(value)
       element_set_value(self, private, value),
@@ -280,8 +280,8 @@ element_isSelected <- function(self, private) {
   response$value
 }
 
-element_get_value <- function(self, private) {
-  "!DEBUG element_get_value `private$id`"
+element_getValue <- function(self, private) {
+  "!DEBUG element_getValue `private$id`"
   self$get_attribute("value")
 }
 

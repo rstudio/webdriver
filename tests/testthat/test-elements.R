@@ -33,13 +33,13 @@ test_that("Element methods are OK", {
   el <- s$findElement(css = "#firstname")
   el$send_keys("Gabor")
   expect_equal(el$get_attribute("value"), "Gabor")
-  expect_equal(el$get_value(), "Gabor")
+  expect_equal(el$getValue(), "Gabor")
   el$clear()
   expect_equal(el$get_attribute("value"), "")
-  expect_equal(el$get_value(), "")
+  expect_equal(el$getValue(), "")
 
   el$set_value("Not Gabor")
-  expect_equal(el$get_value(), "Not Gabor")
+  expect_equal(el$getValue(), "Not Gabor")
   el$clear()
 
   form <- s$findElement(css = "form")
@@ -75,7 +75,7 @@ test_that("sending special keys", {
   textarea$send_keys(key$delete)        # delete
   textarea$send_keys("line1", key$enter, "line2", key$enter)
   expect_equal(
-    textarea$get_value(),
+    textarea$getValue(),
     "line1\nline2\n"
   )
 })
