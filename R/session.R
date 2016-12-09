@@ -36,7 +36,7 @@
 #' s$mouse_button_up(button = c("left", "middle", "right"))
 #'
 #' s$read_log(type = c("browser", "har"))
-#' s$get_log_types()
+#' s$getLogTypes()
 #'
 #' s$wait_for(expr, check_interval = 100, timeout = 3000)
 #' }
@@ -156,7 +156,7 @@
 #'
 #' \code{s$button_up()} emulates releasing the specified mouse button.
 #'
-#' \code{s$get_log_types()} returns the log types supported by the
+#' \code{s$getLogTypes()} returns the log types supported by the
 #' server, in a character vector.
 #'
 #' \code{s$read_log()} returns the log messages since the last
@@ -271,8 +271,8 @@ Session <- R6Class(
 
     ## Logs ----------------------------------------------------
 
-    get_log_types = function()
-      session_get_log_types(self, private),
+    getLogTypes = function()
+      session_getLogTypes(self, private),
 
     read_log = function(type = "browser")
       session_read_log(self, private, type),

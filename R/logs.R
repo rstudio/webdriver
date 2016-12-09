@@ -1,5 +1,5 @@
 
-session_get_log_types <- function(self, private) {
+session_getLogTypes <- function(self, private) {
 
   response <- private$make_request(
     "GET LOG TYPES"
