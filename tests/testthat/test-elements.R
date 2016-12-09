@@ -7,7 +7,7 @@ test_that("Element methods are OK", {
   on.exit(s$delete(), add = TRUE)
   s$go(server$url("/elements.html"))
 
-  ## TODO: is_selected
+  ## TODO: isSelected
 
   el <- s$findElement(css = ".foo")
   expect_equal(el$get_attribute("class"), "foo bar")

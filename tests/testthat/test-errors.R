@@ -40,7 +40,7 @@ test_that("no elements", {
   expect_error(s$findElement(css = "foobar"), "Unable to find element")
 })
 
-test_that("is_selected for non-selectable elements", {
+test_that("isSelected for non-selectable elements", {
 
   s <- Session$new(port = phantom$port)
   on.exit(s$delete(), add = TRUE)
@@ -48,5 +48,5 @@ test_that("is_selected for non-selectable elements", {
   s$go(server$url("/check.html"))
   el <- s$findElement(css = "p")
 
-  expect_error(el$is_selected(), "Element is not selectable")
+  expect_error(el$isSelected(), "Element is not selectable")
 })

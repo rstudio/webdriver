@@ -10,7 +10,7 @@
 #' e$findElements(css = NULL, link_text = NULL,
 #'     partial_link_text = NULL, xpath = NULL)
 #'
-#' e$is_selected()
+#' e$isSelected()
 #' e$get_value()
 #' e$set_value(value)
 #' e$get_attribute(name)
@@ -69,7 +69,7 @@
 #' \code{link_text}, \code{partial_link_text} and \code{xpath} arguments.
 #' It returns a list of newly created \code{Element} objects.
 #'
-#' \code{e$is_selected()} returns \code{TRUE} is the element is currently
+#' \code{e$isSelected()} returns \code{TRUE} is the element is currently
 #' selected, and \code{FALSE} otherwise.
 #'
 #' \code{e$get_value()} returns the value of an input element, it is a
@@ -144,8 +144,8 @@ Element <- R6Class(
       element_findElements(self, private, css, link_text,
                             partial_link_text, xpath),
 
-    is_selected = function()
-      element_is_selected(self, private),
+    isSelected = function()
+      element_isSelected(self, private),
 
     get_value = function()
       element_get_value(self, private),
@@ -269,9 +269,9 @@ element_findElements <- function(self, private, css, link_text,
 }
 
 
-element_is_selected <- function(self, private) {
+element_isSelected <- function(self, private) {
 
-  "!DEBUG element_is_selected `private$id`"
+  "!DEBUG element_isSelected `private$id`"
   response <- private$session_private$makeRequest(
     "IS ELEMENT SELECTED",
     params = list(element_id = private$id)
