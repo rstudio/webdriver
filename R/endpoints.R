@@ -5,108 +5,108 @@
 endpoints <- list(
 
   "NEW SESSION"          = "POST   /session",
-  "DELETE SESSION"       = "DELETE /session/:session_id",
-  "GO"                   = "POST   /session/:session_id/url",
-  "GET CURRENT URL"      = "GET    /session/:session_id/url",
-  "BACK"                 = "POST   /session/:session_id/back",
-  "FORWARD"              = "POST   /session/:session_id/forward",
-  "REFRESH"              = "POST   /session/:session_id/refresh",
-  "GET TITLE"            = "GET    /session/:session_id/title",
+  "DELETE SESSION"       = "DELETE /session/:sessionId",
+  "GO"                   = "POST   /session/:sessionId/url",
+  "GET CURRENT URL"      = "GET    /session/:sessionId/url",
+  "BACK"                 = "POST   /session/:sessionId/back",
+  "FORWARD"              = "POST   /session/:sessionId/forward",
+  "REFRESH"              = "POST   /session/:sessionId/refresh",
+  "GET TITLE"            = "GET    /session/:sessionId/title",
 
   ## windows
   ## This is /window in the standard, /window_handle in phantomjs
-  ## "GET WINDOW HANDLE"    = "GET    /session/:session_id/window",
-  "GET WINDOW HANDLE"    = "GET    /session/:session_id/window_handle",
-  "CLOSE WINDOW"         = "DELETE /session/:session_id/window",
-  "SWITCH TO WINDOW"     = "POST   /session/:session_id/window",
+  ## "GET WINDOW HANDLE"    = "GET    /session/:sessionId/window",
+  "GET WINDOW HANDLE"    = "GET    /session/:sessionId/window_handle",
+  "CLOSE WINDOW"         = "DELETE /session/:sessionId/window",
+  "SWITCH TO WINDOW"     = "POST   /session/:sessionId/window",
   ## This is window/handles in the standard, /window_handles in phantomjs
-  ## "GET WINDOW HANDLES"   = "GET    /session/:session_id/window/handles",
-  "GET WINDOW HANDLES"   = "GET    /session/:session_id/window_handles",
+  ## "GET WINDOW HANDLES"   = "GET    /session/:sessionId/window/handles",
+  "GET WINDOW HANDLES"   = "GET    /session/:sessionId/window_handles",
   ## Not supported
-  "FULLSCREEN WINDOW"    = "POST   /session/:session_id/window/fullscreen",
+  "FULLSCREEN WINDOW"    = "POST   /session/:sessionId/window/fullscreen",
   ## non-standard
-  ## "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/maximize",
-  "MAXIMIZE WINDOW"      = "POST   /session/:session_id/window/:window_id/maximize",
+  ## "MAXIMIZE WINDOW"      = "POST   /session/:sessionId/window/maximize",
+  "MAXIMIZE WINDOW"      = "POST   /session/:sessionId/window/:window_id/maximize",
   ## non-standard
-  ## "SET WINDOW SIZE"      = "POST   /session/:session_id/window/size",
-  "SET WINDOW SIZE"      = "POST   /session/:session_id/window/:window_id/size",
+  ## "SET WINDOW SIZE"      = "POST   /session/:sessionId/window/size",
+  "SET WINDOW SIZE"      = "POST   /session/:sessionId/window/:window_id/size",
   ## non-stadard
-  ## "GET WINDOW POSITION"  = "GET    /session/:session_id/window/position",
-  "GET WINDOW POSITION"  = "GET    /session/:session_id/window/:window_id/position",
+  ## "GET WINDOW POSITION"  = "GET    /session/:sessionId/window/position",
+  "GET WINDOW POSITION"  = "GET    /session/:sessionId/window/:window_id/position",
   ## non-standard
-  ## "SET WINDOW POSITION"  = "POST   /session/:session_id/window/position",
-  "SET WINDOW POSITION"  = "POST   /session/:session_id/window/:window_id/position",
+  ## "SET WINDOW POSITION"  = "POST   /session/:sessionId/window/position",
+  "SET WINDOW POSITION"  = "POST   /session/:sessionId/window/:window_id/position",
   ## This is also non-standard
-  ## "GET WINDOW SIZE"      = "GET    /session/:session_id/window/size",
-  "GET WINDOW SIZE"      = "GET    /session/:session_id/window/:window_id/size",
+  ## "GET WINDOW SIZE"      = "GET    /session/:sessionId/window/size",
+  "GET WINDOW SIZE"      = "GET    /session/:sessionId/window/:window_id/size",
 
   ## frames
-  "SWITCH TO FRAME"      = "POST   /session/:session_id/frame",
+  "SWITCH TO FRAME"      = "POST   /session/:sessionId/frame",
   "SWITCH TO PARENT FRAME"
-                         = "POST   /session/:session_id/frame/parent",
+                         = "POST   /session/:sessionId/frame/parent",
 
   ## elements
-  "FIND ELEMENT"         = "POST   /session/:session_id/element",
+  "FIND ELEMENT"         = "POST   /session/:sessionId/element",
   "FIND ELEMENT FROM ELEMENT"
-                         = "POST   /session/:session_id/element/:element_id/element",
-  "FIND ELEMENTS"        = "POST   /session/:session_id/elements",
+                         = "POST   /session/:sessionId/element/:element_id/element",
+  "FIND ELEMENTS"        = "POST   /session/:sessionId/elements",
   "FIND ELEMENTS FROM ELEMENT"
-                         = "POST   /session/:session_id/element/:element_id/elements",
+                         = "POST   /session/:sessionId/element/:element_id/elements",
   ## In the standard this is a GET, but phantomjs expects a POST :(
-  "GET ACTIVE ELEMENT"   = "POST   /session/:session_id/element/active",
-  "IS ELEMENT SELECTED"  = "GET    /session/:session_id/element/:element_id/selected",
-  "GET ELEMENT ATTRIBUTE"= "GET    /session/:session_id/element/:element_id/attribute/:name",
-  "GET ELEMENT PROPERTY" = "GET    /session/:session_id/element/:element_id/property/:name",
-  "GET ELEMENT CSS VALUE"= "GET    /session/:session_id/element/:element_id/css/:property_name",
-  "GET ELEMENT TEXT"     = "GET    /session/:session_id/element/:element_id/text",
-  "GET ELEMENT TAG NAME" = "GET    /session/:session_id/element/:element_id/name",
-  "GET ELEMENT RECT"     = "GET    /session/:session_id/element/:element_id/rect",
-  "IS ELEMENT ENABLED"   = "GET    /session/:session_id/element/:element_id/enabled",
-  "ELEMENT CLICK"        = "POST   /session/:session_id/element/:element_id/click",
-  "ELEMENT CLEAR"        = "POST   /session/:session_id/element/:element_id/clear",
-  "ELEMENT SEND KEYS"    = "POST   /session/:session_id/element/:element_id/value",
+  "GET ACTIVE ELEMENT"   = "POST   /session/:sessionId/element/active",
+  "IS ELEMENT SELECTED"  = "GET    /session/:sessionId/element/:element_id/selected",
+  "GET ELEMENT ATTRIBUTE"= "GET    /session/:sessionId/element/:element_id/attribute/:name",
+  "GET ELEMENT PROPERTY" = "GET    /session/:sessionId/element/:element_id/property/:name",
+  "GET ELEMENT CSS VALUE"= "GET    /session/:sessionId/element/:element_id/css/:property_name",
+  "GET ELEMENT TEXT"     = "GET    /session/:sessionId/element/:element_id/text",
+  "GET ELEMENT TAG NAME" = "GET    /session/:sessionId/element/:element_id/name",
+  "GET ELEMENT RECT"     = "GET    /session/:sessionId/element/:element_id/rect",
+  "IS ELEMENT ENABLED"   = "GET    /session/:sessionId/element/:element_id/enabled",
+  "ELEMENT CLICK"        = "POST   /session/:sessionId/element/:element_id/click",
+  "ELEMENT CLEAR"        = "POST   /session/:sessionId/element/:element_id/clear",
+  "ELEMENT SEND KEYS"    = "POST   /session/:sessionId/element/:element_id/value",
 
-  "GET PAGE SOURCE"      = "GET    /session/:session_id/source",
-  ## "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute/sync",
-  "EXECUTE SCRIPT"       = "POST   /session/:session_id/execute",
-  ## "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute/async",
-  "EXECUTE ASYNC SCRIPT" = "POST   /session/:session_id/execute_async",
+  "GET PAGE SOURCE"      = "GET    /session/:sessionId/source",
+  ## "EXECUTE SCRIPT"       = "POST   /session/:sessionId/execute/sync",
+  "EXECUTE SCRIPT"       = "POST   /session/:sessionId/execute",
+  ## "EXECUTE ASYNC SCRIPT" = "POST   /session/:sessionId/execute/async",
+  "EXECUTE ASYNC SCRIPT" = "POST   /session/:sessionId/execute_async",
 
   ## cookies
-  "GET ALL COOKIES"      = "GET    /session/:session_id/cookie",
-  "GET NAMED COOKIE"     = "GET    /session/:session_id/cookie/:name",
-  "ADD COOKIE"           = "POST   /session/:session_id/cookie",
-  "DELETE COOKIE"        = "DELETE /session/:session_id/cookie/:name",
-  "DELETE ALL COOKIES"   = "DELETE /session/:session_id/cookie",
+  "GET ALL COOKIES"      = "GET    /session/:sessionId/cookie",
+  "GET NAMED COOKIE"     = "GET    /session/:sessionId/cookie/:name",
+  "ADD COOKIE"           = "POST   /session/:sessionId/cookie",
+  "DELETE COOKIE"        = "DELETE /session/:sessionId/cookie/:name",
+  "DELETE ALL COOKIES"   = "DELETE /session/:sessionId/cookie",
 
-  "SET TIMEOUT"          = "POST   /session/:session_id/timeouts",
-  "PERFORM ACTIONS"      = "POST   /session/:session_id/actions",
-  "RELEASE ACTIONS"      = "DELETE /session/:session_id/actions",
+  "SET TIMEOUT"          = "POST   /session/:sessionId/timeouts",
+  "PERFORM ACTIONS"      = "POST   /session/:sessionId/actions",
+  "RELEASE ACTIONS"      = "DELETE /session/:sessionId/actions",
 
   ## alerts
-  "DISMISS ALERT"        = "POST   /session/:session_id/alert/dismiss",
-  "ACCEPT ALERT"         = "POST   /session/:session_id/alert/accept",
-  "GET ALERT TEXT"       = "GET    /session/:session_id/alert/text",
-  "SEND ALERT TEXT"      = "POST   /session/:session_id/alert/text",
+  "DISMISS ALERT"        = "POST   /session/:sessionId/alert/dismiss",
+  "ACCEPT ALERT"         = "POST   /session/:sessionId/alert/accept",
+  "GET ALERT TEXT"       = "GET    /session/:sessionId/alert/text",
+  "SEND ALERT TEXT"      = "POST   /session/:sessionId/alert/text",
 
   ## screenshots
-  "TAKE SCREENSHOT"      = "GET    /session/:session_id/screenshot",
+  "TAKE SCREENSHOT"      = "GET    /session/:sessionId/screenshot",
   "TAKE ELEMENT SCREENSHOT"
-                         = "GET    /session/:session_id/element/:element_id/screenshot",
+                         = "GET    /session/:sessionId/element/:element_id/screenshot",
 
   ## -------------------------------------------------------------------
   ## Phantom JS specific endpoints
 
-  "STATUS"               = "GET    /session/:session_id",
-  "MOVE MOUSE TO"        = "POST   /session/:session_id/moveto",
-  "CLICK"                = "POST   /session/:session_id/click",
-  "DOUBLECLICK"          = "POST   /session/:session_id/doubleclick",
-  "BUTTONDOWN"           = "POST   /session/:session_id/buttondown",
-  "BUTTONUP"             = "POST   /session/:session_id/buttonup",
-  "GET LOG TYPES"        = "GET    /session/:session_id/log/types",
-  "READ LOG"             = "POST   /session/:session_id/log",
-  "UPLOAD FILE"          = "POST   /session/:session_id/file",
-  "GET ELEMENT LOCATION" = "GET    /session/:session_id/element/:element_id/location",
-  "GET ELEMENT SIZE"     = "GET    /session/:session_id/element/:element_id/size",
-  "SET ELEMENT VALUE"    = "POST   /session/:session_id/element/:element_id/value"
+  "STATUS"               = "GET    /session/:sessionId",
+  "MOVE MOUSE TO"        = "POST   /session/:sessionId/moveto",
+  "CLICK"                = "POST   /session/:sessionId/click",
+  "DOUBLECLICK"          = "POST   /session/:sessionId/doubleclick",
+  "BUTTONDOWN"           = "POST   /session/:sessionId/buttondown",
+  "BUTTONUP"             = "POST   /session/:sessionId/buttonup",
+  "GET LOG TYPES"        = "GET    /session/:sessionId/log/types",
+  "READ LOG"             = "POST   /session/:sessionId/log",
+  "UPLOAD FILE"          = "POST   /session/:sessionId/file",
+  "GET ELEMENT LOCATION" = "GET    /session/:sessionId/element/:element_id/location",
+  "GET ELEMENT SIZE"     = "GET    /session/:sessionId/element/:element_id/size",
+  "SET ELEMENT VALUE"    = "POST   /session/:sessionId/element/:element_id/value"
 )

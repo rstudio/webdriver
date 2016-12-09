@@ -287,7 +287,7 @@ Session <- R6Class(
 
     host = NULL,
     port = NULL,
-    session_id = NULL,
+    sessionId = NULL,
     parameters = NULL,
     numLogLinesShown = 0,
 
@@ -318,7 +318,7 @@ session_initialize <- function(self, private, host, port) {
     )
   )
 
-  private$session_id = response$sessionId %||% stop("Got no session_id")
+  private$sessionId = response$sessionId %||% stop("Got no sessionId")
   private$parameters = response$value
 
   ##  reg.finalizer(self, function(e) e$delete(), TRUE)
@@ -337,14 +337,14 @@ session_initialize <- function(self, private, host, port) {
 session_delete <- function(self, private) {
 
   "!DEBUG session_delete"
-  if (! is.null(private$session_id)) {
+  if (! is.null(private$sessionId)) {
     response <- private$makeRequest(
       "DELETE SESSION",
       list()
     )
   }
 
-  private$session_id <- NULL
+  private$sessionId <- NULL
 
   invisible()
 }
