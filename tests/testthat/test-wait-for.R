@@ -13,22 +13,22 @@ test_that("waiting for a condition", {
   expect_false(s$executeScript("return $('#me').hasClass('red')"))
 
   ## Wait until it is there
-  expect_true(s$wait_for("$('#me').hasClass('red')"))
+  expect_true(s$waitFor("$('#me').hasClass('red')"))
 
   ## It is there now
   expect_true(s$executeScript("return $('#me').hasClass('red')"))
 
   ## We wait for a 'blue' class, but that does not happen
-  expect_false(s$wait_for("$('#me').hasClass('blue')", timeout = 1000))
+  expect_false(s$waitFor("$('#me').hasClass('blue')", timeout = 1000))
 
   ## Syntax error in the wait expression returns NA
   expect_identical(
-    s$wait_for("syntax error"),
+    s$waitFor("syntax error"),
     NA
   )
 
   ## Quotes in the expression
   expect_true(
-    s$wait_for('"foo" == "foo"')
+    s$waitFor('"foo" == "foo"')
   )
 })

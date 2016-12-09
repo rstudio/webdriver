@@ -1,10 +1,10 @@
 
 #' @importFrom utils packageName
 
-session_wait_for <- function(self, private, expr, check_interval,
+session_waitFor <- function(self, private, expr, check_interval,
                              timeout) {
 
-  "!DEBUG session_wait_for"
+  "!DEBUG session_waitFor"
 
   assert_string(expr)
   assert_count(check_interval)

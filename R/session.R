@@ -38,7 +38,7 @@
 #' s$readLog(type = c("browser", "har"))
 #' s$getLogTypes()
 #'
-#' s$wait_for(expr, check_interval = 100, timeout = 3000)
+#' s$waitFor(expr, check_interval = 100, timeout = 3000)
 #' }
 #'
 #' @section Arguments:
@@ -163,7 +163,7 @@
 #' \code{readLog} call, in a data frame with columns \code{timestamp},
 #' \code{level} and \code{message}.
 #'
-#' \code{s$wait_for()} waits until a JavaScript expression evaluates
+#' \code{s$waitFor()} waits until a JavaScript expression evaluates
 #' to \code{true}, or a timeout happens. It returns \code{TRUE} is the
 #' expression evaluated to \code{true}, possible after some waiting. If
 #' the expression has a syntax error or a runtime error happens, it
@@ -279,8 +279,8 @@ Session <- R6Class(
 
     ## Polling for a condition ---------------------------------
 
-    wait_for = function(expr, check_interval = 100, timeout = 3000)
-      session_wait_for(self, private, expr, check_interval, timeout)
+    waitFor = function(expr, check_interval = 100, timeout = 3000)
+      session_waitFor(self, private, expr, check_interval, timeout)
   ),
 
   private = list(
