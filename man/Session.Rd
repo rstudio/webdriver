@@ -64,7 +64,7 @@ s$waitFor(expr, checkInterval = 100, timeout = 3000)
     \code{executeScriptAsync}. JavaScript code to execute. It will be
     placed in the body of a function.}
   \item{...}{Arguments to the script, they will be put in a list
-    called arguments. \code{\link{element}} objects are automatically
+    called arguments. \code{\link{Element}} objects are automatically
     transformed to DOM element in JavaScript.}
   \item{script}{For \code{setTimeout}. Script execution timeout,
     in milliseconds. More below.}
@@ -119,17 +119,17 @@ show it on the graphics device (if \code{file} is \code{NULL}).
 \code{s$findElement()} finds a HTML element using a CSS selector,
 XPath expression, or the \code{innerHTML} of the element. If multiple
 elements match, then the first one is returned. The return value
-is an \code{\link{element}} object.
+is an \code{\link{Element}} object.
 
 \code{s$findElements()} finds HTML elements using a CSS selector,
 XPath expression, or the \code{innerHTML} of the element. All matching
-elements are returned in a list of \code{\link{element}} objects.
+elements are returned in a list of \code{\link{Element}} objects.
 
 \code{s$executeScript()} executes JavaScript code. It places the code
 in the body of a function, and then calls the function with the
 additional arguments. These can be accessed from the function via the
 \code{arguments} array. Returned DOM elements are automatically
-converted to \code{\link{element}} objects, even if they are inside
+converted to \code{\link{Element}} objects, even if they are inside
 a list (or list of list, etc.).
 
 \code{s$executeScriptAsync()} is similar, for asynchronous execution.
@@ -138,7 +138,7 @@ with the additional arguments and a callback function as the last
 argument. The script must call this callback function when it
 finishes its work. The first argument passed to the callback function
 is returned. Returned DOM elements are automatically converted to
-\code{\link{element}} objects, even if they are inside a list (or list
+\code{\link{Element}} objects, even if they are inside a list (or list
 of list, etc.).
 
 \code{s$setTimeout()} sets various timeouts. The \sQuote{script}
