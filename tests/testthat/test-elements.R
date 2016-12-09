@@ -11,7 +11,7 @@ test_that("Element methods are OK", {
 
   el <- s$findElement(css = ".foo")
   expect_equal(el$getAttribute("class"), "foo bar")
-  expect_equal(el$get_class(), c("foo", "bar"))
+  expect_equal(el$getClass(), c("foo", "bar"))
   expect_null(el$getAttribute("xxx"))
 
   expect_equal(el$get_css_value("color"), "rgba(255, 0, 0, 1)")

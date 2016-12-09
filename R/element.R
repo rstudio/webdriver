@@ -14,7 +14,7 @@
 #' e$getValue()
 #' e$setValue(value)
 #' e$getAttribute(name)
-#' e$get_class()
+#' e$getClass()
 #' e$get_css_value(name)
 #' e$get_text()
 #' e$get_name()
@@ -81,7 +81,7 @@
 #' \code{e$getAttribute()} queries an arbitrary HTML attribute. It is
 #' does not exist, \code{NULL} is returned.
 #'
-#' \code{e$get_class()} uses \code{e$getAttribute} to parse the
+#' \code{e$getClass()} uses \code{e$getAttribute} to parse the
 #' \sQuote{class} attribute into a character vector.
 #'
 #' \code{e$get_css_value()} queries a CSS property of an element.
@@ -156,8 +156,8 @@ Element <- R6Class(
     getAttribute = function(name)
       element_getAttribute(self, private, name),
 
-    get_class = function()
-      element_get_class(self, private),
+    getClass = function()
+      element_getClass(self, private),
 
     get_css_value = function(name)
       element_get_css_value(self, private, name),
@@ -313,9 +313,9 @@ element_getAttribute <- function(self, private, name) {
 }
 
 
-element_get_class <- function(self, private) {
+element_getClass <- function(self, private) {
 
-  "!DEBUG element_get_class `private$id`"
+  "!DEBUG element_getClass `private$id`"
   class <- self$getAttribute("class")
   strsplit(class, "\\s+")[[1]]
 }
