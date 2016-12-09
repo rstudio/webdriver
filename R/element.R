@@ -18,7 +18,7 @@
 #' e$getCssValue(name)
 #' e$getText()
 #' e$getName()
-#' e$get_data(name)
+#' e$getData(name)
 #' e$get_rect()
 #' e$is_enabled()
 #' e$click()
@@ -41,7 +41,7 @@
 #'     \code{innerText}. It uses partial matching.}
 #'   \item{xpath}{Find HTML elements using XPath expressions.}
 #'   \item{name}{String scalar, named of attribute, property or css key.
-#'     For \code{get_data}, the key of the data attribute.}
+#'     For \code{getData}, the key of the data attribute.}
 #'   \item{xoffset}{Horizontal offset for mouse movement, relative to the
 #'     position of the element. If at least of of \code{xoffset} and
 #'     \code{yoffset} is \code{NULL}, then they are ignored.}
@@ -90,7 +90,7 @@
 #'
 #' \code{e$getName()} returns the tag name of an element.
 #'
-#' \code{e$get_data()} is a shorthand for querying \code{data-*} attributes.
+#' \code{e$getData()} is a shorthand for querying \code{data-*} attributes.
 #'
 #' \code{e$get_rect()} returns the \sQuote{rectangle} of an element. It is
 #' named list with components \code{x}, \code{y}, \code{height} and
@@ -168,8 +168,8 @@ Element <- R6Class(
     getName = function()
       element_getName(self, private),
 
-    get_data = function(name)
-      element_get_data(self, private, name),
+    getData = function(name)
+      element_getData(self, private, name),
 
     get_rect = function()
       element_get_rect(self, private),
@@ -345,9 +345,9 @@ element_getText <- function(self, private) {
   response$value
 }
 
-element_get_data <- function(self, private, name) {
+element_getData <- function(self, private, name) {
 
-  "!DEBUG element_get_data `private$id` `name`"
+  "!DEBUG element_getData `private$id` `name`"
   assert_string(name)
   self$getAttribute(paste0("data-", name))
 }

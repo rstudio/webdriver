@@ -48,7 +48,7 @@ test_that("Element methods are OK", {
   expect_true(is(pars[[1]], "Element"))
 
   fn <- s$findElement("#firstname")
-  expect_equal(fn$get_data("foo"), "bar")
+  expect_equal(fn$getData("foo"), "bar")
 })
 
 test_that("move mouse cursor", {
