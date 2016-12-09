@@ -328,7 +328,7 @@ session_initialize <- function(self, private, host, port) {
   self$setTimeout(implicit = 0)
 
   ## Set initial windows size to something sane
-  self$getWindow()$set_size(992, 744)
+  self$getWindow()$setSize(992, 744)
 
   invisible(self)
 }

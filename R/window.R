@@ -10,7 +10,7 @@
 #' w$switchTo()
 #' w$maximize()
 #' w$getSize()
-#' w$set_size(width, height)
+#' w$setSize(width, height)
 #' w$get_position()
 #' w$set_position(x, y)
 #' }
@@ -46,7 +46,7 @@
 #' \code{w$getSize} returns the size of the window, in a list with
 #' elementh \code{width} and \code{height}, both integers.
 #'
-#' \code{w$set_size} sets the size of the window.
+#' \code{w$setSize} sets the size of the window.
 #'
 #' \code{w$get_position} returns the position of the window on the
 #' screen. Phantom.js being headless, it always returns
@@ -88,8 +88,8 @@ Window <- R6Class(
     getSize = function()
       window_getSize(self, private),
 
-    set_size = function(width, height)
-      window_set_size(self, private, width, height),
+    setSize = function(width, height)
+      window_setSize(self, private, width, height),
 
     get_position = function()
       window_get_position(self, private),
@@ -179,9 +179,9 @@ window_getSize <- function(self, private) {
   list(width = response$value$width, height = response$value$height)
 }
 
-window_set_size <- function(self, private, width, height) {
+window_setSize <- function(self, private, width, height) {
 
-  "!DEBUG window_set_size `width`x`height`"
+  "!DEBUG window_setSize `width`x`height`"
   assert_window_size(width)
   assert_window_size(height)
 

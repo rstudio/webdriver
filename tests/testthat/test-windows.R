@@ -28,7 +28,7 @@ test_that("Window methods are OK", {
   w1$switchTo()
   expect_equal(s$getUrl(), server$url("/window1.html"))
 
-  w1$set_size(800, 600)
+  w1$setSize(800, 600)
   expect_equal(w1$getSize(), list(width = 800, height = 600))
 
   expect_equal(w1$get_position(), list(x = 0, y= 0))
