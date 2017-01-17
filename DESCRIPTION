@@ -9,8 +9,8 @@ Description: A client for the 'WebDriver' 'API'. It allows driving a
     'WebDriver' implementation, but it was only tested with 'PhantomJS'.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/gaborcsardi/webdriver
-BugReports: https://github.com/gaborcsardi/webdriver/issues
+URL: https://github.com/rstudio/webdriver
+BugReports: https://github.com/rstudio/webdriver/issues
 RoxygenNote: 5.0.1.9000
 Imports:
     base64enc,

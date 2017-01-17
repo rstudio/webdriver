@@ -3,8 +3,8 @@
 
 > 'WebDriver' Client for 'PhantomJS'
 
-[![Linux Build Status](https://travis-ci.org/MangoTheCat/webdriver.svg?branch=master)](https://travis-ci.org/MangoTheCat/webdriver)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/webdriver?svg=true)](https://ci.appveyor.com/project/gaborcsardi/webdriver)
+[![Linux Build Status](https://travis-ci.org/rstudio/webdriver.svg?branch=master)](https://travis-ci.org/rstudio/webdriver)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/rstudio/webdriver?svg=true)](https://ci.appveyor.com/project/rstudio/webdriver)
 [![](http://www.r-pkg.org/badges/version/webdriver)](http://www.r-pkg.org/pkg/webdriver)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/webdriver)](http://www.r-pkg.org/pkg/webdriver)
 
@@ -17,7 +17,7 @@ tested with 'PhantomJS'.
 ## Installation
 
 ```r
-source("https://install-github.me/MangoTheCat/webdriver")
+source("https://install-github.me/rstudio/webdriver")
 ```
 
 ## Usage
