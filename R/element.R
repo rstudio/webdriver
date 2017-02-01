@@ -441,6 +441,12 @@ element_uploadFile <- function(self, private, filename) {
       selector <- paste0("input[type=file,name=", name, "]")
   }
 
+  # Check that file exists and isn't a directory
+  if (!file.exists(filename))
+    stop(filename, " not found.")
+  if (!file_test("-f", filename))
+    stop(filename, " is not a regular file.")
+
   if (is.null(selector))
     stop("File input element must have an id or name attribute.")
 
