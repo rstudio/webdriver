@@ -444,7 +444,7 @@ element_uploadFile <- function(self, private, filename) {
   # Check that file exists and isn't a directory
   if (!file.exists(filename))
     stop(filename, " not found.")
-  if (!file_test("-f", filename))
+  if (!utils::file_test("-f", filename))
     stop(filename, " is not a regular file.")
 
   if (is.null(selector))
