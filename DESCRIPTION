@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/rstudio/webdriver
 BugReports: https://github.com/rstudio/webdriver/issues
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1
 Imports:
     base64enc,
     curl (>= 2.0),

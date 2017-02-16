@@ -16,7 +16,8 @@ random_port <- function(min = 3000, max = 9000) {
 #' @importFrom processx process
 #' @export
 
-run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG")) {
+run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
+                          timeout = 5000) {
 
   debugLevel <- match.arg(debugLevel)
 
@@ -41,7 +42,7 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG")) {
 
   ## Wait until has started and answers queries
   url <- paste0("http://", host, ":", port)
-  res <- wait_for_http(url)
+  res <- wait_for_http(url, timeout = timeout)
   if (!res) {
     stop(
       "Cannot start phantom.js, or cannot connect to it",
