@@ -5,13 +5,16 @@ random_port <- function(min = 3000, max = 9000) {
 
 #' Start up phantomjs on localhost, and a random port
 #'
-#' Throws and error if phantom cannot be found, or cannot be started.
-#' It works with a timeout of five seconds.
+#' Throws and error if phantom cannot be found, or cannot be started. It works
+#' with a timeout of five seconds.
 #'
-#' @param debugLevel Phantom.js debug level, possible values:
-#'   \code{"INFO"}, \code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.
-#' @return A list of \code{process}, the \code{processx::process} object,
-#'   and \code{port}, the local port where phantom is running.
+#' @param debugLevel Phantom.js debug level, possible values: \code{"INFO"},
+#'   \code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.
+#' @param timeout How long to wait (in milliseconds) for the webdriver
+#'   connection to be established to the phantomjs process.
+#'
+#' @return A list of \code{process}, the \code{processx::process} object, and
+#'   \code{port}, the local port where phantom is running.
 #'
 #' @importFrom processx process
 #' @export

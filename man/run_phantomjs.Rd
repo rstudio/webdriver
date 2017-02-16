@@ -8,14 +8,17 @@ run_phantomjs(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   timeout = 5000)
 }
 \arguments{
-\item{debugLevel}{Phantom.js debug level, possible values:
-\code{"INFO"}, \code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.}
+\item{debugLevel}{Phantom.js debug level, possible values: \code{"INFO"},
+\code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.}
+
+\item{timeout}{How long to wait (in milliseconds) for the webdriver
+connection to be established to the phantomjs process.}
 }
 \value{
-A list of \code{process}, the \code{processx::process} object,
-  and \code{port}, the local port where phantom is running.
+A list of \code{process}, the \code{processx::process} object, and
+  \code{port}, the local port where phantom is running.
 }
 \description{
-Throws and error if phantom cannot be found, or cannot be started.
-It works with a timeout of five seconds.
+Throws and error if phantom cannot be found, or cannot be started. It works
+with a timeout of five seconds.
 }
