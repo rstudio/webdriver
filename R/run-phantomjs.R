@@ -30,11 +30,12 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   host <- "127.0.0.1"
   port <- random_port()
 
-  cmd <- sprintf(
-    "%s --proxy-type=none --webdriver=%s:%d --webdriver-loglevel=%s",
-    shQuote(phexe), host, port, debugLevel
+  args <- c(
+    "--proxy-type=none",
+    sprintf("--webdriver=%s:%d", host, port),
+    sprintf("--webdriver-loglevel=%s", debugLevel)
   )
-  ph <- process$new(commandline = cmd)
+  ph <- process$new(command = phexe, args = args)
 
   if (! ph$is_alive()) {
     stop(
