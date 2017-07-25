@@ -442,6 +442,7 @@ element_uploadFile <- function(self, private, filename) {
   }
 
   # Check that file exists and isn't a directory
+  filename <- normalizePath(filename, mustWork = FALSE)
   if (!file.exists(filename))
     stop(filename, " not found.")
   if (!utils::file_test("-f", filename))
