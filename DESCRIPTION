@@ -18,13 +18,13 @@ Imports:
     debugme,
     httr,
     jsonlite,
-    processx,
+    processx (>= 2.0.1.9000),
     R6,
     showimage,
     utils
 Remotes:
     gaborcsardi/debugme,
-    MangoTheCat/processx,
+    r-lib/processx,
     MangoTheCat/showimage
 Suggests:
     pingr,

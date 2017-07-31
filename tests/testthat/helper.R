@@ -16,7 +16,7 @@ start_web_server <- function(dir) {
 
   cmd <- paste(Rbin, "-q -e", shQuote(rcmd))
 
-  ws <- processx::process$new(commandline = cmd)
+  ws <- processx::process$new(commandline = cmd, supervise = TRUE)
 
   if (! ws$is_alive()) {
     stop(

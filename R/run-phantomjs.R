@@ -35,7 +35,7 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
     sprintf("--webdriver=%s:%d", host, port),
     sprintf("--webdriver-loglevel=%s", debugLevel)
   )
-  ph <- process$new(command = phexe, args = args)
+  ph <- process$new(command = phexe, args = args, supervise = TRUE)
 
   if (! ph$is_alive()) {
     stop(
