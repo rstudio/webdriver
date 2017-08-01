@@ -63,13 +63,19 @@ log_rows_to_df <- function(logs) {
 
 #' @export
 
-print.webdriver_logs <- function(x, ...) {
+format.webdriver_logs <- function(x, ...) {
   s <- paste(
     format(x$timestamp, "%H:%M:%S"),
     substr(x$level, 1, 1),
     x$message
   )
-  cat(strwrap(s, exdent = 2), sep = "\n")
+  paste(strwrap(s, exdent = 2), collapse = "\n")
+}
 
+
+#' @export
+
+print.webdriver_logs <- function(x, ...) {
+  print(format(x), ...)
   invisible(x)
 }
