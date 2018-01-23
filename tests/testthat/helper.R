@@ -40,5 +40,13 @@ start_web_server <- function(dir) {
   list(process = ws, port = port, baseurl = baseurl, url = url)
 }
 
-server <- start_web_server("web")
+webdir <- tryCatch(
+  file.path(
+    rprojroot::find_package_root_file(),
+    "tests", "testthat", "web"
+  ),
+    error = function(e) "web"
+)
+
+server <- start_web_server(webdir)
 phantom <- run_phantomjs()

@@ -28,6 +28,7 @@ Remotes:
     MangoTheCat/showimage
 Suggests:
     pingr,
+    rprojroot,
     servr,
     testthat
 Encoding: UTF-8
