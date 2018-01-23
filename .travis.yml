@@ -14,7 +14,7 @@ after_success:
 
 env:
   global:
-    - DEBUGME=webdriver,processx
+#    - DEBUGME=webdriver,processx
     - WEBDRIVER_HOST=127.0.0.1
     - WEBDRIVER_PORT=8081
     - SERVR_HOST=127.0.0.1
