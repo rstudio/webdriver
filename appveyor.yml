@@ -40,5 +40,8 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
+environment:
+  USE_RTOOLS: true
+
 # environment:
 #   DEBUGME: webdriver,processx
