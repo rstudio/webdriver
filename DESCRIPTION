@@ -27,6 +27,7 @@ Remotes:
     r-lib/processx,
     MangoTheCat/showimage
 Suggests:
+    covr,
     pingr,
     rprojroot,
     servr,

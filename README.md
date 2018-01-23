@@ -7,6 +7,7 @@
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/github/rstudio/webdriver?svg=true)](https://ci.appveyor.com/project/rstudio/webdriver)
 [![](http://www.r-pkg.org/badges/version/webdriver)](http://www.r-pkg.org/pkg/webdriver)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/webdriver)](http://www.r-pkg.org/pkg/webdriver)
+[![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/master.svg)](https://codecov.io/github/rstudio/webdriver?branch=master)
 
 
 A client for the 'WebDriver' 'API'. It allows driving a (probably headless)

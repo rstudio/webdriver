@@ -9,6 +9,9 @@ r:
  - devel
  - oldrel
 
+after_success:
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
+
 env:
   global:
     - DEBUGME=webdriver,processx
