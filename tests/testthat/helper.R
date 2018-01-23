@@ -14,9 +14,10 @@ start_web_server <- function(dir) {
     dir, host, port
   )
 
-  cmd <- paste(Rbin, "-q -e", shQuote(rcmd))
+  cmd <- c(Rbin, "-q", "-e", rcmd)
 
-  ws <- processx::process$new(commandline = cmd, supervise = TRUE, stderr = "|")
+  ws <- processx::process$new(cmd[1], cmd[-1], supervise = TRUE,
+                              stdout = "|", stderr = "|")
 
   if (! ws$is_alive()) {
     stop(
