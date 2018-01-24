@@ -3,7 +3,7 @@ start_web_server <- function(dir) {
 
   Sys.unsetenv("R_TESTS")
 
-  Rexe <- if (is_windows()) "R.exe" else "R"
+  Rexe <- if (is_windows()) "Rterm.exe" else "R"
   Rbin <- file.path(R.home("bin"), Rexe)
 
   host <- Sys.getenv("SERVR_HOST", "127.0.0.1")
