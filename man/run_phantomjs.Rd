@@ -15,7 +15,7 @@ run_phantomjs(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
 connection to be established to the phantomjs process.}
 }
 \value{
-A list of \code{process}, the \code{processx::process} object, and
+A list of \code{process}, the \code{callr::process} object, and
   \code{port}, the local port where phantom is running.
 }
 \description{

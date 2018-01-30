@@ -13,18 +13,17 @@ URL: https://github.com/rstudio/webdriver
 BugReports: https://github.com/rstudio/webdriver/issues
 RoxygenNote: 6.0.1
 Imports:
+    callr (>= 2.0.0),
     base64enc,
     curl (>= 2.0),
     debugme,
     httr,
     jsonlite,
-    processx (>= 2.0.1.9000),
     R6,
     showimage,
     utils
 Remotes:
     gaborcsardi/debugme,
-    r-lib/processx,
     MangoTheCat/showimage
 Suggests:
     covr,

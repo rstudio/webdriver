@@ -13,10 +13,10 @@ random_port <- function(min = 3000, max = 9000) {
 #' @param timeout How long to wait (in milliseconds) for the webdriver
 #'   connection to be established to the phantomjs process.
 #'
-#' @return A list of \code{process}, the \code{processx::process} object, and
+#' @return A list of \code{process}, the \code{callr::process} object, and
 #'   \code{port}, the local port where phantom is running.
 #'
-#' @importFrom processx process
+#' @importFrom callr process
 #' @export
 
 run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
