@@ -22,9 +22,6 @@ Imports:
     R6,
     showimage,
     utils
-Remotes:
-    gaborcsardi/debugme,
-    MangoTheCat/showimage
 Suggests:
     covr,
     pingr,
