@@ -29,4 +29,4 @@ library(webdriver)
 
 ## License
 
-MIT © Mango Solutions
+MIT © Mango Solutions, RStudio
