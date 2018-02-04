@@ -1,7 +1,8 @@
 Package: webdriver
 Title: 'WebDriver' Client for 'PhantomJS'
-Version: 1.0.3
-Author: Gábor Csárdi, Winston Chang
+Version: 1.0.4
+Author: Ariya Hidayat, Gábor Csárdi, Gabor Torok, Ivan De Marino, Robert Gieseke,
+    Steven Masala, Winston Chang, Zack Weinberg
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: A client for the 'WebDriver' 'API'. It allows driving a
     (probably headless) web browser, and can be used to test web
