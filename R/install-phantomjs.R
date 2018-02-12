@@ -96,13 +96,16 @@ phantom_paths <- function() {
 
 # Find PhantomJS from PATH, APPDATA, system.file('webdriver'), ~/bin, etc
 find_phantom <- function() {
-  path <- Sys.which( "phantomjs" )
-  if (path != "") return(path)
 
   for (d in phantom_paths()) {
     exec <- if (is_windows()) "phantomjs.exe" else "phantomjs"
     path <- file.path(d, exec)
     if (utils::file_test("-x", path)) break else path <- ""
+  }
+
+  if (path == "") {
+    path <- Sys.which( "phantomjs" )
+    if (path != "") return(path)
   }
 
   if (path == "") {
