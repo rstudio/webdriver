@@ -22,7 +22,8 @@ Imports:
     jsonlite,
     R6,
     showimage,
-    utils
+    utils,
+    withr
 Suggests:
     covr,
     pingr,
