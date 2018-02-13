@@ -80,7 +80,11 @@ get_phantom_envvars <- local({
     if (is.null(phexe)) stop("No phantom.js, exiting.")
 
     ph <- process$new(command = phexe, args = "--version", stdout = "|", stderr = "|")
-    ph$wait(1000)
+    ph$wait(5000)
+    if (ph$is_alive()) {
+      ph$kill()
+      stop("`phantomjs --version` timed out.")
+    }
     if (ph$get_exit_status() != 0 &&
         any(grepl("^QXcbConnection: Could not connect to display", ph$read_error_lines())))
     {
