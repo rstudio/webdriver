@@ -330,6 +330,23 @@ session_initialize <- function(self, private, host, port) {
   ## Set initial windows size to something sane
   self$getWindow()$setSize(992, 744)
 
+  ## Try to run a very basic script. If this fails, it probably means that the
+  ## phantomjs binary was not built with ghostdriver.
+  ## https://github.com/rstudio/shinytest/issues/165
+  tryCatch(
+    self$executeScript("1"),
+    error = function(e) {
+      if (grepl("Unable to load Atom.*ghostdriver", e$message)) {
+        e$message <- paste0(
+          e$message,
+          "\nThis is probably because your phantomjs binary (",
+          find_phantom(), ") was not built with ghostdriver support.",
+          "\nTry running webdriver::install_phantomjs() and restarting R."
+        )
+      }
+      stop(e)
+    })
+
   invisible(self)
 }
 
