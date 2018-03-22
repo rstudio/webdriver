@@ -443,10 +443,14 @@ element_uploadFile <- function(self, private, filename) {
 
   # Check that file exists and isn't a directory
   filename <- normalizePath(filename, mustWork = FALSE)
-  if (!file.exists(filename))
-    stop(filename, " not found.")
-  if (!utils::file_test("-f", filename))
-    stop(filename, " is not a regular file.")
+  if (!all(file.exists(filename))) {
+    bad_files <- filename[!file.exists(filename)]
+    stop(paste(bad_files, collapse = ", "), " not found.")
+  }
+  if (!all(utils::file_test("-f", filename))) {
+    bad_files <- filename[!utils::file_test("-f", filename)]
+    stop(bad_file, " is not a regular file.")
+  }
 
   if (is.null(selector))
     stop("File input element must have an id or name attribute.")
