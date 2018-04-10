@@ -449,7 +449,7 @@ element_uploadFile <- function(self, private, filename) {
   }
   if (!all(utils::file_test("-f", filename))) {
     bad_files <- filename[!utils::file_test("-f", filename)]
-    stop(bad_file, " is not a regular file.")
+    stop(bad_files, " is not a regular file.")
   }
 
   if (is.null(selector))
