@@ -9,10 +9,12 @@ report_error <- function(response) {
 
     cond <- create_condition(response, "error", call = call)
 
-    # Sometimes the message from create_condition can be very long, but it is
-    # necessary to show the whole thing so that the user can understand it.
-    old_options <- options(warning.length = nchar(cond$message))
-    on.exit(options(old_options))
+    # Sometimes the message from create_condition can be very long and will be
+    # truncated when printed. This prints the maximum possible amount.
+    if (nchar(cond$message) > getOption("warning.length")) {
+      old_options <- options(warning.length = 8170)
+      on.exit(options(old_options))
+    }
 
     stop(cond)
   }
@@ -26,13 +28,12 @@ create_condition <- function(response,
 
   class <- match.arg(class)
 
-  cont <- content(response, as = "text")
-
   message <- NULL
   status <- NULL
 
-  if (jsonlite::validate(cont)) {
+  if (grepl("^application/json", headers(response)[["content-type"]])) {
     try({
+      cont <- content(response)
       # This can error if `cont` doesn't include the fields we want.
       json <- fromJSON(
         cont[["value"]][["message"]],
@@ -50,7 +51,7 @@ create_condition <- function(response,
   #   https://github.com/rstudio/shinytest/issues/190
   # * The `cont` object was JSON, but did not include the needed fields.
   if (is.null(status)) {
-    message <- cont
+    message <- content(response, "text")
     # Need to manually set status code for UnknownError. From:
     # https://github.com/detro/ghostdriver/blob/873c9d6/src/errors.js#L135
     status <- 13L
