@@ -20,7 +20,7 @@ tested with 'PhantomJS'.
 ## Installation
 
 ```r
-source("https://install-github.me/rstudio/webdriver")
+install.packages("webdriver")
 ```
 
 ## Usage
