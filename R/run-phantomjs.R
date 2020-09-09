@@ -39,15 +39,19 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   # The env vars are a workaround for :
   # https://github.com/rstudio/shinytest/issues/165#issuecomment-364935112
   withr::with_envvar(get_phantom_envvars(), {
-    ph <- process$new(command = phexe, args = args, supervise = TRUE,
-                      stdout = tempfile("webdriver-stdout-", fileext = ".log"),
-                      stderr = tempfile("webdriver-stderr-", fileext = ".log"))
+    ph <- process$new(
+      command = phexe,
+      args = args,
+      supervise = TRUE,
+      stdout = tempfile("webdriver-stdout-", fileext = ".log"),
+      stderr = "2>&1"
+    )
   })
 
   if (! ph$is_alive()) {
     stop(
-      "Failed to start phantomjs. Error: ",
-      strwrap(ph$read_error_lines())
+      "Failed to start phantomjs. stdout + stderr:\n",
+      paste(collapse = "\n", "> ", readLines(ph$get_output_file()))
     )
   }
 
@@ -56,8 +60,8 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   res <- wait_for_http(url, timeout = timeout)
   if (!res) {
     stop(
-      "Cannot start phantom.js, or cannot connect to it",
-      strwrap(ph$read_error_lines())
+      "Cannot start phantom.js, or cannot connect to it. stdout + stderr:\n",
+      paste(collapse = "\n", "> ", readLines(ph$get_output_file()))
     )
   }
 
