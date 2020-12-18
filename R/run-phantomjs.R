@@ -92,8 +92,10 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   url <- paste0("http://", host, ":", port)
   res <- wait_for_http(url, timeout = timeout)
   if (!res) {
+    ph$kill()
     stop(
-      "Cannot start phantom.js, or cannot connect to it. stdout + stderr:\n",
+      "phantom.js started, but cannot connect to it on port ", port,
+      ". stdout + stderr:\n",
       paste(collapse = "\n", "> ", readLines(ph$get_output_file()))
     )
   }
