@@ -1,6 +1,39 @@
 
 random_port <- function(min = 3000, max = 9000) {
-  if (min < max) sample(min:max, 1) else min
+  found <- FALSE
+
+  # base::serverSocket was added in R 4.0, and it can be used to check if a port
+  # is available before we actually return it. If the function isn't available,
+  # we'll just return a random port without checking.
+  serverSocket <- get0("serverSocket", as.environment("package:base"),
+                       inherits = FALSE)
+
+  if (is.null(serverSocket)) {
+    port <- if (min < max) sample(min:max, 1) else min
+    return(port)
+  }
+
+  # Try up to 20 ports
+  n_ports <- min(20, max - min + 1)
+  test_ports <- if (min < max) sample(min:max, n_ports) else min
+  for (port in test_ports) {
+    open_error <- FALSE
+    tryCatch(
+      {
+        s <- serverSocket(port)
+        close(s)
+      },
+      error = function(e) {
+        open_error <<- TRUE
+      }
+    )
+
+    if (!open_error) {
+      return(port)
+    }
+  }
+
+  stop("Unable to find an available port.")
 }
 
 #' Start up phantomjs on localhost, and a random port
@@ -59,8 +92,10 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
   url <- paste0("http://", host, ":", port)
   res <- wait_for_http(url, timeout = timeout)
   if (!res) {
+    ph$kill()
     stop(
-      "Cannot start phantom.js, or cannot connect to it. stdout + stderr:\n",
+      "phantom.js started, but cannot connect to it on port ", port,
+      ". stdout + stderr:\n",
       paste(collapse = "\n", "> ", readLines(ph$get_output_file()))
     )
   }
