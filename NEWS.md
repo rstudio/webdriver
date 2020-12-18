@@ -1,6 +1,8 @@
 # 1.0.5.9000
 
-* Better display of error messages.
+* Better display of error messages. (#60)
+
+* Resolved #59: `run_phantomjs()` now checks that a port is available before telling PhantomJS to start and listen on that port. It also provides more informative error messages if unable to connect. (#62)
 
 # 1.0.5
 
