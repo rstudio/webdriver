@@ -5,11 +5,13 @@
 
 > 'WebDriver' Client for 'PhantomJS'
 
-[![Linux Build Status](https://travis-ci.org/rstudio/webdriver.svg?branch=master)](https://travis-ci.org/rstudio/webdriver)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/rstudio/webdriver?svg=true)](https://ci.appveyor.com/project/rstudio/webdriver)
-[![](http://www.r-pkg.org/badges/version/webdriver)](http://www.r-pkg.org/pkg/webdriver)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/webdriver)](http://www.r-pkg.org/pkg/webdriver)
-[![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/master.svg)](https://codecov.io/github/rstudio/webdriver?branch=master)
+  <!-- badges: start -->
+  [![R-CMD-check](https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/webdriver/actions)
+  [![](http://www.r-pkg.org/badges/version/webdriver)](http://www.r-pkg.org/pkg/webdriver)
+  [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/webdriver)](http://www.r-pkg.org/pkg/webdriver)
+  [![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/master.svg)](https://codecov.io/github/rstudio/webdriver?branch=master)
+  <!-- badges: end -->
+
 
 
 A client for the 'WebDriver' 'API'. It allows driving a (probably headless)
