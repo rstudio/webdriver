@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
   tidy = FALSE,
   fig.width = 4,
   fig.height = 12,
-  fig.path = "inst/")
+  fig.path = "figs/")
 ```
 
 # webdriver
