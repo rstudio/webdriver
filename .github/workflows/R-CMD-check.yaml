@@ -80,6 +80,27 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+
+      - name: Install webdriver (so that phantomJS can be installed)
+        run: |
+          Rscript -e "remotes::install_local('.')"
+      - name: Find PhantomJS path
+        id: phantomjs
+        run: |
+          echo "::set-output name=path::$(Rscript -e 'cat(webdriver:::phantom_paths()[[1]])')"
+      - name: Cache PhantomJS
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.phantomjs.outputs.path }}
+          key: ${{ runner.os }}-phantomjs
+          restore-keys: ${{ runner.os }}-phantomjs
+      - name: Install PhantomJS
+        run: >
+          Rscript
+          -e "options(install.packages.check.source = 'no')"
+          -e "if (is.null(webdriver:::find_phantom())) webdriver::install_phantomjs()"
+
+
       - name: Session info
         run: |
           options(width = 100)
