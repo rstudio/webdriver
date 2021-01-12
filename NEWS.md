@@ -1,4 +1,4 @@
-# 1.0.5.9000
+# 1.0.6
 
 * Better display of error messages. (#60)
 
