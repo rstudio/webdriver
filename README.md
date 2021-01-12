@@ -7,8 +7,8 @@
 
   <!-- badges: start -->
   [![R-CMD-check](https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/webdriver/actions)
-  [![](http://www.r-pkg.org/badges/version/webdriver)](http://www.r-pkg.org/pkg/webdriver)
-  [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/webdriver)](http://www.r-pkg.org/pkg/webdriver)
+  [![](https://www.r-pkg.org/badges/version/webdriver)](https://www.r-pkg.org/pkg/webdriver)
+  [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/webdriver)](https://www.r-pkg.org/pkg/webdriver)
   [![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/master.svg)](https://codecov.io/github/rstudio/webdriver?branch=master)
   <!-- badges: end -->
 
