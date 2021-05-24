@@ -4,7 +4,9 @@
 \name{key}
 \alias{key}
 \title{Special keys, so that we can refer to them with an easier syntax}
-\format{An object of class \code{list} of length 51.}
+\format{
+An object of class \code{list} of length 51.
+}
 \usage{
 key
 }

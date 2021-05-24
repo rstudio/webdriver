@@ -3,7 +3,6 @@
 \docType{package}
 \name{webdriver}
 \alias{webdriver}
-\alias{webdriver-package}
 \title{'WebDriver' Client for 'PhantomJS'}
 \description{
 A client for the 'WebDriver' 'API'. It allows driving a (probably
