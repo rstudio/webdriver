@@ -4,8 +4,7 @@
 \alias{run_phantomjs}
 \title{Start up phantomjs on localhost, and a random port}
 \usage{
-run_phantomjs(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
-  timeout = 5000)
+run_phantomjs(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"), timeout = 5000)
 }
 \arguments{
 \item{debugLevel}{Phantom.js debug level, possible values: \code{"INFO"},
