@@ -1,7 +1,6 @@
 1.0.6.9000
 =====
 
-* On Windows, `install_phantomjs()` now installs version 2.5.0-beta by default, due to some font rendering issues with version 2.1.1. (#102)
 
 1.0.6
 =====
