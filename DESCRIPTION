@@ -1,6 +1,6 @@
 Package: webdriver
 Title: 'WebDriver' Client for 'PhantomJS'
-Version: 1.0.6.9000
+Version: 1.0.6.9001
 Author: Ariya Hidayat, Gábor Csárdi, Gabor Torok, Ivan De Marino, Robert Gieseke,
     Steven Masala, Winston Chang, Zack Weinberg
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
