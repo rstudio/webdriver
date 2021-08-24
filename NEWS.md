@@ -1,6 +1,8 @@
 1.0.6.9000
 =====
 
+* If there is not content type in a request response, return `NULL` instead of `""`. This allows for graceful fall-through within webdriver. (#72)
+
 
 1.0.6
 =====
