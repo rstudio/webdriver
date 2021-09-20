@@ -81,7 +81,7 @@ parse_response <- function(response) {
   content_type <- headers(response)$`content-type`
 
   if (is.null(content_type) || length(content_type) == 0) {
-    ""
+    NULL
 
   } else if (grepl("^application/json", content_type, ignore.case = TRUE)) {
     fromJSON(content(response, as = "text"), simplifyVector = FALSE)
