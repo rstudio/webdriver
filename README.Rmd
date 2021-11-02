@@ -1,3 +1,6 @@
+---
+output: github_document
+---
 
 ```{r, setup, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(
@@ -15,7 +18,7 @@ knitr::opts_chunk$set(
   [![R-CMD-check](https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/webdriver/actions)
   [![](https://www.r-pkg.org/badges/version/webdriver)](https://www.r-pkg.org/pkg/webdriver)
   [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/webdriver)](https://www.r-pkg.org/pkg/webdriver)
-  [![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/master.svg)](https://codecov.io/github/rstudio/webdriver?branch=master)
+  [![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/main.svg)](https://codecov.io/github/rstudio/webdriver?branch=main)
   <!-- badges: end -->
 
 
