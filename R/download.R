@@ -8,16 +8,16 @@
 # (like the PhantomJS binaries), because the url for the GET request returns a
 # 403 for HEAD requests. See
 # https://stat.ethz.ch/pipermail/r-devel/2016-June/072852.html
-download <- function(url, destfile, mode = "w") {
+download <- function(url, destfile, mode = "w", ...) {
   if (getRversion() >= "3.3.0") {
-    download_no_libcurl(url, destfile, mode = mode)
+    download_no_libcurl(url, destfile, mode = mode, ...)
 
   } else if (is_windows() && getRversion() < "3.2") {
     # Older versions of R on Windows need setInternet2 to download https.
-    download_old_win(url, destfile, mode = mode)
+    download_old_win(url, destfile, mode = mode, ...)
 
   } else {
-    utils::download.file(url, destfile, mode = mode)
+    utils::download.file(url, destfile, mode = mode, ...)
   }
 }
 
