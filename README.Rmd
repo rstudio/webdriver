@@ -7,19 +7,32 @@ knitr::opts_chunk$set(
   tidy = FALSE,
   fig.width = 4,
   fig.height = 12,
-  fig.path = "figs/")
+  fig.path = "man/figures")
 ```
+
+```{r screenshot-manual, eval = FALSE, include = FALSE}
+# Run this code to update the images (since results are random)
+pjs <- webdriver::run_phantomjs()
+ses <- Session$new(port = pjs$port)
+
+ses$go("https://r-pkg.org/pkg/callr")
+ses$takeScreenshot(file="man/figures/screenshot-1.png")
+search <- ses$findElement("#cran-input")
+search$sendKeys("html", key$enter)
+ses$takeScreenshot(file="man/figures/screenshot-2.png")
+```
+
 
 # webdriver
 
 > 'WebDriver' Client for 'PhantomJS'
 
-  <!-- badges: start -->
-  [![R-CMD-check](https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/webdriver/actions)
-  [![](https://www.r-pkg.org/badges/version/webdriver)](https://www.r-pkg.org/pkg/webdriver)
-  [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/webdriver)](https://www.r-pkg.org/pkg/webdriver)
-  [![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/main.svg)](https://codecov.io/github/rstudio/webdriver?branch=main)
-  <!-- badges: end -->
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/rstudio/webdriver/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/webdriver/actions)
+[![](https://www.r-pkg.org/badges/version/webdriver)](https://www.r-pkg.org/pkg/webdriver)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/webdriver)](https://www.r-pkg.org/pkg/webdriver)
+[![Coverage Status](https://img.shields.io/codecov/c/github/rstudio/webdriver/main.svg)](https://codecov.io/github/rstudio/webdriver?branch=main)
+<!-- badges: end -->
 
 
 
@@ -51,10 +64,17 @@ The `run_phantomjs()` function starts PhantomJS, and waits until it is ready
 to serve queries. It returns a process object that you can terminate
 manually, and the port on which PhantomJS is listening.
 
-```{r}
+```{r, results='hide'}
 pjs <- run_phantomjs()
 pjs
 ```
+
+    ## $process
+    ## PROCESS 'phantomjs', running, pid 17405.
+    ##
+    ## $port
+    ## [1] 6795
+
 
 ### Sessions
 
@@ -79,9 +99,11 @@ You can also take a screenshot of the whole web page, and show it on R's
 graphics device, or save it to a PNG file:
 
 
-```{r screenshot-1}
+```{r screenshot-1, eval = FALSE}
 ses$takeScreenshot()
 ```
+
+![](man/figures/screenshot-1.png)
 
 ### HTML elements
 
@@ -101,13 +123,19 @@ the `sendKeys()` method to send them. The `key` list helps with sending
 special, characters, e.g. `key$enter` corresponds to pressing ENTER. For
 example we can type into a search box:
 
-```{r screenshot-2}
+```{r}
 search <- ses$findElement("#cran-input")
 search$sendKeys("html", key$enter)
 ses$getUrl()
 ses$getTitle()
+```
+
+```{r screenshot-2, eval = FALSE}
 ses$takeScreenshot()
 ```
+
+![](man/figures/screenshot-2.png)
+
 
 ### JavaScript
 

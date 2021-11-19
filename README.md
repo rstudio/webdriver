@@ -4,7 +4,8 @@
 > ‘WebDriver’ Client for ‘PhantomJS’
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/webdriver/actions)
+
+[![R-CMD-check](https://github.com/rstudio/webdriver/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/webdriver/actions)
 [![](https://www.r-pkg.org/badges/version/webdriver)](https://www.r-pkg.org/pkg/webdriver)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/webdriver)](https://www.r-pkg.org/pkg/webdriver)
@@ -46,10 +47,10 @@ pjs
 ```
 
     ## $process
-    ## PROCESS 'phantomjs', running, pid 12623.
-    ## 
+    ## PROCESS 'phantomjs', running, pid 17405.
+    ##
     ## $port
-    ## [1] 3707
+    ## [1] 6795
 
 ### Sessions
 
@@ -84,7 +85,7 @@ graphics device, or save it to a PNG file:
 ses$takeScreenshot()
 ```
 
-![](figs/screenshot-1-1.png)<!-- -->
+![](man/figures/screenshot-1.png)
 
 ### HTML elements
 
@@ -129,7 +130,7 @@ ses$getTitle()
 ses$takeScreenshot()
 ```
 
-![](figs/screenshot-2-1.png)<!-- -->
+![](man/figures/screenshot-2.png)
 
 ### JavaScript
 
