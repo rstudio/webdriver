@@ -1,6 +1,7 @@
 on:
   push:
-    branches: **
+    branches:
+    - gha_v2
 name: debug
 
 jobs:
