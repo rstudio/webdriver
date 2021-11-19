@@ -79,7 +79,7 @@
 <p>‘WebDriver’ Client for ‘PhantomJS’</p>
 </blockquote>
 <!-- badges: start -->
-<p><a href="https://github.com/rstudio/webdriver/actions"><img src="https://github.com/rstudio/webdriver/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://www.r-pkg.org/pkg/webdriver"><img src="https://www.r-pkg.org/badges/version/webdriver"></a> <a href="https://www.r-pkg.org/pkg/webdriver"><img src="https://cranlogs.r-pkg.org/badges/webdriver" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/rstudio/webdriver?branch=main"><img src="https://img.shields.io/codecov/c/github/rstudio/webdriver/main.svg" alt="Coverage Status"></a> <!-- badges: end --></p>
+<p><a href="https://github.com/rstudio/webdriver/actions"><img src="https://github.com/rstudio/webdriver/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://www.r-pkg.org/pkg/webdriver"><img src="https://www.r-pkg.org/badges/version/webdriver"></a> <a href="https://www.r-pkg.org/pkg/webdriver"><img src="https://cranlogs.r-pkg.org/badges/webdriver" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/rstudio/webdriver?branch=main"><img src="https://img.shields.io/codecov/c/github/rstudio/webdriver/main.svg" alt="Coverage Status"></a> <!-- badges: end --></p>
 <p>A client for the ‘WebDriver’ ‘API’. It allows driving a (probably headless) web browser, and can be used to test web applications, including ‘Shiny’ apps. In theory it works with any ‘WebDriver’ implementation, but it was only tested with ‘PhantomJS’.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -101,10 +101,10 @@
 <code class="sourceCode R"><span class="va">pjs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/run_phantomjs.html">run_phantomjs</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">pjs</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## $process</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## PROCESS 'phantomjs', running, pid 12623.</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">## </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## PROCESS 'phantomjs', running, pid 17405.</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">## $port</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## [1] 3707</span></span></code></pre></div>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## [1] 6795</span></span></code></pre></div>
 </div>
 <div id="sessions" class="section level3">
 <h3 class="hasAnchor">
@@ -123,7 +123,7 @@
 <p>You can also take a screenshot of the whole web page, and show it on R’s graphics device, or save it to a PNG file:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ses</span><span class="op">$</span><span class="fu">takeScreenshot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="figs/screenshot-1-1.png"><!-- --></p>
+<p><img src="reference/figures/screenshot-1.png"></p>
 </div>
 <div id="html-elements" class="section level3">
 <h3 class="hasAnchor">
@@ -147,7 +147,7 @@
 <div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">## [1] "METACRAN search results"</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ses</span><span class="op">$</span><span class="fu">takeScreenshot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="figs/screenshot-2-1.png"><!-- --></p>
+<p><img src="reference/figures/screenshot-2.png"></p>
 </div>
 <div id="javascript" class="section level3">
 <h3 class="hasAnchor">
