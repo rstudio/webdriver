@@ -1,0 +1,45 @@
+on:
+  push:
+    branches: **
+name: debug
+
+jobs:
+
+  routine:
+    runs-on: ubuntu-20.04
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: rstudio/shiny-workflows/.github/internal/checkout@v1
+
+      # Needs the repo to already be checked out
+      - name: Git Pull (PR)
+        if: github.event_name == 'pull_request'
+        uses: r-lib/actions/pr-fetch@v1
+        with:
+          repo-token: ${{ github.token }}
+
+      - name: Git Config
+        uses: rstudio/shiny-workflows/.github/internal/setup-git@v1
+
+      - name: Install R, system dependencies, and package dependencies
+        uses: rstudio/shiny-workflows/setup-r-package@v1
+        with:
+          pandoc-version: ${{ inputs.pandoc-version }}
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          cache-version: ${{ inputs.cache-version }}
+          needs: routine
+          extra-packages: |
+            devtools
+            roxygen2
+            rmarkdown
+            lintr
+            jsonlite
+
+      - uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
