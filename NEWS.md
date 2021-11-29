@@ -3,6 +3,8 @@
 
 * If there is not content type in a request response, return `NULL` instead of `""`. This allows for graceful fall-through within webdriver. (#72)
 
+* Add 'quiet' parameter to `install_phantomjs()` (@bersbersbers, #79)
+
 
 1.0.6
 =====
