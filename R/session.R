@@ -700,8 +700,8 @@ session_moveMouseTo <- function(self, private, xoffset, yoffset) {
 
   "!DEBUG session_moveMouseTo"
 
-  assert_count(xoffset)
-  assert_count(yoffset)
+  assert_integer(xoffset)
+  assert_integer(yoffset)
 
   private$makeRequest(
     "MOVE MOUSE TO",

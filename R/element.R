@@ -468,8 +468,8 @@ element_moveMouseTo <- function(self, private, xoffset, yoffset) {
 
   "!DEBUG element_moveMouseTo `private$id` `xoffset`, `yoffset`"
 
-  if (!is.null(xoffset)) assert_count(xoffset)
-  if (!is.null(yoffset)) assert_count(yoffset)
+  if (!is.null(xoffset)) assert_integer(xoffset)
+  if (!is.null(yoffset)) assert_integer(yoffset)
 
   private$session_private$makeRequest(
     "MOVE MOUSE TO",

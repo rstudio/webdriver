@@ -11,6 +11,15 @@ assert_url <- assert_string
 
 assert_filename <- assert_string
 
+assert_integer <- function(x) {
+  stopifnot(
+    is.numeric(x),
+    length(x) == 1,
+    !is.na(x),
+    x == as.integer(x)
+  )
+}
+
 assert_count <- function(x) {
   stopifnot(
     is.numeric(x),
