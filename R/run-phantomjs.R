@@ -43,6 +43,8 @@ random_port <- function(min = 3000, max = 9000) {
 #'
 #' @param debugLevel Phantom.js debug level, possible values: \code{"INFO"},
 #'   \code{"ERROR"}, \code{"WARN"}, \code{"DEBUG"}.
+#' @param proxy Character vector of proxy information, default to be \code{c("--proxy-type=none")}.
+#'   If supplying proxy, use \code{c("--proxy-type=PROXY_TYPE", "--proxy=PROXY_HOST:PROXY_PORT")}.
 #' @param timeout How long to wait (in milliseconds) for the webdriver
 #'   connection to be established to the phantomjs process.
 #'
@@ -53,6 +55,7 @@ random_port <- function(min = 3000, max = 9000) {
 #' @export
 
 run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
+                          proxy = c("--proxy-type=none"),
                           timeout = 5000) {
 
   debugLevel <- match.arg(debugLevel)
@@ -62,9 +65,9 @@ run_phantomjs <- function(debugLevel = c("INFO", "ERROR", "WARN", "DEBUG"),
 
   host <- "127.0.0.1"
   port <- random_port()
-
+  
   args <- c(
-    "--proxy-type=none",
+    proxy, # add proxy
     sprintf("--webdriver=%s:%d", host, port),
     sprintf("--webdriver-loglevel=%s", debugLevel)
   )
